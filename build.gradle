@@ -34,6 +34,7 @@ minecraft {
 }
 
 dependencies {
+	compile files('libs/Baubles-1.12-1.5.1-deobf.jar')
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
