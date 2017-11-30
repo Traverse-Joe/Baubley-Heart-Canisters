@@ -10,6 +10,8 @@ public class BaubleyHeartCanisters {
     public static final String MODID = "bhc";
     public static final String VERSION = "1.0";
     public static final String MODNAME = "Baubley Heart Canisters";
+    public static final String CLIENTPROXY = "kiba.bhc.proxy.ClientProxy";
+    public static final String COMMONPROXY = "kiba.bhc.proxy.CommonProxy";
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
