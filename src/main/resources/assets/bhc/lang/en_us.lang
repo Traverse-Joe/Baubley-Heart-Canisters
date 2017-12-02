@@ -1,6 +1,8 @@
 #PARSE_ESCAPES
 #en_US.lang File
 
+itemGroup.bhc.name=Baubley Heart Canisters
+
 #Items
 item.red_heart.name=Red Heart
 item.red_heart_canister.name=Red Heart Canister
