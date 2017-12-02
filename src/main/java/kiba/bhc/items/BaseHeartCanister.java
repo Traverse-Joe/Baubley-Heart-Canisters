@@ -3,6 +3,7 @@ package kiba.bhc.items;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import kiba.bhc.BaubleyHeartCanisters;
+import kiba.bhc.proxy.CommonProxy;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -19,6 +20,7 @@ public final int heartIn;
         super();
         this.setRegistryName(name);
         this.setUnlocalizedName(BaubleyHeartCanisters.MODID + "." + name);
+        this.setCreativeTab(CommonProxy.CREATIVE_TAB);
         this.heartIn = amount;
         ForgeRegistries.ITEMS.register(this);
 
@@ -29,15 +31,22 @@ public final int heartIn;
     }
 
     @Override
+    public BaubleType getBaubleType(ItemStack itemStack) {
+        //wanna make it customizable by default in the super like i did with my heart
+        return BaubleType.TRINKET;
+    }
+
+    @Override
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-        //HOW THE HELL DOES ONE.....MAKE HEARTS
+        //HOW THE HELL DOES ONE.....MAKE HEARTS EXPAND THE PLAYERS MAX HEALTH
 
     }
 
     @Override
-    public BaubleType getBaubleType(ItemStack itemStack) {
-        return BaubleType.BODY;
+    public boolean canEquip(ItemStack itemstack, EntityLivingBase player) {
+        return true;
     }
+
 
 }
 

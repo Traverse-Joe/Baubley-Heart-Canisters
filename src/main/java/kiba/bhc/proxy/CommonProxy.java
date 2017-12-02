@@ -1,14 +1,19 @@
 package kiba.bhc.proxy;
 
+import kiba.bhc.BaubleyHeartCanistersCreativeTab;
 import kiba.bhc.handler.BaubleyHeartCanistersEventHandler;
 import kiba.bhc.init.ModItems;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
 
+    public static CreativeTabs CREATIVE_TAB;
+
     public void preInit(FMLPreInitializationEvent event){
+        CREATIVE_TAB = new BaubleyHeartCanistersCreativeTab();
         ModItems.init();
 
     }
