@@ -20,7 +20,7 @@ public class BaubleyHeartCanisters {
     @Mod.Instance
     public static BaubleyHeartCanisters INSTANCE;
 
-    @SidedProxy(clientSide = Reference.CLIENTPROXY , serverSide = Reference.COMMONPROXY)
+    @SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.COMMONPROXY)
     public static CommonProxy proxy;
 
     @Mod.EventHandler
