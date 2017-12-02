@@ -1,66 +1,191 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven {
+            name = "Forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "Sonatype"
+            url = 'https://oss.sonatype.org/content/groups/public'
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
+
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.0.9'
+}
+
 apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
+def username = "${mod_name}"
+if (project.hasProperty('dev_mail')) {
+    username = "${dev_mail}"
+}
+else if(project.hasProperty('dev_username')) {
+    username = "${dev_username}"
+}
 
-version = "1.0"
-group = "kiba.bhc" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "bhc"
+version = "${project.mc_version}-${project.mod_version}"
+group= project.base_package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+//noinspection GroovyUnusedAssignment
+archivesBaseName = project.mod_name
 
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = project.jvm_version // Need this here so eclipse task generates correctly.
 compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
+    sourceCompatibility = targetCompatibility = project.jvm_version
+}
+
+repositories {
+    maven {
+        //JEI files
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "http://modmaven.k-4u.nl"
+    }
+
+    maven {
+        //fallback for almost everything, this is CurseForge :P
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+
+    maven {
+        name = "JitPack"
+        url = "https://jitpack.io"
+    }
 }
 
 minecraft {
-    version = "1.12.2-14.23.1.2555"
-    runDir = "run"
+    version = "${project.mc_version}-${project.forge_version}"
+    if(file('../run').exists()) {
+		runDir = "../run"
+	}
+	else
+	{
+		runDir = "run"
+	}
     
-    // the mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   snapshot are built nightly.
-    // stable_#            stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20171003"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    mappings = project.forge_mappings
+    makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+	
+	replace "@VERSION@", project.mod_version
+    if(project.hasProperty('public_key')) {
+        replace "@FINGERPRINTKEY@", "${project.public_key}".replace(":", "").toLowerCase(Locale.ROOT)
+    }
+    replaceIn "kiba/bhc/Reference.java"
+
+    //auto-configure the run arguments
+    clientRunArgs += "--username=${username}"
+    if(project.hasProperty('dev_password')) {
+        clientRunArgs += "--password=${dev_password}"
+    }
+    serverRunArgs += "nogui" //mc server GUIs suck :P
+
+    //add the coremod to the dev environment
+    serverJvmArgs += "-Dfml.queryResult=confirm"
+}
+
+sourceSets {
+	
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'resources'
+		}
+	}
+}
+
+jar {
+    manifest.mainAttributes(
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${project.mod_version}",
+            "Built-On": "${project.mc_version}-${project.forge_version}",
+            "FMLAT": "${project.mod_name}_at.cfg"
+    )
+}
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    if(project.hasProperty('sign_keyStore')) {
+        keyPass = "${sign_keyPass}"
+        keyStore = "${sign_keyStore}"
+        storePass = "${sign_storePass}"
+        alias = "${sign_alias}"
+    }
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
+
+if (JavaVersion.current().isJava8Compatible()) {
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
+    }
 }
 
 dependencies {
-	compile files('libs/Baubles-1.12-1.5.1-deobf.jar')
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 
-    // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+    //compile against the JEI api
+    //compile "mezz.jei:jei_${project.mc_version}:${project.jei_version}:api"
 
-    // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
-    // except that these dependencies get remapped to your current MCP mappings
-    //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-    //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+    // at runtime, use the full JEI jar
+    runtime "mezz.jei:jei_${project.mc_version}:${project.jei_version}"
 
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    //compile baubles from github using jitpack
+    deobfCompile "com.github.azanor:Baubles:${baubles_version}"
 
 }
+tasks.build.dependsOn signJar
+tasks.curseforge.dependsOn build
 
-processResources {
+def curseRelations = {
+    requiredLibrary 'baubles'
+    //optionalLibrary '' //add curseforge-slug here
+}
+
+curseforge {
+    if (project.hasProperty('curse_key'))
+        apiKey = project.curse_key
+
+    if(project.hasProperty('curse_id')) {
+        project {
+            id = project.curse_id
+            changelogType = 'markdown'
+            changelog = getChangelogText()
+            releaseType = project.release_type
+
+            relations curseRelations
+
+            //no such jars for now
+            //addArtifact javadocJar
+            //addArtifact sourceJar
+            //addArtifact apiJar
+
+            addGameVersion '1.12'
+            addGameVersion '1.12.1'
+            addGameVersion '1.12.2'
+
+            mainArtifact(jar) {
+                displayName = "Baubley Heart Canisters v${project.mod_version} MC${project.mc_version}"
+            }
+        }
+    }
+}
+
+processResources
+{
     // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
+    inputs.property "version", version
     inputs.property "mcversion", project.minecraft.version
 
     // replace stuff in mcmod.info, nothing else
@@ -68,11 +193,44 @@ processResources {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':version, 'mcversion':project.minecraft.version
     }
         
-    // copy everything else except the mcmod.info
+    // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+	
+	//ATs
+	rename '(.+_at.cfg)', 'META-INF/$1'
+}
+
+String getChangelogText() {
+    def changelogFile = new File(project.projectDir, "changelog.md")
+    String str = ''
+    if(!changelogFile.exists()) {
+        changelogFile.createNewFile()
+        return str
+    }
+    String separator = '---'
+    int lineCount = 0
+    boolean done = false
+    changelogFile.eachLine {
+        if (done || it == null) {
+            return
+        }
+        if (lineCount < 3) {
+            lineCount++
+            if (it.startsWith(separator)) {
+                return
+            }
+        }
+        if (!it.startsWith(separator)) {
+            str += "$it" + (lineCount < 3 ? ':\n\n' : '\n')
+            return
+        }
+        done = true // once we go past the first version block, parse no more
+    }
+    str += "\n\n see full changelog [here](${project.changelog_url} \"Changelog\")"
+    return str
 }

@@ -1,6 +1,6 @@
 package kiba.bhc.items;
 
-import kiba.bhc.BaubleyHeartCanisters;
+import kiba.bhc.Reference;
 import kiba.bhc.proxy.ClientProxy;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -13,7 +13,7 @@ public class BaseItem extends Item {
     public BaseItem (String name){
         super();
         this.setRegistryName(name);
-        this.setUnlocalizedName(BaubleyHeartCanisters.MODID + "." + name);
+        this.setUnlocalizedName(Reference.MODID + "." + name);
         this.setCreativeTab(ClientProxy.CREATIVE_TAB);
         ForgeRegistries.ITEMS.register(this);
     }

@@ -2,7 +2,7 @@ package kiba.bhc.items;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import kiba.bhc.BaubleyHeartCanisters;
+import kiba.bhc.Reference;
 import kiba.bhc.proxy.CommonProxy;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +19,7 @@ public final int heartIn;
     public BaseHeartCanister(String name , Integer amount){
         super();
         this.setRegistryName(name);
-        this.setUnlocalizedName(BaubleyHeartCanisters.MODID + "." + name);
+        this.setUnlocalizedName(Reference.MODID + "." + name);
         this.setCreativeTab(CommonProxy.CREATIVE_TAB);
         this.setMaxStackSize(10); //UPCRAFT BAUBLE STACK (NO NEED FOR NBT) 
         this.heartIn = amount;

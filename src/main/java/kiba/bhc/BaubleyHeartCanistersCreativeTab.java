@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class BaubleyHeartCanistersCreativeTab extends CreativeTabs {
     public BaubleyHeartCanistersCreativeTab(){
-        super(BaubleyHeartCanisters.MODID);
+        super(Reference.MODID);
     }
 
 
