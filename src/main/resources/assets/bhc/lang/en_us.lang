@@ -1,0 +1,17 @@
+#PARSE_ESCAPES
+#en_US.lang File
+
+#Items
+item.red_heart.name=Red Heart
+item.red_heart_canister.name=Red Heart Canister
+
+item.orange_heart.name=Orange Heart
+item.orange_heart_canister.name=Orange Heart Canister
+
+item.green_heart.name=Green Heart
+item.green_heart_canister.name=Green Heart Canister
+
+item.blue_heart.name=Blue Heart
+item.blue_heart_canister.name=Blue Heart Canister
+
+item.canister.name=Canister
