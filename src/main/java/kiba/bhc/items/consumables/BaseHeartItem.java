@@ -1,6 +1,6 @@
 package kiba.bhc.items.consumables;
 
-import kiba.bhc.items.BaseItem;
+import core.upcraftlp.craftdev.api.item.Item;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -10,7 +10,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class BaseHeartItem extends BaseItem {
+public class BaseHeartItem extends Item {
     public final int healValue;
     public BaseHeartItem(String name, Integer amount) {
         super(name);

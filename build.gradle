@@ -144,6 +144,8 @@ dependencies {
     //compile baubles from github using jitpack
     deobfCompile "com.github.azanor:Baubles:${baubles_version}"
 
+    //craftdev-core
+    deobfCompile "craftdev-core:craftdev-core:${project.mc_version}:${project.core_version}"
 }
 tasks.build.dependsOn signJar
 tasks.curseforge.dependsOn build
