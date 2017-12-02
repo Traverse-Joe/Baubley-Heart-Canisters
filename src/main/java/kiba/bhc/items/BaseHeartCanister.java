@@ -36,14 +36,13 @@ public class BaseHeartCanister extends core.upcraftlp.craftdev.api.item.Item imp
         AttributeModifier health_modifier = health.getModifier(this.id);
         int current = 0;
         if(health_modifier != null) {
-            if(health_modifier.getAmount() == itemstack.getCount()) return;
+            if(health_modifier.getAmount() == itemstack.getCount() * 2) return;
             current = (int) health_modifier.getAmount();
             health.removeModifier(this.id);
         }
         health.applyModifier(new AttributeModifier(this.id, Reference.MODID + ":hearts", itemstack.getCount() * 2, 0));
         int diff = (int) health.getModifier(this.id).getAmount() - current;
-        if(diff >= 0) player.heal(diff);
-        else player.attackEntityFrom(DamageSource.DROWN, -diff); //no healing glitch by adding and removing heart canisters!
+        player.heal(diff); //no healing glitch by adding and removing heart canisters!
     }
 
     @Override
@@ -52,7 +51,7 @@ public class BaseHeartCanister extends core.upcraftlp.craftdev.api.item.Item imp
         AttributeModifier health_modifier = health.getModifier(this.id);
         if(health_modifier != null) {
             int extraHealth = (int) health_modifier.getAmount();
-            player.attackEntityFrom(DamageSource.DROWN, extraHealth); //no healing glitch by adding and removing heart canisters!
+            player.heal(-extraHealth); //no healing glitch by adding and removing heart canisters!
             health.removeModifier(this.id); //ensure that the health is reset when removing the stack.
         }
 
