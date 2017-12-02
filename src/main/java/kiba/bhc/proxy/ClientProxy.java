@@ -12,8 +12,8 @@ public class ClientProxy extends CommonProxy {
         registerRenderers();
     }
     @Override
-    public void init(FMLInitializationEvent event){
-        super.init(event);
+    public void Init(FMLInitializationEvent event){
+      super.Init(event);
     }
     @Override
     public void registerRenderers(){
