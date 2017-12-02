@@ -8,7 +8,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.UUID;
 
@@ -34,15 +34,13 @@ public class BaseHeartCanister extends core.upcraftlp.craftdev.api.item.Item imp
         if(player.world.isRemote) return;
         IAttributeInstance health = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
         AttributeModifier health_modifier = health.getModifier(this.id);
-        int current = 0;
+        float diff = player.getMaxHealth() - player.getHealth();
         if(health_modifier != null) {
             if(health_modifier.getAmount() == itemstack.getCount() * 2) return;
-            current = (int) health_modifier.getAmount();
             health.removeModifier(this.id);
         }
         health.applyModifier(new AttributeModifier(this.id, Reference.MODID + ":hearts", itemstack.getCount() * 2, 0));
-        int diff = (int) health.getModifier(this.id).getAmount() - current;
-        player.setHealth(player.getHealth() + diff); //no healing glitch by adding and removing heart canisters!
+        setHealthDiff(diff, player);
     }
 
     @Override
@@ -50,11 +48,15 @@ public class BaseHeartCanister extends core.upcraftlp.craftdev.api.item.Item imp
         IAttributeInstance health = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
         AttributeModifier health_modifier = health.getModifier(this.id);
         if(health_modifier != null) {
-            int extraHealth = (int) health_modifier.getAmount();
-            player.setHealth(player.getHealth() - extraHealth); //no healing glitch by adding and removing heart canisters!
+            float diff = player.getMaxHealth() - player.getHealth();
             health.removeModifier(this.id); //ensure that the health is reset when removing the stack.
+            setHealthDiff(diff, player);
         }
+    }
 
+    private static void setHealthDiff(float diff, EntityLivingBase player) {
+        float amount = MathHelper.clamp(player.getMaxHealth() - diff, 0.5F, player.getMaxHealth()); //bugfix: death by removing heart canisters could cause lost items!
+        player.setHealth(amount); //no healing glitch by adding and removing heart canisters!
     }
 
     @Override
