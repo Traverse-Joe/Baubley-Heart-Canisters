@@ -21,6 +21,7 @@ public final int heartIn;
         this.setRegistryName(name);
         this.setUnlocalizedName(BaubleyHeartCanisters.MODID + "." + name);
         this.setCreativeTab(CommonProxy.CREATIVE_TAB);
+        this.setMaxStackSize(10); //UPCRAFT BAUBLE STACK (NO NEED FOR NBT) 
         this.heartIn = amount;
         ForgeRegistries.ITEMS.register(this);
 
