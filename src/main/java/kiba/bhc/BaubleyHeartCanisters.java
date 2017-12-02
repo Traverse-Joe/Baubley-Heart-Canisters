@@ -6,6 +6,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(
         modid = Reference.MODID,
@@ -17,6 +19,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 )
 public class BaubleyHeartCanisters {
 
+    public static Logger getLogger() {
+        return log;
+    }
+
+    private static final Logger log = LogManager.getLogger(Reference.MODID);
+
     @Mod.Instance
     public static BaubleyHeartCanisters INSTANCE;
 
@@ -26,16 +34,18 @@ public class BaubleyHeartCanisters {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         proxy.preInit(event);
+        log.info("Pre-Initialization finished.");
     }
 
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
         proxy.init(event);
-
+        log.info("Initialization finished.");
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event){
         proxy.postInit(event);
+        log.info("Post-Initialization finished.");
     }
 }

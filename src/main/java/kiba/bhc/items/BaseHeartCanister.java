@@ -2,18 +2,25 @@ package kiba.bhc.items;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import core.upcraftlp.craftdev.api.item.Item;
+import kiba.bhc.Reference;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+
+import java.util.UUID;
 
 
-public class BaseHeartCanister extends Item implements IBauble {
-public final int heartIn;
-    public BaseHeartCanister(String name , Integer amount){
-        super(name);
-        this.setMaxStackSize(10); //UPCRAFT BAUBLE STACK (NO NEED FOR NBT) //TODO does that work?
-        this.heartIn = amount;
+public class BaseHeartCanister extends core.upcraftlp.craftdev.api.item.Item implements IBauble {
 
+    protected final UUID id;
+
+    public BaseHeartCanister(String name, final UUID type){
+        super(name + "_heart_canister");
+        this.setMaxStackSize(10);
+        this.id = type;
     }
 
     @Override
@@ -24,14 +31,44 @@ public final int heartIn;
 
     @Override
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
-        //HOW THE HELL DOES ONE.....MAKE HEARTS EXPAND THE PLAYERS MAX HEALTH
-        //TODO increase base health
+        if(player.world.isRemote) return;
+        IAttributeInstance health = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
+        AttributeModifier health_modifier = health.getModifier(this.id);
+        int current = 0;
+        if(health_modifier != null) {
+            if(health_modifier.getAmount() == itemstack.getCount()) return;
+            current = (int) health_modifier.getAmount();
+            health.removeModifier(this.id);
+        }
+        health.applyModifier(new AttributeModifier(this.id, Reference.MODID + ":hearts", itemstack.getCount() * 2, 0));
+        int diff = (int) health.getModifier(this.id).getAmount() - current;
+        if(diff >= 0) player.heal(diff);
+        else player.attackEntityFrom(DamageSource.DROWN, -diff); //no healing glitch by adding and removing heart canisters!
+    }
+
+    @Override
+    public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
+        IAttributeInstance health = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
+        AttributeModifier health_modifier = health.getModifier(this.id);
+        if(health_modifier != null) {
+            int extraHealth = (int) health_modifier.getAmount();
+            player.attackEntityFrom(DamageSource.DROWN, extraHealth); //no healing glitch by adding and removing heart canisters!
+            health.removeModifier(this.id); //ensure that the health is reset when removing the stack.
+        }
+
     }
 
     @Override
     public boolean canEquip(ItemStack itemstack, EntityLivingBase player) {
         return true;
     }
+
+    //FIXME is this needed?
+    @Override
+    public boolean willAutoSync(ItemStack itemstack, EntityLivingBase player) {
+        return true;
+    }
+
 
 }
 

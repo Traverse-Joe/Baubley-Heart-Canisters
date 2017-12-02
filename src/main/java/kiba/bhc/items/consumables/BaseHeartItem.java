@@ -11,10 +11,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class BaseHeartItem extends Item {
-    public final int healValue;
-    public BaseHeartItem(String name, Integer amount) {
-        super(name);
-        this.healValue = amount;
+
+    protected final int healValue;
+
+    public BaseHeartItem(String name, Integer healAmount) {
+        super(name + "_heart");
+        this.healValue = healAmount;
     }
 
     @Override
@@ -30,16 +32,15 @@ public class BaseHeartItem extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         playerIn.setActiveHand(handIn);
-
-        return new ActionResult<>(EnumActionResult.SUCCESS , playerIn.getHeldItem(handIn));
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-        if(entityLiving instanceof EntityPlayer){
+        if(!worldIn.isRemote && entityLiving instanceof EntityPlayer){
             EntityPlayer  player = (EntityPlayer)entityLiving;
-            player.setHealth(player.getHealth() + healValue);
-            stack.shrink(1);
+            player.heal(this.healValue);
+            if(!player.isCreative()) stack.shrink(1);
         }
         return  stack;
     }
