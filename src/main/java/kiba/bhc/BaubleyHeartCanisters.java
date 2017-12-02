@@ -1,5 +1,6 @@
 package kiba.bhc;
 
+import core.upcraftlp.craftdev.api.creativetab.CreativeTab;
 import kiba.bhc.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -19,11 +20,9 @@ import org.apache.logging.log4j.Logger;
 )
 public class BaubleyHeartCanisters {
 
-    public static Logger getLogger() {
-        return log;
-    }
+    public static final CreativeTab CREATIVE_TAB = new CreativeTab(Reference.MODID);
 
-    private static final Logger log = LogManager.getLogger(Reference.MODID);
+    public static final Logger log = LogManager.getLogger(Reference.MODID);
 
     @Mod.Instance
     public static BaubleyHeartCanisters INSTANCE;
