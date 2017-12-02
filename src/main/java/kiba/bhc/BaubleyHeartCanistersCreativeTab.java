@@ -12,6 +12,6 @@ public class BaubleyHeartCanistersCreativeTab extends CreativeTabs {
 
     @Override
     public ItemStack getTabIconItem() {
-        return new ItemStack(ModItems.itemRedHeartCanister);
+        return new ItemStack(ModItems.RED_HEART_CANISTER);
     }
 }
