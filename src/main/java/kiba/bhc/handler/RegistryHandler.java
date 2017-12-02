@@ -4,7 +4,6 @@ import core.upcraftlp.craftdev.api.util.RegistryUtils;
 import kiba.bhc.BaubleyHeartCanisters;
 import kiba.bhc.Reference;
 import kiba.bhc.init.ModItems;
-import kiba.bhc.proxy.CommonProxy;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
