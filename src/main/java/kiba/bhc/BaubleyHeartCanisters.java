@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
         modid = Reference.MODID,
         version = Reference.VERSION,
         name = Reference.MODNAME,
-        dependencies = "required-after:baubles;",
+        dependencies = "required-after:baubles;required-after:mantle",
         acceptedMinecraftVersions = "[1.12,1.13)",
         certificateFingerprint = Reference.FINGERPRINT_KEY
 )

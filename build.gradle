@@ -133,6 +133,8 @@ dependencies {
 
     //compile baubles from github using jitpack
     deobfCompile "com.github.azanor:Baubles:${baubles_version}"
+    //compile mantle from github using jitpack
+    compile 'com.github.SlimeKnights:Mantle:b6be83efa6'
 
 
 }
@@ -140,8 +142,10 @@ tasks.curseforge.dependsOn build
 
 def curseRelations = {
     requiredLibrary 'baubles'
-    //optionalLibrary '' //add curseforge-slug here
+    //optionalLibrary '' //add curseforge-slug here,
+    requiredLibrary 'mantle'
 }
+
 
 curseforge {
     if (project.hasProperty('curse_key'))
