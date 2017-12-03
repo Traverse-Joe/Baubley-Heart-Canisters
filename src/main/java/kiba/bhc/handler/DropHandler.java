@@ -4,6 +4,7 @@ import kiba.bhc.Reference;
 import kiba.bhc.init.ModItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +24,11 @@ public class DropHandler {
             } else { //no boss
                 if(entity.getRNG().nextDouble() < 0.05D) {
                     entity.dropItem(ModItems.RED_HEART, 1);
+                }
+            }
+            if(entity instanceof EntityWitherSkeleton){
+                if(entity.getRNG().nextDouble() < 0.15D){
+                    entity.dropItem(ModItems.WITHER_BONE,1);
                 }
             }
         }

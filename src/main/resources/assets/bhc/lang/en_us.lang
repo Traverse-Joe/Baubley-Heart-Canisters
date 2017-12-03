@@ -1,7 +1,7 @@
 #PARSE_ESCAPES
 #en_US.lang File
 
-itemGroup.bhc.name=Baubley Heart Canisters
+itemGroup.bhc=Baubley Heart Canisters
 
 #Items
 item.red_heart.name=Red Heart
@@ -18,5 +18,5 @@ item.blue_heart_canister.name=Blue Heart Canister
 
 item.canister.name=Canister
 
-item.jeweled_apple.name=Jeweled Apple
+item.relic_apple.name=Relic Apple
 item.wither_bone.name=Wither Bone

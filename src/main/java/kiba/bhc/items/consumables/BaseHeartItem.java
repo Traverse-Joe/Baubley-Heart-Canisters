@@ -1,6 +1,6 @@
 package kiba.bhc.items.consumables;
 
-import core.upcraftlp.craftdev.api.item.Item;
+import kiba.bhc.BaubleyHeartCanisters;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -10,12 +10,15 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class BaseHeartItem extends Item {
+public class BaseHeartItem extends net.minecraft.item.Item {
 
     protected final int healValue;
 
     public BaseHeartItem(String name, Integer healAmount) {
-        super(name + "_heart");
+        super();
+        this.setRegistryName(name + "_heart");
+        this.setUnlocalizedName(name + "_heart");
+        this.setCreativeTab(BaubleyHeartCanisters.CREATIVE_TAB);
         this.healValue = healAmount;
     }
 

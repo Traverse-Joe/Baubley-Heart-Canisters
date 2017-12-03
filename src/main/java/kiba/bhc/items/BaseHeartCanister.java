@@ -2,23 +2,28 @@ package kiba.bhc.items;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import kiba.bhc.BaubleyHeartCanisters;
 import kiba.bhc.Reference;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.UUID;
 
 
-public class BaseHeartCanister extends core.upcraftlp.craftdev.api.item.Item implements IBauble {
+public class BaseHeartCanister extends Item implements IBauble {
 
     protected final UUID id;
 
     public BaseHeartCanister(String name, final UUID type){
-        super(name + "_heart_canister");
+        super();
+        this.setRegistryName(name + "_heart_canister");
+        this.setUnlocalizedName(name + "_heart_canister");
+        this.setCreativeTab(BaubleyHeartCanisters.CREATIVE_TAB);
         this.setMaxStackSize(10);
         this.id = type;
     }

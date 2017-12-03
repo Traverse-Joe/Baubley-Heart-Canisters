@@ -1,8 +1,6 @@
 package kiba.bhc;
 
-/**
- * @author UpcraftLP
- */
+
 public class Reference {
     public static final String MODID = "bhc";
     public static final String VERSION = "@VERSION@";
