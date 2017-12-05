@@ -47,6 +47,7 @@ public class ClientProxy extends CommonProxy {
 
         regItem(ModItems.WITHER_BONE);
         regItem(ModItems.RELIC_APPLE);
+        regItem(ModItems.HEART_AMULET);
 
     }
     public static void regItem(Item item){

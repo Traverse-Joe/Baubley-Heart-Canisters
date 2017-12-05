@@ -14,6 +14,7 @@ public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event){
 
+
     }
 
     public void init(FMLInitializationEvent event){
@@ -39,6 +40,7 @@ public class CommonProxy {
 
         event.getRegistry().register(ModItems.RELIC_APPLE);
         event.getRegistry().register(ModItems.WITHER_BONE);
+        event.getRegistry().register(ModItems.HEART_AMULET);
 
 
 

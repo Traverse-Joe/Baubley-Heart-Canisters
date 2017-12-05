@@ -2,6 +2,7 @@ package kiba.bhc.init;
 
 import kiba.bhc.items.BaseHeartCanister;
 import kiba.bhc.items.BaseItem;
+import kiba.bhc.items.ItemHeartAmulet;
 import kiba.bhc.items.consumables.BaseHeartItem;
 import kiba.bhc.items.consumables.ItemFoodRelicApple;
 import net.minecraft.item.Item;
@@ -19,10 +20,12 @@ public class ModItems {
     public static  Item WITHER_BONE = new BaseItem("wither_bone");
     public static  Item CANISTER = new BaseItem("canister");
     public static  ItemFood RELIC_APPLE = new ItemFoodRelicApple();
+    public static BaseItem HEART_AMULET = new ItemHeartAmulet();
 
     public static  Item RED_HEART = new BaseHeartItem("red", 10);
     public static  Item ORANGE_HEART = new BaseHeartItem("orange",20);
     public static  Item GREEN_HEART = new BaseHeartItem("green",30);
     public static  Item BLUE_HEART = new BaseHeartItem("blue",40);
-    //TODO add blue heart item!
+
+
 }
