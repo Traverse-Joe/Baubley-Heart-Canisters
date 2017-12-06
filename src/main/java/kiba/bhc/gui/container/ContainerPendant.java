@@ -3,6 +3,7 @@ package kiba.bhc.gui.container;
 import com.google.common.base.Preconditions;
 import kiba.bhc.init.ModItems;
 import kiba.bhc.items.BaseHeartCanister;
+import kiba.bhc.util.HeartType;
 import kiba.bhc.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
