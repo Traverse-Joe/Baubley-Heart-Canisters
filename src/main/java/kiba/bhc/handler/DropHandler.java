@@ -21,19 +21,29 @@ public class DropHandler {
         if (entity.world.isRemote) return; //no duplicate glitch on client!
         if (entity instanceof IMob) {
             if (!entity.isNonBoss()) { // = is boss
-                if (entity instanceof EntityDragon) entity.dropItem(ModItems.GREEN_HEART, 1);
-                else entity.dropItem(ModItems.ORANGE_HEART, 1);
+                if (entity instanceof EntityDragon) {
+                    if (entity.getRNG().nextDouble() < ConfigHandler.greenDropRate) {
+                        entity.dropItem(ModItems.GREEN_HEART, 1);
+                    }
+                    else if(entity.getRNG().nextDouble()<ConfigHandler.orangeDropRate){
+                        entity.dropItem(ModItems.ORANGE_HEART, 1);
+                    }
+
+                }
             } else { //no boss
                 if (entity instanceof EntityEvoker) {
-                    entity.dropItem(ModItems.BLUE_HEART, 1);
+                    if (entity.getRNG().nextDouble() < ConfigHandler.blueDropRate) {
+                        entity.dropItem(ModItems.BLUE_HEART, 1);
+                    }
+
                 } else {
-                    if (entity.getRNG().nextDouble() < 0.05D) {
+                    if (entity.getRNG().nextDouble() < ConfigHandler.redDropRate) {
                         entity.dropItem(ModItems.RED_HEART, 1);
                     }
                 }
                 if (!(Loader.isModLoaded("tconstruct"))) {
                     if (entity instanceof EntityWitherSkeleton) {
-                        if (entity.getRNG().nextDouble() < 0.15D) {
+                        if (entity.getRNG().nextDouble() < ConfigHandler.boneDropRate) {
                             entity.dropItem(ModItems.WITHER_BONE, 1);
                         }
                     }
@@ -43,3 +53,4 @@ public class DropHandler {
     }
 }
 //TODO setup the Config for drops
+//BUGREPORT need help getting config to work properly Orange Else If isnt working
