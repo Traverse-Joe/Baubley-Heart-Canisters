@@ -1,12 +1,10 @@
 {
-  "homepage": "",
+  "homepage": "https://minecraft.curseforge.com/projects/baubley-heart-canisters",
   "promos": {
-    "1.12.2-latest": "1.0.0",
-    "1.12.2-recommended": "1.0.0",
-    "1.12-latest": "1.0.0",
-    "1.12-recommended": "1.0.0"
+    "1.12.2-latest": "0.2.0",
+    "1.12-latest": "0.2.0"
   },
   "1.12": {
-    "1.0.0": "* initial release"
+    "0.2.0": "* initial release"
   }
 }
