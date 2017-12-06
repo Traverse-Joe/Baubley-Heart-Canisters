@@ -115,6 +115,16 @@ jar {
     )
 }
 
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    if(project.hasProperty('sign_keyStore')) {
+        keyPass = "${sign_keyPass}"
+        keyStore = "${sign_keyStore}"
+        storePass = "${sign_storePass}"
+        alias = "${sign_alias}"
+    }
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
 
 if (JavaVersion.current().isJava8Compatible()) {
     allprojects {
@@ -140,6 +150,7 @@ dependencies {
 
 
 }
+//tasks.build.dependsOn signJar //TODO uncomment when signing jars.
 tasks.curseforge.dependsOn build
 
 def curseRelations = {
