@@ -42,3 +42,4 @@ public class DropHandler {
         }
     }
 }
+//TODO setup the Config for drops
