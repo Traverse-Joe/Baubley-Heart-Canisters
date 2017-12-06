@@ -1,8 +1,8 @@
-# Baubley Heart Canisters [![](http://cf.way2muchnoise.eu/full_id_downloads.svg)](https://minecraft.curseforge.com/projects/curse-slug)
+# Baubley Heart Canisters [![](http://cf.way2muchnoise.eu/full_282947_downloads.svg)](https://minecraft.curseforge.com/projects/baubley-heart-canisters)
 ---
-[![](http://cf.way2muchnoise.eu/versions/Available%20for%20MC_id_all.svg)](https://minecraft.curseforge.com/projects/id/files)
+[![](http://cf.way2muchnoise.eu/versions/Available%20for%20MC_282947_all.svg)](https://minecraft.curseforge.com/projects/baubley-heart-canisters/files)
 ---
-## Requires [Baubles](https://minecraft.curseforge.com/projects/baubles "Download on CurseForge")
+## Requires [Baubles](https://minecraft.curseforge.com/projects/baubles "Download on CurseForge") and [Mantle](https://minecraft.curseforge.com/projects/mantle "Download on CurseForge")
 ---
 
 
