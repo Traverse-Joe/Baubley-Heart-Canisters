@@ -4,6 +4,7 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import kiba.bhc.BaubleyHeartCanisters;
 import kiba.bhc.Reference;
+import kiba.bhc.util.HeartType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -12,20 +13,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 
+import java.util.Locale;
 import java.util.UUID;
 
 
 public class BaseHeartCanister extends Item implements IBauble {
 
-    protected final UUID id;
+    public final HeartType type;
 
-    public BaseHeartCanister(String name, final UUID type){
+    public BaseHeartCanister(HeartType type){
         super();
-        this.setRegistryName(name + "_heart_canister");
-        this.setUnlocalizedName(name + "_heart_canister");
+        String name = type.name().toLowerCase(Locale.ROOT) + "_heart_canister";
+        this.setRegistryName(name);
+        this.setUnlocalizedName(name);
         this.setCreativeTab(BaubleyHeartCanisters.CREATIVE_TAB);
         this.setMaxStackSize(10);
-        this.id = type;
+        this.type = type;
     }
 
     @Override
@@ -38,23 +41,23 @@ public class BaseHeartCanister extends Item implements IBauble {
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
         if(player.world.isRemote) return;
         IAttributeInstance health = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
-        AttributeModifier health_modifier = health.getModifier(this.id);
+        AttributeModifier health_modifier = health.getModifier(this.type.modifierID);
         float diff = player.getMaxHealth() - player.getHealth();
         if(health_modifier != null) {
             if(health_modifier.getAmount() == itemstack.getCount() * 2) return;
-            health.removeModifier(this.id);
+            health.removeModifier(this.type.modifierID);
         }
-        health.applyModifier(new AttributeModifier(this.id, Reference.MODID + ":hearts", itemstack.getCount() * 2, 0));
+        health.applyModifier(new AttributeModifier(this.type.modifierID, Reference.MODID + ":hearts", itemstack.getCount() * 2, 0));
         setHealthDiff(diff, player);
     }
 
     @Override
     public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
         IAttributeInstance health = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
-        AttributeModifier health_modifier = health.getModifier(this.id);
+        AttributeModifier health_modifier = health.getModifier(this.type.modifierID);
         if(health_modifier != null) {
             float diff = player.getMaxHealth() - player.getHealth();
-            health.removeModifier(this.id); //ensure that the health is reset when removing the stack.
+            health.removeModifier(this.type.modifierID); //ensure that the health is reset when removing the stack.
             setHealthDiff(diff, player);
         }
     }

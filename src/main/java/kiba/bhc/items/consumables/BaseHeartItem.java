@@ -1,6 +1,7 @@
 package kiba.bhc.items.consumables;
 
 import kiba.bhc.BaubleyHeartCanisters;
+import kiba.bhc.util.HeartType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -10,16 +11,19 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import java.util.Locale;
+
 public class BaseHeartItem extends net.minecraft.item.Item {
 
-    protected final int healValue;
+    protected final HeartType type;
 
-    public BaseHeartItem(String name, Integer healAmount) {
+    public BaseHeartItem(HeartType type) {
         super();
-        this.setRegistryName(name + "_heart");
-        this.setUnlocalizedName(name + "_heart");
+        String name = type.name().toLowerCase(Locale.ROOT) + "_heart";
+        this.setRegistryName(name);
+        this.setUnlocalizedName(name);
         this.setCreativeTab(BaubleyHeartCanisters.CREATIVE_TAB);
-        this.healValue = healAmount;
+        this.type = type;
     }
 
     @Override
@@ -42,7 +46,7 @@ public class BaseHeartItem extends net.minecraft.item.Item {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
         if(!worldIn.isRemote && entityLiving instanceof EntityPlayer){
             EntityPlayer  player = (EntityPlayer)entityLiving;
-            player.heal(this.healValue);
+            player.heal(this.type.healAmount);
             if(!player.isCreative()) stack.shrink(1);
         }
         return  stack;

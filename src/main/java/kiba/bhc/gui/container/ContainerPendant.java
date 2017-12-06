@@ -1,6 +1,7 @@
 package kiba.bhc.gui.container;
 
 import com.google.common.base.Preconditions;
+import kiba.bhc.items.BaseHeartCanister;
 import kiba.bhc.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -27,25 +29,24 @@ public class ContainerPendant extends Container {
         Preconditions.checkNotNull(hand, "hand cannot be null");
         this.itemHandler = InventoryUtil.createVirtualInventory(4, pendant);
         this.pendant = pendant;
-
         for (int l = 0; l < 3; ++l)
         {
             for (int j1 = 0; j1 < 9; ++j1)
             {
-                this.addSlotToContainer(new Slot(playerInventory, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18));
+                this.addSlotToContainer(new Slot(playerInventory, j1 + l * 9 + 9, 8 + j1 * 18, 84 + l * 18));
             }
         }
 
         for (int i1 = 0; i1 < 9; ++i1)
         {
-            this.addSlotToContainer(new Slot(playerInventory, i1, 8 + i1 * 18, 161));
+            this.addSlotToContainer(new Slot(playerInventory, i1, 8 + i1 * 18, 142));
         }
 
         //heart container slots
-        this.addSlotToContainer(new SlotItemHandler(this.itemHandler, 0, 80, 9)); //red
-        this.addSlotToContainer(new SlotItemHandler(this.itemHandler, 0, 53, 33)); //orange
-        this.addSlotToContainer(new SlotItemHandler(this.itemHandler, 0, 107, 33)); //green
-        this.addSlotToContainer(new SlotItemHandler(this.itemHandler, 0, 80, 57)); //blue
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 0, 80, 9)); //red
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 1, 53, 33)); //orange
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 2, 107, 33)); //green
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 3, 80, 57)); //blue
     }
 
     @Override
@@ -57,5 +58,18 @@ public class ContainerPendant extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return true;
+    }
+
+    private static class SlotPendant extends SlotItemHandler {
+
+        public SlotPendant(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+            super(itemHandler, index, xPosition, yPosition);
+        }
+
+        @Override
+        public boolean isItemValid(@Nonnull ItemStack stack) {
+            //only store heart canisters matching the color.
+            return super.isItemValid(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).type.ordinal() == this.getSlotIndex();
+        }
     }
 }
