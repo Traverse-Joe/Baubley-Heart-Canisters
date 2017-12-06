@@ -33,5 +33,5 @@ public class ItemHeartAmulet extends BaseItem implements IBauble {
     }
 
     //TODO track health upgrades
-    //BUG REPORT - Shift Clicking Canister's into the Pendant causes the game to freeze up and force a close this also occurs when you shift items out
+    //BUGREPORT - Shift Clicking Canister's into the Pendant causes the game to freeze up and force a close this also occurs when you shift items out
 }
