@@ -1,6 +1,7 @@
 package kiba.bhc.gui.container;
 
 import com.google.common.base.Preconditions;
+import kiba.bhc.init.ModItems;
 import kiba.bhc.items.BaseHeartCanister;
 import kiba.bhc.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,6 +61,28 @@ public class ContainerPendant extends Container {
         return true;
     }
 
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        ItemStack stack = ItemStack.EMPTY;
+        Slot slot = inventorySlots.get(index);
+        if(slot != null && slot.getHasStack()) {
+            ItemStack slotStack = slot.getStack();
+            stack = slotStack.copy();
+            if(index < HeartType.values().length) { //player --> pendant or pendant --> player inventory
+                if(!this.mergeItemStack(slotStack, 4, this.inventorySlots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+            else if(!this.mergeItemStack(slotStack, 0, 4, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if(slotStack.isEmpty()) slot.putStack(ItemStack.EMPTY);
+            else slot.onSlotChanged();
+        }
+        return stack;
+    }
+
     private static class SlotPendant extends SlotItemHandler {
 
         public SlotPendant(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
@@ -70,6 +93,15 @@ public class ContainerPendant extends Container {
         public boolean isItemValid(@Nonnull ItemStack stack) {
             //only store heart canisters matching the color.
             return super.isItemValid(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).type.ordinal() == this.getSlotIndex();
+        }
+
+        @Override
+        public int getSlotStackLimit() {
+            return getMaxStackSize();
+        }
+
+        public static int getMaxStackSize() { //TODO small bypass, might need to be updated if stack sizes are made configurable individually.
+            return ModItems.RED_HEART.getItemStackLimit();
         }
     }
 }
