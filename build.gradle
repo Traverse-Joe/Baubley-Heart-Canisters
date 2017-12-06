@@ -43,6 +43,7 @@ compileJava {
 repositories {
     maven {
         //JEI files
+        //Mantle
         url = "http://dvs1.progwml6.com/files/maven"
     }
     maven {
@@ -133,8 +134,9 @@ dependencies {
 
     //compile baubles from github using jitpack
     deobfCompile "com.github.azanor:Baubles:${baubles_version}"
-    //compile mantle from github using jitpack
-    compile 'com.github.SlimeKnights:Mantle:b6be83efa6'
+
+    //get mantle from curseforge
+    runtime "slimeknights.mantle:Mantle:${mantle_version}"
 
 
 }
