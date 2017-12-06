@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.Locale;
-import java.util.UUID;
 
 
 public class BaseHeartCanister extends Item implements IBauble {
@@ -62,7 +61,7 @@ public class BaseHeartCanister extends Item implements IBauble {
         }
     }
 
-    private static void setHealthDiff(float diff, EntityLivingBase player) {
+    public static void setHealthDiff(float diff, EntityLivingBase player) {
         float amount = MathHelper.clamp(player.getMaxHealth() - diff, 0.5F, player.getMaxHealth()); //bugfix: death by removing heart canisters could cause lost items!
         player.setHealth(amount); //no healing glitch by adding and removing heart canisters!
     }

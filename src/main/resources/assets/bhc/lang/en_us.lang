@@ -21,3 +21,6 @@ item.heart_amulet.name=Heart Amulet
 
 item.relic_apple.name=Relic Apple
 item.wither_bone.name=Wither Bone
+
+#Containers
+container.bhc.heart_pendant=Heart Pendant

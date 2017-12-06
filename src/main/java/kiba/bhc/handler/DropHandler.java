@@ -4,6 +4,7 @@ import kiba.bhc.Reference;
 import kiba.bhc.init.ModItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.monster.EntityEvoker;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -23,14 +24,18 @@ public class DropHandler {
                 if (entity instanceof EntityDragon) entity.dropItem(ModItems.GREEN_HEART, 1);
                 else entity.dropItem(ModItems.ORANGE_HEART, 1);
             } else { //no boss
-                if (entity.getRNG().nextDouble() < 0.05D) {
-                    entity.dropItem(ModItems.RED_HEART, 1);
+                if (entity instanceof EntityEvoker) {
+                    entity.dropItem(ModItems.BLUE_HEART, 1);
+                } else {
+                    if (entity.getRNG().nextDouble() < 0.05D) {
+                        entity.dropItem(ModItems.RED_HEART, 1);
+                    }
                 }
-            }
-            if (!(Loader.isModLoaded("tconstruct"))) {
-                if (entity instanceof EntityWitherSkeleton) {
-                    if (entity.getRNG().nextDouble() < 0.15D) {
-                        entity.dropItem(ModItems.WITHER_BONE, 1);
+                if (!(Loader.isModLoaded("tconstruct"))) {
+                    if (entity instanceof EntityWitherSkeleton) {
+                        if (entity.getRNG().nextDouble() < 0.15D) {
+                            entity.dropItem(ModItems.WITHER_BONE, 1);
+                        }
                     }
                 }
             }

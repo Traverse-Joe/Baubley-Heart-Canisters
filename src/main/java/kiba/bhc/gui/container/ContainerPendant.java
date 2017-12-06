@@ -15,9 +15,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-/**
- * @author UpcraftLP
- */
+
 public class ContainerPendant extends Container {
 
     private final ItemStackHandler itemHandler;
