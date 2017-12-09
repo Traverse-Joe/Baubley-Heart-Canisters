@@ -3,7 +3,6 @@ package kiba.bhc.gui.container;
 import com.google.common.base.Preconditions;
 import kiba.bhc.init.ModItems;
 import kiba.bhc.items.BaseHeartCanister;
-import kiba.bhc.util.HeartType;
 import kiba.bhc.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -32,6 +31,14 @@ public class ContainerPendant extends Container {
         Preconditions.checkNotNull(hand, "hand cannot be null");
         this.itemHandler = InventoryUtil.createVirtualInventory(4, pendant);
         this.pendant = pendant;
+
+        //heart container slots
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 0, 80, 9)); //red
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 1, 53, 33)); //orange
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 2, 107, 33)); //green
+        this.addSlotToContainer(new SlotPendant(this.itemHandler, 3, 80, 57)); //blue
+
+        //player inventory
         for (int l = 0; l < 3; ++l)
         {
             for (int j1 = 0; j1 < 9; ++j1)
@@ -40,16 +47,11 @@ public class ContainerPendant extends Container {
             }
         }
 
+        //hotbar
         for (int i1 = 0; i1 < 9; ++i1)
         {
             this.addSlotToContainer(new Slot(playerInventory, i1, 8 + i1 * 18, 142));
         }
-
-        //heart container slots
-        this.addSlotToContainer(new SlotPendant(this.itemHandler, 0, 80, 9)); //red
-        this.addSlotToContainer(new SlotPendant(this.itemHandler, 1, 53, 33)); //orange
-        this.addSlotToContainer(new SlotPendant(this.itemHandler, 2, 107, 33)); //green
-        this.addSlotToContainer(new SlotPendant(this.itemHandler, 3, 80, 57)); //blue
     }
 
     @Override
@@ -77,12 +79,12 @@ public class ContainerPendant extends Container {
         if(slot != null && slot.getHasStack()) {
             ItemStack slotStack = slot.getStack();
             stack = slotStack.copy();
-            if(index < HeartType.values().length) { //player --> pendant or pendant --> player inventory
-                if(!this.mergeItemStack(slotStack, 4, this.inventorySlots.size(), true)) {
+            if(index < this.itemHandler.getSlots()) { //player --> pendant or pendant --> player inventory
+                if(!this.mergeItemStack(slotStack, this.itemHandler.getSlots(), this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if(!this.mergeItemStack(slotStack, 0, 4, false)) {
+            else if(!this.mergeItemStack(slotStack, 0, this.itemHandler.getSlots(), false)) {
                 return ItemStack.EMPTY;
             }
 
