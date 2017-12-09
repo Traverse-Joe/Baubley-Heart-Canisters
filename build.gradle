@@ -150,7 +150,7 @@ dependencies {
 
 
 }
-tasks.build.dependsOn signJar
+//tasks.build.dependsOn signJar //TODO uncomment when signing jars.
 tasks.curseforge.dependsOn build
 
 def curseRelations = {
