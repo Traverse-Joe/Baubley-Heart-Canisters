@@ -25,10 +25,10 @@ public class DropHandler {
                     if (entity.getRNG().nextDouble() < ConfigHandler.greenDropRate) {
                         entity.dropItem(ModItems.GREEN_HEART, 1);
                     }
-                    else if(entity.getRNG().nextDouble()<ConfigHandler.orangeDropRate){
-                        entity.dropItem(ModItems.ORANGE_HEART, 1);
-                    }
 
+                }
+                else if (entity.getRNG().nextDouble()<ConfigHandler.orangeDropRate){
+                    entity.dropItem(ModItems.ORANGE_HEART, 1);
                 }
             } else { //no boss
                 if (entity instanceof EntityEvoker) {
@@ -53,4 +53,3 @@ public class DropHandler {
     }
 }
 //TODO setup the Config for drops
-//BUGREPORT need help getting config to work properly Orange Else If isnt working
