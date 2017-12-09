@@ -28,5 +28,4 @@ public class ModItems {
     public static  Item GREEN_HEART = new BaseHeartItem(HeartType.GREEN);
     public static  Item BLUE_HEART = new BaseHeartItem(HeartType.BLUE);
 
-
 }
