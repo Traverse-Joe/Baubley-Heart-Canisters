@@ -10,6 +10,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -19,6 +20,8 @@ import javax.annotation.Nonnull;
 
 
 public class ContainerPendant extends Container {
+
+    public static final String HEART_AMOUNT = "heart_amount";
 
     private final ItemStackHandler itemHandler;
     private final ItemStack pendant;
@@ -53,6 +56,13 @@ public class ContainerPendant extends Container {
     public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
         InventoryUtil.serializeInventory(this.itemHandler, this.pendant);
+        NBTTagCompound nbt = this.pendant.getTagCompound();
+        int hearts = 0;
+        for(int i = 0; i < this.itemHandler.getSlots(); i++) { //add all hearts together and save to NBT for easy access
+            ItemStack stack = this.itemHandler.getStackInSlot(i);
+            if(!stack.isEmpty()) hearts += stack.getCount() * 2;
+        }
+        nbt.setInteger(HEART_AMOUNT, hearts);
     }
 
     @Override

@@ -9,6 +9,5 @@ public class BaseItem extends Item {
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setCreativeTab(BaubleyHeartCanisters.CREATIVE_TAB);
-
     }
 }

@@ -3,6 +3,7 @@ package kiba.bhc.items;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import kiba.bhc.BaubleyHeartCanisters;
+import kiba.bhc.gui.container.ContainerPendant;
 import kiba.bhc.util.BHCGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -32,5 +33,11 @@ public class ItemHeartAmulet extends BaseItem implements IBauble {
         else return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
-    //TODO track health upgrades
+    public int getHeartCount(ItemStack stack) {
+        if(stack.hasTagCompound()) {
+            return stack.getTagCompound().getInteger(ContainerPendant.HEART_AMOUNT);
+        }
+        return 0;
+    }
+
 }
