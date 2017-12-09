@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class ItemHeartAmulet extends BaseItem implements IBauble {
     public ItemHeartAmulet() {
         super("heart_amulet");
-
+        this.setMaxStackSize(1);
     }
 
     @Override
