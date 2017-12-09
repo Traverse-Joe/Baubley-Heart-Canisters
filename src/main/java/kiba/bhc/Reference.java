@@ -8,4 +8,5 @@ public class Reference {
     public static final String MODNAME = "Baubley Heart Canisters";
     public static final String CLIENTPROXY = "kiba.bhc.proxy.ClientProxy";
     public static final String COMMONPROXY = "kiba.bhc.proxy.CommonProxy";
+    public static final String UPDATE_URL = "https://raw.githubusercontent.com/EmoKiba/Baubley-Heart-Canisters/master/versions.json";
 }

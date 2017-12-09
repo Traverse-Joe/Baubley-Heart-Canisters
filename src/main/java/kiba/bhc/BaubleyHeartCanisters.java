@@ -18,7 +18,8 @@ import org.apache.logging.log4j.Logger;
         name = Reference.MODNAME,
         dependencies = "required-after:baubles;required-after:mantle",
         acceptedMinecraftVersions = "[1.12,1.13)",
-        certificateFingerprint = Reference.FINGERPRINT_KEY
+        certificateFingerprint = Reference.FINGERPRINT_KEY,
+        updateJSON = Reference.UPDATE_URL
 )
 public class BaubleyHeartCanisters {
 
