@@ -3,7 +3,7 @@ package kiba.bhc.handler;
 import kiba.bhc.Reference;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = Reference.MODID, category = "options")
+@Config(modid = Reference.MODID, category = "options", name = "BaubleyHeartCanisters")
 @Config.LangKey(Reference.MODID + ".config.title")
 public class ConfigHandler {
 

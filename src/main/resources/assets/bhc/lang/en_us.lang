@@ -2,6 +2,7 @@
 #en_US.lang File
 
 itemGroup.bhc=Baubley Heart Canisters
+bhc.config.title=Baubley Heart Canisters
 
 #Items
 item.red_heart.name=Red Heart
