@@ -1,7 +1,7 @@
 package kiba.bhc.gui.container;
 
 import com.google.common.base.Preconditions;
-import kiba.bhc.init.ModItems;
+import kiba.bhc.handler.ConfigHandler;
 import kiba.bhc.items.BaseHeartCanister;
 import kiba.bhc.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,12 +59,12 @@ public class ContainerPendant extends Container {
         super.onContainerClosed(playerIn);
         InventoryUtil.serializeInventory(this.itemHandler, this.pendant);
         NBTTagCompound nbt = this.pendant.getTagCompound();
-        int hearts = 0;
-        for(int i = 0; i < this.itemHandler.getSlots(); i++) { //add all hearts together and save to NBT for easy access
+        int[] hearts = new int [this.itemHandler.getSlots()];
+        for(int i = 0; i < hearts.length; i++) { //save hearts to NBT for easy access
             ItemStack stack = this.itemHandler.getStackInSlot(i);
-            if(!stack.isEmpty()) hearts += stack.getCount() * 2;
+            if(!stack.isEmpty()) hearts[i] = stack.getCount() * 2;
         }
-        nbt.setInteger(HEART_AMOUNT, hearts);
+        nbt.setIntArray(HEART_AMOUNT, hearts);
     }
 
     @Override
@@ -108,11 +108,8 @@ public class ContainerPendant extends Container {
 
         @Override
         public int getSlotStackLimit() {
-            return getMaxStackSize();
+            return ConfigHandler.HEARTS_STACKSIZE;
         }
 
-        public static int getMaxStackSize() { //TODO small bypass, might need to be updated if stack sizes are made configurable individually.
-            return ModItems.RED_HEART.getItemStackLimit();
-        }
     }
 }
