@@ -1,7 +1,7 @@
 ------------------------------------------------------
 Version 1.1.0
 ------------------------------------------------------
-- heart canisters now have a maximum value (configurable) (closes [#3](/issues/3))
+- heart canisters now have a maximum value (configurable) (closes [#3](https://github.com/EmoKiba/Baubley-Heart-Canisters/issues/3))
 
 ------------------------------------------------------
 Version 1.0.2
