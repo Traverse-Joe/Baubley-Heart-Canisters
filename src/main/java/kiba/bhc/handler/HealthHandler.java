@@ -28,10 +28,10 @@ public class HealthHandler {
     @SubscribeEvent
     public static void onPlayerUpdate(TickEvent.PlayerTickEvent event) {
         //only sync every 10 ticks
-        if (event.phase == TickEvent.Phase.END && event.player.openContainer == event.player.inventoryContainer && event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).world.getTotalWorldTime() % 10 == 0) {
+        if (event.phase == TickEvent.Phase.END && !event.player.world.isRemote && event.player.openContainer == event.player.inventoryContainer && event.player instanceof EntityPlayerMP && ((EntityPlayerMP) event.player).world.getTotalWorldTime() % 10 == 0) {
             EntityPlayerMP player = (EntityPlayerMP) event.player;
             IAttributeInstance health = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
-            if(player.hasCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null)) { //TODO is this check needed??
+            if(player.hasCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null)) {
                 IBaublesItemHandler baublesInventory = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
                 float diff = player.getMaxHealth() - player.getHealth();
                 int hearts = 0;
