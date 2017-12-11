@@ -13,19 +13,19 @@ public class ConfigHandler {
     @Config.Comment("The maximum stacksize for heart canisters, also the maximum amount of full hearts you can get per heart container type")
     public static int HEARTS_STACKSIZE = 10;
 
-    @Config.Comment("How often do red hearts Drop? (1.0 = 100 % and 0.0 means 0%)[Default: 0.05]")
+    @Config.Comment("How often do red hearts Drop? (1.0 = 100 % and 0.0 means 0%)")
     public static double redDropRate = 0.05;
 
-    @Config.Comment("How often do orange hearts Drop? (1.0 = 100 % and 0.0 means 0%)[Default: 1.00]")
+    @Config.Comment("How often do orange hearts Drop? (1.0 = 100 % and 0.0 means 0%)")
     public static double orangeDropRate = 1.00;
 
-    @Config.Comment("How often do green hearts Drop? (1.0 = 100 % and 0.0 means 0%)[Default: 1.00]")
+    @Config.Comment("How often do green hearts Drop? (1.0 = 100 % and 0.0 means 0%)")
     public static double greenDropRate = 1.00;
 
-    @Config.Comment("How often do blue hearts Drop? (1.0 = 100 % and 0.0 means 0%)[Default: 1.00]")
+    @Config.Comment("How often do blue hearts Drop? (1.0 = 100 % and 0.0 means 0%)")
     public static double blueDropRate = 1.00;
 
-    @Config.Comment("How often do wither bones Drop? (1.0 = 100 % and 0.0 means 0%)[Default:0.15]")
+    @Config.Comment("How often do wither bones Drop? (1.0 = 100 % and 0.0 means 0%)")
     public static double boneDropRate = 0.15;
 
     public static class Handler {
