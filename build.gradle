@@ -81,6 +81,9 @@ minecraft {
     if(project.hasProperty('public_key')) {
         replace "@FINGERPRINTKEY@", "${project.public_key}".replace(":", "").toLowerCase(Locale.ROOT)
     }
+    else {
+        replace "@FINGERPRINTKEY@", "undefined"
+    }
     replaceIn "kiba/bhc/Reference.java"
 
     //auto-configure the run arguments
@@ -116,12 +119,14 @@ jar {
 }
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
-    if(project.hasProperty('sign_keyStore')) {
-        keyPass = "${sign_keyPass}"
-        keyStore = "${sign_keyStore}"
-        storePass = "${sign_storePass}"
-        alias = "${sign_alias}"
+    onlyIf {
+        project.hasProperty('sign_keyStore')
     }
+    keyPass = findProperty('sign_keyPass')
+    keyStore = findProperty('sign_keyStore')
+    storePass = findProperty('sign_storePass')
+    alias = findProperty('sign_alias')
+
     inputFile = jar.archivePath
     outputFile = jar.archivePath
 }
@@ -150,13 +155,14 @@ dependencies {
 
 
 }
-//tasks.build.dependsOn signJar //TODO uncomment when signing jars.
+tasks.build.dependsOn signJar
 tasks.curseforge.dependsOn build
 
 def curseRelations = {
     requiredLibrary 'baubles'
-    //optionalLibrary '' //add curseforge-slug here,
     requiredLibrary 'mantle'
+    optionalLibrary 'tinkers-construct'
+    //optionalLibrary '' //add curseforge-slug here
 }
 
 
