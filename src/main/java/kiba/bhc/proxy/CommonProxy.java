@@ -1,7 +1,6 @@
 package kiba.bhc.proxy;
 
 import kiba.bhc.BaubleyHeartCanisters;
-import kiba.bhc.handler.DropHandler;
 import kiba.bhc.util.BHCGuiHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

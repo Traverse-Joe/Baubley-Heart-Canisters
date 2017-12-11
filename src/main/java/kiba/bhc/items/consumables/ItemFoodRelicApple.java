@@ -14,7 +14,6 @@ public class ItemFoodRelicApple extends net.minecraft.item.ItemFood{
         this.setRegistryName("relic_apple");
         this.setUnlocalizedName("relic_apple");
         this.setCreativeTab(BaubleyHeartCanisters.CREATIVE_TAB);
-
     }
 
     @Override

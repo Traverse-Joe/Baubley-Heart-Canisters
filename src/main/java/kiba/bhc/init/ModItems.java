@@ -9,8 +9,6 @@ import kiba.bhc.util.HeartType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
-import java.util.UUID;
-
 
 public class ModItems {
 

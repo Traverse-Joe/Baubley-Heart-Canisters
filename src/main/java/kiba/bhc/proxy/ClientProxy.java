@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 @Mod.EventBusSubscriber(Side.CLIENT)
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
@@ -28,29 +29,27 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
-
-
         super.postInit(event);
     }
     @SubscribeEvent
     public static void rendModel(ModelRegistryEvent event){
-        regItem(ModItems.RED_HEART);
-        regItem(ModItems.ORANGE_HEART);
-        regItem(ModItems.GREEN_HEART);
-        regItem(ModItems.BLUE_HEART);
+        regModel(ModItems.RED_HEART);
+        regModel(ModItems.ORANGE_HEART);
+        regModel(ModItems.GREEN_HEART);
+        regModel(ModItems.BLUE_HEART);
 
-        regItem(ModItems.CANISTER);
-        regItem(ModItems.RED_HEART_CANISTER);
-        regItem(ModItems.ORANGE_HEART_CANISTER);
-        regItem(ModItems.GREEN_HEART_CANISTER);
-        regItem(ModItems.BLUE_HEART_CANISTER);
+        regModel(ModItems.CANISTER);
+        regModel(ModItems.RED_HEART_CANISTER);
+        regModel(ModItems.ORANGE_HEART_CANISTER);
+        regModel(ModItems.GREEN_HEART_CANISTER);
+        regModel(ModItems.BLUE_HEART_CANISTER);
 
-        regItem(ModItems.WITHER_BONE);
-        regItem(ModItems.RELIC_APPLE);
-        regItem(ModItems.HEART_AMULET);
-
+        regModel(ModItems.WITHER_BONE);
+        regModel(ModItems.RELIC_APPLE);
+        regModel(ModItems.HEART_AMULET);
     }
-    public static void regItem(Item item){
+
+    public static void regModel(Item item){
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 }

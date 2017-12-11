@@ -17,8 +17,6 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class DropHandler {
 
-
-
     @SubscribeEvent
     public static void onEntityDrop(LivingDropsEvent event) {
         EntityLivingBase entity = event.getEntityLiving();
@@ -54,4 +52,3 @@ public class DropHandler {
         }
     }
 }
-//TODO setup the Config for drops
