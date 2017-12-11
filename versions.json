@@ -1,12 +1,12 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/baubley-heart-canisters",
   "promos": {
-    "1.12.2-latest": "1.0.2",
-    "1.12.2-recommended": "1.0.2",
-    "1.12.1-latest": "1.0.2",
-    "1.12.1-recommended": "1.0.2",
-    "1.12-latest": "1.0.2",
-    "1.12-recommended": "1.0.2"
+    "1.12.2-latest": "1.1.0",
+    "1.12.2-recommended": "1.1.0",
+    "1.12.1-latest": "1.1.0",
+    "1.12.1-recommended": "1.1.0",
+    "1.12-latest": "1.1.0",
+    "1.12-recommended": "1.1.0"
   },
   "1.12": {
     "1.1.0": "* added heart canister limit (configurable)",
