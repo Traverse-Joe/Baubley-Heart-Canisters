@@ -5,12 +5,15 @@ import baubles.api.IBauble;
 import kiba.bhc.BaubleyHeartCanisters;
 import kiba.bhc.gui.container.ContainerPendant;
 import kiba.bhc.util.BHCGuiHandler;
+import kiba.bhc.util.HeartType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 
 public class ItemHeartAmulet extends BaseItem implements IBauble {
     public ItemHeartAmulet() {
@@ -33,11 +36,12 @@ public class ItemHeartAmulet extends BaseItem implements IBauble {
         else return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
-    public int getHeartCount(ItemStack stack) {
+    public int[] getHeartCount(ItemStack stack) {
         if(stack.hasTagCompound()) {
-            return stack.getTagCompound().getInteger(ContainerPendant.HEART_AMOUNT);
+            NBTTagCompound nbt = stack.getTagCompound();
+            if(nbt.hasKey(ContainerPendant.HEART_AMOUNT, Constants.NBT.TAG_INT_ARRAY)) return nbt.getIntArray(ContainerPendant.HEART_AMOUNT);
         }
-        return 0;
+        return new int[HeartType.values().length];
     }
 
 }

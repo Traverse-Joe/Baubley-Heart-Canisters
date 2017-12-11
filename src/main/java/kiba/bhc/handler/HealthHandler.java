@@ -2,9 +2,11 @@ package kiba.bhc.handler;
 
 import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
+import com.google.common.base.Preconditions;
 import kiba.bhc.Reference;
 import kiba.bhc.items.BaseHeartCanister;
 import kiba.bhc.items.ItemHeartAmulet;
+import kiba.bhc.util.HeartType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -34,24 +36,33 @@ public class HealthHandler {
             if(player.hasCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null)) {
                 IBaublesItemHandler baublesInventory = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
                 float diff = player.getMaxHealth() - player.getHealth();
-                int hearts = 0;
+                int[] hearts = new int[HeartType.values().length];
                 for(int slot = 0; slot < baublesInventory.getSlots(); slot++) {
                     ItemStack slotStack = baublesInventory.getStackInSlot(slot);
                     if(!slotStack.isEmpty()) {
                         if(slotStack.getItem() instanceof BaseHeartCanister) {
-                            hearts += slotStack.getCount() * 2;
+                            HeartType type = ((BaseHeartCanister) slotStack.getItem()).type;
+                            hearts[type.ordinal()] += slotStack.getCount() * 2;
                         }
                         else if(slotStack.getItem() instanceof ItemHeartAmulet) {
-                            hearts += ((ItemHeartAmulet) slotStack.getItem()).getHeartCount(slotStack);
+                            int[] pendantHearts = ((ItemHeartAmulet) slotStack.getItem()).getHeartCount(slotStack);
+                            Preconditions.checkArgument(pendantHearts.length == HeartType.values().length, "Array must be same length as enum length!");
+                            for(int i = 0; i < hearts.length; i++) {
+                                hearts[i] += pendantHearts[i];
+                            }
                         }
                     }
                 }
+                int extraHearts = 0;
+                for(int i = 0; i < hearts.length; i++) {
+                    extraHearts += MathHelper.clamp(hearts[i], 0, ConfigHandler.HEARTS_STACKSIZE); //make sure to not bypass the limit
+                }
                 AttributeModifier modifier = health.getModifier(HEALTH_MODIFIER);
                 if(modifier != null) {
-                    if(modifier.getAmount() == hearts) return;
+                    if(modifier.getAmount() == extraHearts) return;
                     else health.removeModifier(modifier);
                 }
-                health.applyModifier(new AttributeModifier(HEALTH_MODIFIER, Reference.MODID + ":extra_hearts", hearts, 0)); //0 = addition
+                health.applyModifier(new AttributeModifier(HEALTH_MODIFIER, Reference.MODID + ":extra_hearts", extraHearts, 0)); //0 = addition
                 float amount = MathHelper.clamp(player.getMaxHealth() - diff, 0.0F, player.getMaxHealth()); //bugfix: death by removing heart canisters could cause loss of items!
                 if(amount > 0.0F) player.setHealth(amount); //no healing glitch by adding and removing heart canisters!
                 else {
