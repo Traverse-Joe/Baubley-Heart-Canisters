@@ -1,14 +1,15 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/baubley-heart-canisters",
   "promos": {
-    "1.12.2-latest": "1.1.0",
-    "1.12.2-recommended": "1.1.0",
-    "1.12.1-latest": "1.1.0",
-    "1.12.1-recommended": "1.1.0",
-    "1.12-latest": "1.1.0",
-    "1.12-recommended": "1.1.0"
+    "1.12.2-latest": "1.1.0b",
+    "1.12.2-recommended": "1.1.0b",
+    "1.12.1-latest": "1.1.0b",
+    "1.12.1-recommended": "1.1.0b",
+    "1.12-latest": "1.1.0b",
+    "1.12-recommended": "1.1.0b"
   },
   "1.12": {
+    "1.1.0b": "* fixed extra hears capping at half the desired limit (hotfix)",
     "1.1.0": "* added heart canister limit (configurable)",
     "1.0.2": "* fixed shift-clicking into the pendant GUI\n* fixed Tinker's Construct Mod Support",
     "1.0.1": "* lang file issue hotfix",

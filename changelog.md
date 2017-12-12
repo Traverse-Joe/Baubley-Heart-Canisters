@@ -1,4 +1,9 @@
 ------------------------------------------------------
+Version 1.1.0b
+------------------------------------------------------
+- fixes heart limit capping at half the amount (closes [#4](https://github.com/EmoKiba/Baubley-Heart-Canisters/issues/4)) (hotfix)
+
+------------------------------------------------------
 Version 1.1.0
 ------------------------------------------------------
 - heart canisters now have a maximum value (configurable) (closes [#3](https://github.com/EmoKiba/Baubley-Heart-Canisters/issues/3))
@@ -19,7 +24,6 @@ Version 1.0.0
 - Added Config for all Drops
 - Added Tinker's Support (Nacrotic Bone's Override the Drop for Wither Bones)
 - Added Heart Amulet - A Bauble that stores all the Heart Canister's in One Convenient Bauble
-
 
 ------------------------------------------------------
 Version 0.2.0
