@@ -1,4 +1,10 @@
 ------------------------------------------------------
+Version 1.1.1
+------------------------------------------------------
+- added chinese Translation by [1093751150](https://minecraft.curseforge.com/members/1093751150 "CurseForge Page")
+- added german Translation by [UpcraftLP](https://github.com/upcraftlp "GitHub")
+
+------------------------------------------------------
 Version 1.1.0b
 ------------------------------------------------------
 - fixes heart limit capping at half the amount (closes [#4](https://github.com/EmoKiba/Baubley-Heart-Canisters/issues/4)) (hotfix)
@@ -29,5 +35,3 @@ Version 1.0.0
 Version 0.2.0
 ------------------------------------------------------
 - initial release
-
-
