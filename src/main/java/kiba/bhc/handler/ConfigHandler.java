@@ -1,9 +1,11 @@
 package kiba.bhc.handler;
 
+import baubles.api.BaubleType;
 import kiba.bhc.Reference;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = Reference.MODID, category = "options", name = "BaubleyHeartCanisters")
@@ -28,6 +30,10 @@ public class ConfigHandler {
     @Config.Comment("How often do wither bones Drop? (1.0 = 100 % and 0.0 means 0%)")
     public static double boneDropRate = 0.15;
 
+    @Config.Comment("What Type of Bauble is the Heart Amulet?")
+    public static BaubleType baubleType = BaubleType.AMULET;
+
+    @Mod.EventBusSubscriber(modid = Reference.MODID)
     public static class Handler {
 
         @SubscribeEvent

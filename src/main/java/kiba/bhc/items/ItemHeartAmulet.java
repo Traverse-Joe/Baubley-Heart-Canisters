@@ -4,6 +4,7 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import kiba.bhc.BaubleyHeartCanisters;
 import kiba.bhc.gui.container.ContainerPendant;
+import kiba.bhc.handler.ConfigHandler;
 import kiba.bhc.util.BHCGuiHandler;
 import kiba.bhc.util.HeartType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +24,7 @@ public class ItemHeartAmulet extends BaseItem implements IBauble {
 
     @Override
     public BaubleType getBaubleType(ItemStack itemstack) {
-        return BaubleType.AMULET;
+        return ConfigHandler.baubleType;
     }
 
     @Override
