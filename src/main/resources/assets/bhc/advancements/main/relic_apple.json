@@ -12,8 +12,8 @@
   },
   "parent": "bhc:main/red_heart_canister",
   "criteria":{
-    "orange_heart_in_inventory":{
-      "trigger": "minecraft:consume_item",
+    "relic_apple_eaten":{
+      "trigger": "minecraft:inventory_changed",
       "conditions":{
         "items":[
           {

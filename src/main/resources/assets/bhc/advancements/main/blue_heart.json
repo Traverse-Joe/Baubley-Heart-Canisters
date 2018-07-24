@@ -12,7 +12,7 @@
   },
   "parent": "bhc:main/green_heart",
   "criteria":{
-    "orange_heart_in_inventory":{
+    "heart_heart_in_inventory":{
       "trigger": "minecraft:inventory_changed",
       "conditions":{
         "items":[

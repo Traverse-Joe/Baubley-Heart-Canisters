@@ -12,7 +12,7 @@
   },
   "parent": "bhc:main/orange_heart",
   "criteria":{
-    "orange_heart_in_inventory":{
+    "orange_heart_canister_in_inventory":{
       "trigger": "minecraft:inventory_changed",
       "conditions":{
         "items":[
