@@ -9,7 +9,7 @@
     "1.12-recommended": "1.2.0"
   },
   "1.12": {
-    "1.2.0":"* added config for heart amulet bauble type\n* added advancements for the mod",
+    "1.2.0": "* added config for heart amulet bauble type\n* added advancements for the mod",
     "1.1.1": "* added chinese translation\n* added german translation",
     "1.1.0b": "* fixed extra hears capping at half the desired limit (hotfix)",
     "1.1.0": "* added heart canister limit (configurable)",
