@@ -38,13 +38,13 @@ public class BaseHeartCanister extends Item implements IBauble {
 
     @Override
     public int getItemStackLimit(ItemStack stack) {
-        return ConfigHandler.HEARTS_STACKSIZE;
+        return ConfigHandler.heartStackSize;
     }
 
     @Deprecated
     @Override
     public int getItemStackLimit() {
-        return ConfigHandler.HEARTS_STACKSIZE;
+        return ConfigHandler.heartStackSize;
     }
 }
 

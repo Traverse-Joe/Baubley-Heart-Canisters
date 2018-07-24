@@ -55,7 +55,7 @@ public class HealthHandler {
                 }
                 int extraHearts = 0;
                 for(int i = 0; i < hearts.length; i++) {
-                    extraHearts += MathHelper.clamp(hearts[i], 0, ConfigHandler.HEARTS_STACKSIZE * 2); //make sure to not bypass the limit; bugfix: this is half hearts, so we need to double the limit...
+                    extraHearts += MathHelper.clamp(hearts[i], 0, ConfigHandler.heartStackSize * 2); //make sure to not bypass the limit; bugfix: this is half hearts, so we need to double the limit...
                 }
                 AttributeModifier modifier = health.getModifier(HEALTH_MODIFIER);
                 if(modifier != null) {

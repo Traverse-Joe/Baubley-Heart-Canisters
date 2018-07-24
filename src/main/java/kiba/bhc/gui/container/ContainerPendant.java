@@ -108,7 +108,7 @@ public class ContainerPendant extends Container {
 
         @Override
         public int getSlotStackLimit() {
-            return ConfigHandler.HEARTS_STACKSIZE;
+            return ConfigHandler.heartStackSize;
         }
 
     }

@@ -1,23 +1,23 @@
 {
   "display": {
     "icon":{
-      "item":"bhc:orange_heart"
+      "item":"bhc:heart_amulet"
     },
     "title":{
-      "translate":"advancements.bhc.orange_heart"
+      "translate":"advancements.bhc.heart_amulet"
     },
     "description":{
-      "translate": "advancements.bhc.orange_heart.description"
+      "translate": "advancements.bhc.heart_amulet.description"
     }
   },
-  "parent": "bhc:root",
+  "parent": "bhc:main/blue_heart_canister",
   "criteria":{
     "orange_heart_in_inventory":{
       "trigger": "minecraft:inventory_changed",
       "conditions":{
         "items":[
           {
-            "item": "bhc:orange_heart"
+            "item": "bhc:heart_amulet"
           }
         ]
 

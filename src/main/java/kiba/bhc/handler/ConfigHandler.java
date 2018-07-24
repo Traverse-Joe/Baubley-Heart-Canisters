@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ConfigHandler {
 
     @Config.Comment("The maximum stacksize for heart canisters, also the maximum amount of full hearts you can get per heart container type")
-    public static int HEARTS_STACKSIZE = 10;
+    public static int heartStackSize = 10;
 
     @Config.Comment("How often do red hearts Drop? (1.0 = 100 % and 0.0 means 0%)")
     public static double redDropRate = 0.05;
@@ -32,6 +32,9 @@ public class ConfigHandler {
 
     @Config.Comment("What Type of Bauble is the Heart Amulet?")
     public static BaubleType heartCanisterBaubleType = BaubleType.AMULET;
+
+    @Config.Comment("Starting Health of Player (Default:20)")
+    public static int startingHealth = 20;
 
     @Mod.EventBusSubscriber(modid = Reference.MODID)
     public static class Handler {
