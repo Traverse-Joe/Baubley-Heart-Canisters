@@ -24,7 +24,7 @@ public class ItemHeartAmulet extends BaseItem implements IBauble {
 
     @Override
     public BaubleType getBaubleType(ItemStack itemstack) {
-        return ConfigHandler.baubleType;
+        return ConfigHandler.heartCanisterBaubleType;
     }
 
     @Override

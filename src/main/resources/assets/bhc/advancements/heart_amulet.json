@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon":{
+      "item":"bhc:heart_amulet"
+    },
+    "title":{
+      "translate":"advancements.bhc.heart_amulet"
+    },
+    "description":{
+      "translate": "advancements.bhc.heart_amulet.description"
+    }
+  },
+  "parent": "bhc:blue_heart_canister",
+  "criteria":{
+    "orange_heart_in_inventory":{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":{
+        "items":[
+          {
+            "item": "bhc:heart_amulet"
+          }
+        ]
+
+
+      }
+    }
+  }
+}

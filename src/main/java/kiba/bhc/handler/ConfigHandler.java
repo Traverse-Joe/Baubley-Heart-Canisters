@@ -31,7 +31,7 @@ public class ConfigHandler {
     public static double boneDropRate = 0.15;
 
     @Config.Comment("What Type of Bauble is the Heart Amulet?")
-    public static BaubleType baubleType = BaubleType.AMULET;
+    public static BaubleType heartCanisterBaubleType = BaubleType.AMULET;
 
     @Mod.EventBusSubscriber(modid = Reference.MODID)
     public static class Handler {
