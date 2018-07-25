@@ -10,7 +10,7 @@
       "translate": "advancements.bhc.red_heart_canister.description"
     }
   },
-  "parent": "bhc:main/root",
+  "parent": "bhc:main/relic_apple",
   "criteria":{
     "red_heart_canister_in_inventory":{
       "trigger": "minecraft:inventory_changed",

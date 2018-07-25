@@ -1,14 +1,15 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/282947",
   "promos": {
-    "1.12.2-latest": "1.2.0",
-    "1.12.2-recommended": "1.2.0",
-    "1.12.1-latest": "1.2.0",
-    "1.12.1-recommended": "1.2.0",
-    "1.12-latest": "1.2.0",
-    "1.12-recommended": "1.2.0"
+    "1.12.2-latest": "1.2.1",
+    "1.12.2-recommended": "1.2.1",
+    "1.12.1-latest": "1.2.1",
+    "1.12.1-recommended": "1.2.1",
+    "1.12-latest": "1.2.1",
+    "1.12-recommended": "1.2.1"
   },
   "1.12": {
+    "1.2.1": "*added new config for setting starting max health of player\n* fixed some advancements",
     "1.2.0": "* added config for heart amulet bauble type\n* added advancements for the mod",
     "1.1.1": "* added chinese translation\n* added german translation",
     "1.1.0b": "* fixed extra hears capping at half the desired limit (hotfix)",

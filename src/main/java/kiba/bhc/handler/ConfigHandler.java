@@ -33,6 +33,9 @@ public class ConfigHandler {
     @Config.Comment("What Type of Bauble is the Heart Amulet?")
     public static BaubleType heartCanisterBaubleType = BaubleType.AMULET;
 
+    @Config.Comment("Allow Starting Health Tweaks")
+    public static boolean allowStartingHealthTweaks = false;
+
     @Config.Comment("Starting Health of Player (Default:20)")
     public static int startingHealth = 20;
 
