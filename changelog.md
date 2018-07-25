@@ -1,13 +1,14 @@
-------------------------------------------------------
+-----------------------------------------------------
 Version 1.2.1
 ------------------------------------------------------
--added new config for setting starting max health of player
--fixed some advancements
+- added new config for setting starting max health of player
+- fixed some advancements
 ------------------------------------------------------
 Version 1.2.0
 ------------------------------------------------------
--added config for heart amulet bauble type!
--added advancements for baubley heart canisters
+- added config for heart amulet bauble type!   
+- added advancements for baubley heart canisters
+
 ------------------------------------------------------
 Version 1.1.1
 ------------------------------------------------------
