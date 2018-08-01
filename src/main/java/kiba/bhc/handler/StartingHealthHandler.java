@@ -15,7 +15,7 @@ public class StartingHealthHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void setStartingHealth(EntityJoinWorldEvent event) {
-        if (ConfigHandler.allowStartingHealthTweaks == true) {
+        if (ConfigHandler.allowStartingHealthTweaks) {
             if (event.getEntity() instanceof EntityPlayer && !(event.getEntity() instanceof FakePlayer)) {
                 EntityPlayer player = (EntityPlayer) event.getEntity();
                 if (ConfigHandler.startingHealth > 0) {
