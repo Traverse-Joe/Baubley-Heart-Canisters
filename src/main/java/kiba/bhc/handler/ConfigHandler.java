@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = Reference.MODID, category = "options", name = "BaubleyHeartCanisters")
 @Config.LangKey(Reference.MODID + ".config.title")
+
 public class ConfigHandler {
 
     @Config.Comment("The maximum stacksize for heart canisters, also the maximum amount of full hearts you can get per heart container type")
@@ -32,6 +33,18 @@ public class ConfigHandler {
 
     @Config.Comment("What Type of Bauble is the Heart Amulet?")
     public static BaubleType heartCanisterBaubleType = BaubleType.AMULET;
+
+    @Config.Comment("Red Heart Canister Bauble Type (Requires Restart)")
+    public static BaubleType redCanisterBaubleType = BaubleType.HEAD;
+
+    @Config.Comment("Orange Heart Canister Bauble Type(Requires Restart)")
+    public static BaubleType orangeCanisterBaubleType = BaubleType.BODY;
+
+    @Config.Comment("Green Heart Canister Bauble Type (Requires Restart)")
+    public static BaubleType greenCanisterBaubleType = BaubleType.CHARM;
+
+    @Config.Comment("Blue Heart Canister Bauble Type (Requires Restart)")
+    public static BaubleType blueCanisterBaubleType = BaubleType.BELT;
 
     @Config.Comment("Allow Starting Health Tweaks")
     public static boolean allowStartingHealthTweaks = false;

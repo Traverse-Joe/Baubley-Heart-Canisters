@@ -15,20 +15,22 @@ import java.util.Locale;
 public class BaseHeartCanister extends Item implements IBauble {
 
     public final HeartType type;
+    public final BaubleType bauble;
 
-    public BaseHeartCanister(HeartType type) {
+    public BaseHeartCanister(HeartType type, BaubleType bauble) {
         super();
         String name = type.name().toLowerCase(Locale.ROOT) + "_heart_canister";
         this.setRegistryName(name);
         this.setUnlocalizedName(name);
         this.setCreativeTab(BaubleyHeartCanisters.CREATIVE_TAB);
+        this.bauble = bauble;
         this.type = type;
     }
 
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
         //wanna make it customizable by default in the super like i did with my heart
-        return BaubleType.TRINKET;
+        return bauble;
     }
 
     @Override
