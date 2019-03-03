@@ -1,0 +1,11 @@
+{
+  "type":"forge:ore_shapeless",
+  "ingredients":[
+    {
+      "item": "bhc:green_heart_canister"
+    }
+  ],
+  "result":{
+    "item":"bhc:green_heart_canister"
+  }
+}

@@ -52,6 +52,9 @@ public class ConfigHandler {
     @Config.Comment("Starting Health of Player (Default:20)")
     public static int startingHealth = 20;
 
+    @Config.Comment("Can Equip Heart Canisters")
+    public static boolean canEquipHeartCanisterWithoutAmulet = true;
+
     @Mod.EventBusSubscriber(modid = Reference.MODID)
     public static class Handler {
 

@@ -1,3 +1,14 @@
+Version 1.2.3
+--------------------------------------------------
+
+- added Config to Make Canister's Equippable
+-     Can Equip Heart Canisters
+      B:canEquipHeartCanisterWithoutAmulet=(true/false) 
+---------------------------------------------------
+Version 1.2.2
+---------------------------------------------------
+- added config for each bauble type 
+- added dummy recipe to fix NBT issues
 -----------------------------------------------------
 Version 1.2.1
 ------------------------------------------------------

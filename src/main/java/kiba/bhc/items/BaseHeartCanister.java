@@ -35,7 +35,10 @@ public class BaseHeartCanister extends Item implements IBauble {
 
     @Override
     public boolean canEquip(ItemStack itemstack, EntityLivingBase player) {
-        return true;
+        if(ConfigHandler.canEquipHeartCanisterWithoutAmulet){
+            return true;
+        }
+        return false;
     }
 
     @Override
