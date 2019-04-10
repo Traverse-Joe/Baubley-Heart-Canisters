@@ -1,7 +1,7 @@
-package kiba.bhc.gui;
+package sora.bhc.gui;
 
-import kiba.bhc.Reference;
-import kiba.bhc.gui.container.ContainerPendant;
+import sora.bhc.Reference;
+import sora.bhc.gui.container.ContainerPendant;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

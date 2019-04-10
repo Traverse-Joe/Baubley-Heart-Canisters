@@ -1,8 +1,8 @@
-package kiba.bhc;
+package sora.bhc;
 
-import kiba.bhc.handler.JsonHandler;
-import kiba.bhc.init.ModItems;
-import kiba.bhc.proxy.CommonProxy;
+import sora.bhc.handler.JsonHandler;
+import sora.bhc.init.ModItems;
+import sora.bhc.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;

@@ -1,11 +1,11 @@
-package kiba.bhc.init;
+package sora.bhc.init;
 
-import kiba.bhc.items.BaseHeartCanister;
-import kiba.bhc.items.BaseItem;
-import kiba.bhc.items.ItemHeartAmulet;
-import kiba.bhc.items.consumables.BaseHeartItem;
-import kiba.bhc.items.consumables.ItemFoodRelicApple;
-import kiba.bhc.util.HeartType;
+import sora.bhc.items.BaseHeartCanister;
+import sora.bhc.items.BaseItem;
+import sora.bhc.items.ItemHeartAmulet;
+import sora.bhc.items.consumables.BaseHeartItem;
+import sora.bhc.items.consumables.ItemFoodRelicApple;
+import sora.bhc.util.HeartType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 

@@ -1,7 +1,7 @@
-package kiba.bhc.items.consumables;
+package sora.bhc.items.consumables;
 
-import kiba.bhc.BaubleyHeartCanisters;
-import kiba.bhc.util.HeartType;
+import sora.bhc.BaubleyHeartCanisters;
+import sora.bhc.util.HeartType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;

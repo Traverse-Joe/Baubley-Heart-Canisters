@@ -1,6 +1,6 @@
-package kiba.bhc.items.consumables;
+package sora.bhc.items.consumables;
 
-import kiba.bhc.BaubleyHeartCanisters;
+import sora.bhc.BaubleyHeartCanisters;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;

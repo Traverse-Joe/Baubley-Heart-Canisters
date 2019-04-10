@@ -1,7 +1,7 @@
-package kiba.bhc.proxy;
+package sora.bhc.proxy;
 
-import kiba.bhc.BaubleyHeartCanisters;
-import kiba.bhc.util.BHCGuiHandler;
+import sora.bhc.BaubleyHeartCanisters;
+import sora.bhc.util.BHCGuiHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

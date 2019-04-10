@@ -1,7 +1,7 @@
-package kiba.bhc.util;
+package sora.bhc.util;
 
-import kiba.bhc.gui.GuiPendant;
-import kiba.bhc.gui.container.ContainerPendant;
+import sora.bhc.gui.GuiPendant;
+import sora.bhc.gui.container.ContainerPendant;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;

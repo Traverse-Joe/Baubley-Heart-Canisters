@@ -1,10 +1,10 @@
-package kiba.bhc.handler;
+package sora.bhc.handler;
 
 import com.google.gson.JsonElement;
-import kiba.bhc.BaubleyHeartCanisters;
-import kiba.bhc.Reference;
-import kiba.bhc.init.ModItems;
-import kiba.bhc.proxy.CommonProxy;
+import sora.bhc.BaubleyHeartCanisters;
+import sora.bhc.Reference;
+import sora.bhc.init.ModItems;
+import sora.bhc.proxy.CommonProxy;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityWitherSkeleton;

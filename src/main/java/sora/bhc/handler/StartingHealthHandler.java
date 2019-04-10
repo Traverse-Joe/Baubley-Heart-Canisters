@@ -1,6 +1,6 @@
-package kiba.bhc.handler;
+package sora.bhc.handler;
 
-import kiba.bhc.Reference;
+import sora.bhc.Reference;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.FakePlayer;

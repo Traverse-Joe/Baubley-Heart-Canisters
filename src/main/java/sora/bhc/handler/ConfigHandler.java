@@ -1,7 +1,7 @@
-package kiba.bhc.handler;
+package sora.bhc.handler;
 
 import baubles.api.BaubleType;
-import kiba.bhc.Reference;
+import sora.bhc.Reference;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;

@@ -1,3 +1,12 @@
+Version 2.0
+--------------------------------------------------
+- added Custom Drop JSON (Any Mob Can Be Set)  
+###### Presets: Hostile (Enemy Mob), Boss (Any Boss), Dragon(Ender Dragon)  
+- removed Bauble Trait from Canisters 
+######(Requires Heart Amulet - Recipe Altered)
+- Hearts now have OreDict (itemHeart)
+- Orange Hearts/Canisters are now Yellow Hearts/Canisters
+
 Version 1.2.3
 --------------------------------------------------
 

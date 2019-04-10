@@ -2,7 +2,7 @@
   "type":"forge:ore_shapeless",
   "ingredients":[
     {
-      "item":"bhc:orange_heart_canister"
+      "item":"bhc:yellow_heart_canister"
     },
     {
       "item":"bhc:green_heart"

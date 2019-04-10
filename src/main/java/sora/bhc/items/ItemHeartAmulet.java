@@ -1,14 +1,14 @@
-package kiba.bhc.items;
+package sora.bhc.items;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import baubles.api.cap.IBaublesItemHandler;
-import kiba.bhc.BaubleyHeartCanisters;
-import kiba.bhc.gui.container.ContainerPendant;
-import kiba.bhc.handler.ConfigHandler;
-import kiba.bhc.util.BHCGuiHandler;
-import kiba.bhc.util.HeartType;
+import sora.bhc.BaubleyHeartCanisters;
+import sora.bhc.gui.container.ContainerPendant;
+import sora.bhc.handler.ConfigHandler;
+import sora.bhc.util.BHCGuiHandler;
+import sora.bhc.util.HeartType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;

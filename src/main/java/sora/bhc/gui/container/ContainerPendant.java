@@ -1,9 +1,9 @@
-package kiba.bhc.gui.container;
+package sora.bhc.gui.container;
 
 import com.google.common.base.Preconditions;
-import kiba.bhc.handler.ConfigHandler;
-import kiba.bhc.items.BaseHeartCanister;
-import kiba.bhc.util.InventoryUtil;
+import sora.bhc.handler.ConfigHandler;
+import sora.bhc.items.BaseHeartCanister;
+import sora.bhc.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

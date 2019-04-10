@@ -1,4 +1,4 @@
-package kiba.bhc.util;
+package sora.bhc.util;
 
 /**
  * @author UpcraftLP

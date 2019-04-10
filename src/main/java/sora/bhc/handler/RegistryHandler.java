@@ -1,8 +1,8 @@
-package kiba.bhc.handler;
+package sora.bhc.handler;
 
-import kiba.bhc.BaubleyHeartCanisters;
-import kiba.bhc.Reference;
-import kiba.bhc.init.ModItems;
+import sora.bhc.BaubleyHeartCanisters;
+import sora.bhc.Reference;
+import sora.bhc.init.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;

@@ -1,8 +1,8 @@
-package kiba.bhc.items;
+package sora.bhc.items;
 
-import kiba.bhc.BaubleyHeartCanisters;
-import kiba.bhc.handler.ConfigHandler;
-import kiba.bhc.util.HeartType;
+import sora.bhc.BaubleyHeartCanisters;
+import sora.bhc.handler.ConfigHandler;
+import sora.bhc.util.HeartType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

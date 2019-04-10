@@ -1,6 +1,6 @@
-package kiba.bhc.items;
+package sora.bhc.items;
 
-import kiba.bhc.BaubleyHeartCanisters;
+import sora.bhc.BaubleyHeartCanisters;
 import net.minecraft.item.Item;
 
 public class BaseItem extends Item {

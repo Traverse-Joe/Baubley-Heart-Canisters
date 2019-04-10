@@ -1,12 +1,12 @@
-package kiba.bhc.handler;
+package sora.bhc.handler;
 
 import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
 import com.google.common.base.Preconditions;
-import kiba.bhc.Reference;
-import kiba.bhc.items.BaseHeartCanister;
-import kiba.bhc.items.ItemHeartAmulet;
-import kiba.bhc.util.HeartType;
+import sora.bhc.Reference;
+import sora.bhc.items.BaseHeartCanister;
+import sora.bhc.items.ItemHeartAmulet;
+import sora.bhc.util.HeartType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;

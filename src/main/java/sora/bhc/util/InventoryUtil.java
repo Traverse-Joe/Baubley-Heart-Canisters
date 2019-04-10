@@ -1,6 +1,6 @@
-package kiba.bhc.util;
+package sora.bhc.util;
 
-import kiba.bhc.Reference;
+import sora.bhc.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;

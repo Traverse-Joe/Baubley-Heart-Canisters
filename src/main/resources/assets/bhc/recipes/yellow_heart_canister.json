@@ -9,11 +9,11 @@
       "data":1
     },
     {
-      "item":"bhc:orange_heart"
+      "item":"bhc:yellow_heart"
     }
 
   ],
   "result":{
-    "item":"bhc:orange_heart_canister"
+    "item":"bhc:yellow_heart_canister"
   }
 }

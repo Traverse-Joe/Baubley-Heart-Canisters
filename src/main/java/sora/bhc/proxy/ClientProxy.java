@@ -1,6 +1,6 @@
-package kiba.bhc.proxy;
+package sora.bhc.proxy;
 
-import kiba.bhc.init.ModItems;
+import sora.bhc.init.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
