@@ -1,4 +1,8 @@
-Version 2.0
+Version 2.0.1
+--------------------------------------------------
+- I goofed (I broke Client and Common Proxy with Refactor of Package Fixed Now)
+--------------------------------------------------
+Version 2.0.0
 --------------------------------------------------
 - added Custom Drop JSON (Any Mob Can Be Set)  
 ###### Presets: Hostile (Enemy Mob), Boss (Any Boss), Dragon(Ender Dragon)  
@@ -6,7 +10,7 @@ Version 2.0
 ######(Requires Heart Amulet - Recipe Altered)
 - Hearts now have OreDict (itemHeart)
 - Orange Hearts/Canisters are now Yellow Hearts/Canisters
-
+--------------------------------------------------
 Version 1.2.3
 --------------------------------------------------
 
