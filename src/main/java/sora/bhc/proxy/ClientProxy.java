@@ -34,13 +34,13 @@ public class ClientProxy extends CommonProxy {
     @SubscribeEvent
     public static void rendModel(ModelRegistryEvent event){
         regModel(ModItems.RED_HEART);
-        regModel(ModItems.ORANGE_HEART);
+        regModel(ModItems.YELLOW_HEART);
         regModel(ModItems.GREEN_HEART);
         regModel(ModItems.BLUE_HEART);
 
         regModel(ModItems.CANISTER);
         regModel(ModItems.RED_HEART_CANISTER);
-        regModel(ModItems.ORANGE_HEART_CANISTER);
+        regModel(ModItems.YELLOW_HEART_CANISTER);
         regModel(ModItems.GREEN_HEART_CANISTER);
         regModel(ModItems.BLUE_HEART_CANISTER);
 

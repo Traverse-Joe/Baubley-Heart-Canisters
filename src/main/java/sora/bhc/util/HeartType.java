@@ -5,7 +5,7 @@ package kiba.bhc.util;
  */
 public enum HeartType {
     RED(10),
-    ORANGE(20),
+    YELLOW(20),
     GREEN(30),
     BLUE(40);
 

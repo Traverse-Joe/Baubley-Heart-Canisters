@@ -16,13 +16,13 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register <Item> event){
         event.getRegistry().register(ModItems.RED_HEART);
-        event.getRegistry().register(ModItems.ORANGE_HEART);
+        event.getRegistry().register(ModItems.YELLOW_HEART);
         event.getRegistry().register(ModItems.GREEN_HEART);
         event.getRegistry().register(ModItems.BLUE_HEART);
 
         event.getRegistry().register(ModItems.CANISTER);
         event.getRegistry().register(ModItems.RED_HEART_CANISTER);
-        event.getRegistry().register(ModItems.ORANGE_HEART_CANISTER);
+        event.getRegistry().register(ModItems.YELLOW_HEART_CANISTER);
         event.getRegistry().register(ModItems.GREEN_HEART_CANISTER);
         event.getRegistry().register(ModItems.BLUE_HEART_CANISTER);
 
@@ -33,5 +33,9 @@ public class RegistryHandler {
         BaubleyHeartCanisters.log.info("Registering Items to the OreDictionary...");
         //moved here because the item is still null in preInit.
         OreDictionary.registerOre("boneWithered", new ItemStack(ModItems.WITHER_BONE));
+        OreDictionary.registerOre("itemHeart", new ItemStack(ModItems.RED_HEART));
+        OreDictionary.registerOre("itemHeart", new ItemStack(ModItems.YELLOW_HEART));
+        OreDictionary.registerOre("itemHeart", new ItemStack(ModItems.GREEN_HEART));
+        OreDictionary.registerOre("itemHeart", new ItemStack(ModItems.BLUE_HEART));
     }
 }
