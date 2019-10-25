@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import sora.bhc.Reference;
-import sora.bhc.gui.container.HeartPendantContainer;
+import sora.bhc.container.HeartPendantContainer;
 
 public class HeartPendantScreen extends ContainerScreen<HeartPendantContainer> {
 

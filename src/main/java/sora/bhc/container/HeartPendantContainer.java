@@ -1,10 +1,9 @@
-package sora.bhc.gui.container;
+package sora.bhc.container;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,7 +12,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import sora.bhc.handler.ConfigHandler;
-import sora.bhc.handler.RegistryHandler;
+import sora.bhc.init.ModItems;
 import sora.bhc.items.BaseHeartCanister;
 import sora.bhc.util.InventoryUtil;
 
@@ -27,15 +26,15 @@ public class HeartPendantContainer extends Container {
     private final ItemStackHandler itemHandler;
     private final ItemStack pendant;
 
-    public HeartPendantContainer(ContainerType<? extends HeartPendantContainer> containerType, int windowId, ItemStack pendant, @Nonnull PlayerInventory playerInventory, @Nonnull Enum<Hand> hand) {
-      super(containerType,windowId);
+    public HeartPendantContainer(int windowId, ItemStack pendant, @Nonnull PlayerInventory playerInventory, @Nonnull Enum<Hand> hand) {
+      super(ModItems.HEART_PENANT_CONTAINER,windowId);
       Preconditions.checkNotNull(pendant, "pendant cannot be null");
         Preconditions.checkNotNull(playerInventory, "playerInventory cannot be null");
         Preconditions.checkNotNull(hand, "hand cannot be null");
         this.itemHandler = InventoryUtil.createVirtualInventory(4, pendant);
         this.pendant = pendant;
 
-      }
+
 
         //heart container slots
         this.addSlot(new SlotPendant(this.itemHandler, 0, 80, 9)); //red
@@ -59,7 +58,13 @@ public class HeartPendantContainer extends Container {
         }
     }
 
-    @Override
+    public HeartPendantContainer(int windowId){
+      super(ModItems.HEART_PENANT_CONTAINER,windowId);
+    }
+
+
+
+  @Override
     public void onContainerClosed(PlayerEntity playerIn) {
         super.onContainerClosed(playerIn);
         InventoryUtil.serializeInventory(this.itemHandler, this.pendant);

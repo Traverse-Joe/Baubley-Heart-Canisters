@@ -2,18 +2,14 @@ package sora.bhc.handler;
 
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import sora.bhc.BaubleyHeartCanisters;
 import sora.bhc.Reference;
-import sora.bhc.gui.container.HeartPendantContainer;
+import sora.bhc.container.HeartPendantContainer;
 import sora.bhc.init.ModItems;
-import sora.bhc.util.HeartType;
 
-import static java.lang.Enum.valueOf;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 @Mod.EventBusSubscriber(bus = MOD, modid = Reference.MODID)
@@ -42,6 +38,8 @@ public class RegistryHandler {
 
   @SubscribeEvent
   public static void registerContainer(final RegistryEvent.Register<ContainerType<?>> event){
-    event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> new HeartPendantContainer(windowId,inv,)).setRegistryName(BaubleyHeartCanisters.MODID, "heart_pendant"));
+    event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+      return new HeartPendantContainer(windowId);
+    }));
   }
 }

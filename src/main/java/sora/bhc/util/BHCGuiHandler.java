@@ -1,7 +1,7 @@
 //package sora.bhc.util;
 //
 //import sora.bhc.gui.GuiPendant;
-//import sora.bhc.gui.container.HeartPendantContainer;
+//import sora.bhc.container.HeartPendantContainer;
 //import net.minecraft.entity.player.EntityPlayer;
 //import net.minecraft.util.EnumHand;
 //import net.minecraft.world.World;
