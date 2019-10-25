@@ -1,0 +1,19 @@
+modLoader="javafml"
+loaderVersion="[26,)"
+credits="Radient_Sora"
+authors="Radient_Sora"
+[[mods]]
+    modId="bhc"
+    version="${version}"
+    displayName="Baubley Heart Canisters" #mandatory
+    description='''
+Baubley Heart Canisters
+Increase your max life! Equip and Win! 
+'''
+
+[[dependencies.bhc]]
+    modId="forge"
+    mandatory=true
+    versionRange="[26,)"
+    ordering="NONE"
+side="BOTH"
