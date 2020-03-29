@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: rock-candy
+Implementation-Version: 1.15.2-1.0.0
+Specification-Vendor: examplemodsareus
+Specification-Title: examplemod
+Implementation-Timestamp: 2020-02-12T02:12:02-0500
+Specification-Version: 1
+Implementation-Vendor: examplemodsareus
+

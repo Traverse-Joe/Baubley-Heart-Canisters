@@ -44,17 +44,18 @@ public class JsonHandler {
 
 
     public void saveJson() {
-        File file = new File(FMLPaths.CONFIGDIR.get().toFile() + "/bhc/" + BaubleyHeartCanisters.MODID);
+        File folder = new File(FMLPaths.CONFIGDIR.get().toFile() + "/bhc");
+        if(!folder.exists()){
+            folder.mkdir();
+        }
+        File file = new File(FMLPaths.CONFIGDIR.get().toFile() + "/bhc/" + BaubleyHeartCanisters.MODID + ".json");
         JsonParser parser = new JsonParser();
-        try {
+        try (FileWriter writer = new FileWriter(file)){
             if (file.exists()){
                 object = parser.parse(new FileReader(file)).getAsJsonObject();
                 return;
             }
-            FileWriter writer = new FileWriter(file);
             gson.toJson(object, writer);
-            writer.flush();
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

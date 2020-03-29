@@ -1,0 +1,5 @@
+Args: "--inJar", "/home/traverse_joe/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.15.2-31.1.30/forge-1.15.2-31.1.30-injected.jar", "--outJar", "/home/traverse_joe/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.15.2-31.1.30_mapped_snapshot_20190719-1.14.3/forge-1.15.2-31.1.30_mapped_snapshot_20190719-1.14.3.jar", "--logFile", "accesstransform.log", "--atFile", "/media/traverse_joe/Art_Dev/Development/MOD DEVELOPMENT/1.15/rock-candy/build/_atJar_5/parent_at.cfg"
+Classpath: /home/traverse_joe/.gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/accesstransformers/1.0.5/accesstransformers-1.0.5-fatjar.jar
+WorkDir: /media/traverse_joe/Art_Dev/Development/MOD DEVELOPMENT/1.15/rock-candy/build/_atJar_5
+Main: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================
