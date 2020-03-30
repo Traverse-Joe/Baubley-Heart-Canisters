@@ -17,9 +17,21 @@
     },
     "done": true
   },
+  "minecraft:recipes/food/cooked_chicken_from_smoking": {
+    "criteria": {
+      "has_chicken": "2020-03-29 23:32:40 -0400"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/white_wool_from_string": {
     "criteria": {
       "has_string": "2020-03-28 21:22:00 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2020-03-29 23:53:37 -0400"
     },
     "done": true
   },
@@ -40,6 +52,12 @@
       "minecraft:spider": "2020-03-28 21:21:58 -0400"
     },
     "done": false
+  },
+  "minecraft:recipes/food/cooked_chicken": {
+    "criteria": {
+      "has_chicken": "2020-03-29 23:32:40 -0400"
+    },
+    "done": true
   },
   "minecraft:recipes/brewing/fermented_spider_eye": {
     "criteria": {
@@ -65,6 +83,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/combat/arrow": {
+    "criteria": {
+      "has_feather": "2020-03-29 23:32:40 -0400"
+    },
+    "done": true
+  },
   "minecraft:adventure/root": {
     "criteria": {
       "killed_by_something": "2020-03-28 21:11:29 -0400"
@@ -74,6 +98,12 @@
   "minecraft:recipes/food/cooked_porkchop": {
     "criteria": {
       "has_porkchop": "2020-03-28 21:22:38 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_chicken_from_campfire_cooking": {
+    "criteria": {
+      "has_chicken": "2020-03-29 23:32:40 -0400"
     },
     "done": true
   },

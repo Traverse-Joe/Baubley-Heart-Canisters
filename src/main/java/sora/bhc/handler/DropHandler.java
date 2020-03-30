@@ -41,9 +41,17 @@ public class DropHandler {
 
     public static List<ItemStack> getEntityDrops(LivingEntity entity) {
         List<ItemStack> list = new ArrayList<>();
-        for (Map.Entry<String, JsonElement> entry : BaubleyHeartCanisters.jsonHandler.getObject().entrySet()) {
+        handleEntry("red",entity,list);
+        handleEntry("yellow",entity,list);
+        handleEntry("green",entity,list);
+        handleEntry("blue",entity,list);
+        return list;
+    }
+
+    public static void handleEntry(String category, LivingEntity entity, List<ItemStack> items) {
+        for (Map.Entry<String, Double> entry : BaubleyHeartCanisters.config.getHeartTypeEntries(category).entrySet()) {
             ItemStack stack = ItemStack.EMPTY;
-            switch (entry.getKey()) {
+            switch (category) {
                 case "red":
                     stack = new ItemStack(ModItems.RED_HEART);
                     break;
@@ -57,31 +65,30 @@ public class DropHandler {
                     stack = new ItemStack(ModItems.BLUE_HEART);
                     break;
             }
-            for (Map.Entry<String, JsonElement> catEntry : entry.getValue().getAsJsonObject().entrySet()) {
-                if (BaubleyHeartCanisters.jsonHandler.genericValues.contains(catEntry.getKey())) {
-                    switch (catEntry.getKey()) {
-                        case "hostile":
-                            if (entity instanceof IMob && entity.isNonBoss()) {
-                                addWithPercent(list, stack, catEntry.getValue().getAsDouble());
-                            }
-                            break;
-                        case "boss":
-                            if (!entity.isNonBoss() && !(entity instanceof EnderDragonEntity)) {
-                                addWithPercent(list, stack, catEntry.getValue().getAsDouble());
-                            }
-                            break;
-                        case "dragon":
-                            if (entity instanceof EnderDragonEntity) {
-                                addWithPercent(list, stack, catEntry.getValue().getAsDouble());
-                            }
-                            break;
-                    }
-                } else if (catEntry.getKey().equals(entity.getEntityString()) && catEntry instanceof MobEntity) {
-                    addWithPercent(list, stack, catEntry.getValue().getAsDouble());
+            if (entry.getKey().equals(entity.getEntityString())) {
+                addWithPercent(items, stack, entry.getValue());
+            } else {
+                switch (entry.getKey()) {
+                    case "hostile":
+                        if (entity instanceof IMob && entity.isNonBoss()) {
+                            addWithPercent(items, stack, entry.getValue());
+                        }
+                        break;
+                    case "boss":
+                        if (!entity.isNonBoss() && !(entity instanceof EnderDragonEntity)) {
+                            addWithPercent(items, stack, entry.getValue());
+                        }
+                        break;
+                    case "dragon":
+                        if (entity instanceof EnderDragonEntity) {
+                            addWithPercent(items, stack, entry.getValue());
+                        }
+                        break;
                 }
             }
+
         }
-        return list;
+
     }
 
     public static void addWithPercent(List<ItemStack> list, ItemStack stack, double percentage) {
