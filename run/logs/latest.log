@@ -1,0 +1,10 @@
+[06Aug2020 14:53:57.489] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--mod, examplemod, --all, --output, A:\Development\MOD DEVELOPMENT\1.16\baubley-heart-canisters\src\generated\resources, --gameDir, ., --launchTarget, fmluserdevdata, --fml.mcpVersion, 20200625.160719, --fml.mcVersion, 1.16.1, --fml.forgeGroup, net.minecraftforge, --fml.forgeVersion, 32.0.106]
+[06Aug2020 14:53:57.496] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 6.1.1+74+master.966c698 starting: java version 1.8.0_181 by Oracle Corporation
+[06Aug2020 14:53:58.076] [main/INFO] [net.minecraftforge.fml.loading.FixSSL/CORE]: Added Lets Encrypt root certificates as additional trust
+[06Aug2020 14:53:58.162] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8 Source=file:/C:/Users/roxxa/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8/dbe9e5db694a7c3cd644d5bb98f8a21295c75048/mixin-0.8.jar Service=ModLauncher Env=UNKNOWN
+[06Aug2020 14:53:58.247] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file A:\Development\MOD DEVELOPMENT\1.16\baubley-heart-canisters\run\config\fml.toml is not correct. Correcting
+[06Aug2020 14:53:58.258] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [defaultConfigPath] was corrected from null to defaultconfigs
+[06Aug2020 14:53:59.844] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'fmluserdevdata' with arguments [--gameDir, ., --mod, examplemod, --all, --output, A:\Development\MOD DEVELOPMENT\1.16\baubley-heart-canisters\src\generated\resources]
+[06Aug2020 14:54:01.252] [main/INFO] [net.minecraftforge.fml.ModLoader/]: Initializing Data Gatherer for mods [examplemod]
+[06Aug2020 14:54:21.565] [modloading-worker-9/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 32.0.106, for MC 1.16.1 with MCP 20200625.160719
+[06Aug2020 14:54:21.565] [modloading-worker-9/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v32.0.106 Initialized

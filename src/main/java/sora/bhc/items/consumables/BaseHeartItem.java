@@ -40,7 +40,7 @@ public class BaseHeartItem extends BaseItem {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if(worldIn.isRemote && entityLiving instanceof PlayerEntity){
+        if(!worldIn.isRemote && entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
             player.heal(this.type.healAmount);
             if(!player.isCreative())stack.shrink(1);

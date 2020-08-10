@@ -1,0 +1,20 @@
+{
+  "type":"forge:ore_shapeless",
+  "ingredients":[
+    {
+      "item":"bhc:yellow_heart_canister"
+    },
+    {
+      "item":"bhc:green_heart"
+    },
+    {
+      "item":"minecraft:nether_star"
+    },
+    {
+      "item":"minecraft:shulker_shell"
+    }
+  ],
+  "result":{
+    "item":"bhc:green_heart_canister"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon":{
+      "item":"bhc:yellow_heart_canister"
+    },
+    "title":{
+      "translate":"advancements.bhc.yellow_heart_canister"
+    },
+    "description":{
+      "translate": "advancements.bhc.yellow_heart_canister.description"
+    }
+  },
+  "parent": "bhc:main/yellow_heart",
+  "criteria":{
+    "orange_heart_canister_in_inventory":{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":{
+        "items":[
+          {
+            "item": "bhc:yellow_heart_canister"
+          }
+        ]
+
+
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon":{
+      "item":"bhc:yellow_heart"
+    },
+    "title":{
+      "translate":"advancements.bhc.yellow_heart"
+    },
+    "description":{
+      "translate": "advancements.bhc.yellow_heart.description"
+    }
+  },
+  "parent": "bhc:main/root",
+  "criteria":{
+    "orange_heart_in_inventory":{
+      "trigger": "minecraft:inventory_changed",
+      "conditions":{
+        "items":[
+          {
+            "item": "bhc:yellow_heart"
+          }
+        ]
+
+
+      }
+    }
+  }
+}

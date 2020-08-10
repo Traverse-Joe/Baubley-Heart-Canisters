@@ -2,7 +2,6 @@ package sora.bhc.init;
 
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import sora.bhc.container.HeartPendantContainer;
 import sora.bhc.items.BaseHeartCanister;
 import sora.bhc.items.BaseItem;
 import sora.bhc.items.consumables.BaseHeartItem;
@@ -20,7 +19,7 @@ public class ModItems {
     public static  Item CANISTER = new BaseItem("canister",new Item.Properties());
     public static  Item RELIC_APPLE = new ItemFoodRelicApple();
    // public static BaseItem HEART_AMULET = new ItemHeartAmulet();
-    public static ContainerType<HeartPendantContainer> HEART_PENANT_CONTAINER;
+    //public static ContainerType<HeartPendantContainer> HEART_PENANT_CONTAINER;
 
     public static  Item RED_HEART = new BaseHeartItem("red_heart",HeartType.RED);
     public static  Item YELLOW_HEART = new BaseHeartItem("yellow_heart",HeartType.YELLOW);

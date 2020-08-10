@@ -1,0 +1,5 @@
+Args: "--inJar", "C:\Users\roxxa\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.16.1-32.0.106\forge-1.16.1-32.0.106-injected.jar", "--outJar", "C:\Users\roxxa\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.16.1-32.0.106_mapped_snapshot_20200514-1.16\forge-1.16.1-32.0.106_mapped_snapshot_20200514-1.16.jar", "--logFile", "accesstransform.log", "--atFile", "A:\Development\MOD DEVELOPMENT\1.16\baubley-heart-canisters\build\_atJar_5\parent_at.cfg"
+Classpath: C:\Users\roxxa\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\1.0.5\accesstransformers-1.0.5-fatjar.jar
+WorkDir: A:\Development\MOD DEVELOPMENT\1.16\baubley-heart-canisters\build\_atJar_5
+Main: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================

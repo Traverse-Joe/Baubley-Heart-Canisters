@@ -1,0 +1,24 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="runData" type="Application" factoryName="Application" singleton="false">
+    <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="MOD_CLASSES" value="examplemod%%$PROJECT_DIR$/../baubley-heart-canisters\build\resources\main;examplemod%%$PROJECT_DIR$/../baubley-heart-canisters\build\classes\java\main" />
+      <env name="MCP_MAPPINGS" value="snapshot_20200514-1.16" />
+      <env name="MCP_VERSION" value="20200625.160719" />
+      <env name="FORGE_VERSION" value="32.0.106" />
+      <env name="FORGE_GROUP" value="net.minecraftforge" />
+      <env name="target" value="fmluserdevdata" />
+      <env name="MC_VERSION" value="1.16.1" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="net.minecraftforge.userdev.LaunchTesting" />
+    <module name="baubley-heart-canisters" />
+    <option name="PROGRAM_PARAMETERS" value="--mod examplemod --all --output &quot;A:\Development\MOD DEVELOPMENT\1.16\baubley-heart-canisters\src\generated\resources&quot;" />
+    <option name="VM_PARAMETERS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=SCAN,REGISTRIES,REGISTRYDUMP" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks=":prepareRunData" externalProjectPath="$PROJECT_DIR$" />
+    </method>
+  </configuration>
+</component>
