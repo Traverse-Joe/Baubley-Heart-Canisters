@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
-  "textures": {
-    "layer0": "bhc:items/yellow_heart"
+  "textures" : {
+    "layer0" : "bhc:items/yellow_heart"
   }
 }
