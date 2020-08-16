@@ -1,8 +1,8 @@
 package com.traverse.bhc.common;
 
 import com.traverse.bhc.client.screens.HeartAmuletScreen;
-import com.traverse.bhc.common.util.ConfigHandler;
-import com.traverse.bhc.common.util.RegistryHandler;
+import com.traverse.bhc.common.init.ConfigHandler;
+import com.traverse.bhc.common.init.RegistryHandler;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

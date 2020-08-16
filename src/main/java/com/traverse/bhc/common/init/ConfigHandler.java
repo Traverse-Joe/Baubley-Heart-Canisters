@@ -1,4 +1,4 @@
-package com.traverse.bhc.common.util;
+package com.traverse.bhc.common.init;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

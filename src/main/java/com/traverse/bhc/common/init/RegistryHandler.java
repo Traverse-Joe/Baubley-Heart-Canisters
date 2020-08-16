@@ -1,8 +1,9 @@
-package com.traverse.bhc.common.util;
+package com.traverse.bhc.common.init;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.items.*;
+import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.extensions.IForgeContainerType;

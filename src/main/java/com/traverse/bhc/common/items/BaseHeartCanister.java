@@ -1,6 +1,6 @@
 package com.traverse.bhc.common.items;
 
-import com.traverse.bhc.common.util.ConfigHandler;
+import com.traverse.bhc.common.init.ConfigHandler;
 import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +18,7 @@ public class BaseHeartCanister extends BaseItem{
     private static final UUID HEALTH_MODIFIER = UUID.fromString("caa44aa0-9e6e-4a57-9759-d2f64abfb7d3");
     public static final String HEALTH_MODIFIER_NAME = "BHC Health Modifier";
 
-    protected HeartType type;
+    public HeartType type;
     public BaseHeartCanister(HeartType type){
         this.type = type;
     }
