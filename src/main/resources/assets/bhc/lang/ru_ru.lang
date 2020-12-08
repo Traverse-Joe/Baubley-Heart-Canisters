@@ -1,0 +1,48 @@
+#PARSE_ESCAPES
+#ru_ru.lang File
+
+itemGroup.bhc=Baubley Heart Canisters
+bhc.config.title=Baubley Heart Canisters
+
+#Items
+item.red_heart.name=Красное сердце
+item.red_heart_canister.name=Канистра с красным сердцем
+
+item.orange_heart.name=Оранжевое сердце
+item.orange_heart_canister.name=Канистра с оранжевым сердцем
+
+item.green_heart.name=Зелёное сердце
+item.green_heart_canister.name=Канистра с зелёным сердцем
+
+item.blue_heart.name=Синее сердце
+item.blue_heart_canister.name=Канистра с синим сердцем
+
+item.canister.name=Пустая канистра
+item.heart_amulet.name=Амулет с сердцем
+
+item.relic_apple.name=Реликтовое яблоко
+item.wither_bone.name=Иссушающая кость
+
+#Containers
+container.bhc.heart_pendant=Кулон с сердцем
+
+#Adavancements
+advancements.bhc.red_heart.description=Убейте любого моба и получите красное сердце!
+advancements.bhc.red_heart_canister=Канистра с красным сердцем
+advancements.bhc.red_heart_canister.description=Создайте канистру с красным сердцем!
+advancements.bhc.orange_heart=Оранжевое сердце
+advancements.bhc.orange_heart.description=Убейте босса и получите оранжевое сердце!
+advancements.bhc.orange_heart_canister=Канистра с оранжевым сердцем
+advancements.bhc.orange_heart_canister.description=Создайте канистру с оранжевым сердцем!
+advancements.bhc.green_heart=Зелёное сердце
+advancements.bhc.green_heart.description=Убейте Эндер Дракона и получите Зеленое Сердце!
+advancements.bhc.green_heart_canister=Канистра с зеленым сердцем
+advancements.bhc.green_heart_canister.description=Создайте канистру с зеленым сердцем!
+advancements.bhc.blue_heart=Синее сердце
+advancements.bhc.blue_heart.description=Найдите особняк, убейте Энвокера и соберите синее сердце!
+advancements.bhc.blue_heart_canister=Канистра с синим сердцем
+advancements.bhc.blue_heart_canister.description=Создайте канистру с синим сердцем!
+advancements.bhc.relic_apple=Реликтовое яблоко, пожалуйста!
+advancements.bhc.relic_apple.description=Получите Реликтовое Яблоко!
+advancements.bhc.heart_amulet=Один за всех!
+advancements.bhc.heart_amulet.description=Получите удивительный амулет с сердцем!
