@@ -11,6 +11,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class ItemHeart extends BaseItem {
+
     protected final HeartType type;
 
     public ItemHeart(HeartType type) {
@@ -36,10 +37,10 @@ public class ItemHeart extends BaseItem {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if(!worldIn.isRemote && entityLiving instanceof PlayerEntity){
+        if (!worldIn.isRemote && entityLiving instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entityLiving;
             player.heal(this.type.healAmount);
-            if(!player.isCreative()) stack.shrink(1);
+            if (!player.isCreative()) stack.shrink(1);
         }
         return stack;
     }

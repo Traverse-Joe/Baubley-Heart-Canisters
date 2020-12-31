@@ -15,15 +15,14 @@ public class ItemRelicApple extends BaseItem {
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if(!worldIn.isRemote) {
-            if (entityLiving instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entityLiving;
-                player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 20 * 60, 1));
-                player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 20 * 60, 1));
-                player.addPotionEffect(new EffectInstance(Effects.HASTE, 20 * 60, 1));
-                player.heal(20);
-            }
+        if (!worldIn.isRemote() && entityLiving instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entityLiving;
+            player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 20 * 60, 1));
+            player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 20 * 60, 1));
+            player.addPotionEffect(new EffectInstance(Effects.HASTE, 20 * 60, 1));
+            player.heal(20);
         }
+
         return stack;
     }
 }

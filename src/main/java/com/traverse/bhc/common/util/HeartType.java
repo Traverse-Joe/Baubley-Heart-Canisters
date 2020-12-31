@@ -8,7 +8,7 @@ public enum HeartType {
 
     public final int healAmount;
 
-    HeartType(int healAmount){
+    HeartType(int healAmount) {
         this.healAmount = healAmount;
     }
 }

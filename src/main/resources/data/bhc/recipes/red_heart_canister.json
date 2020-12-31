@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bhc:red_heart"
+    },
+    {
+      "tag": "forge:witherbone"
+    },
+    {
+      "item": "bhc:relic_apple"
+    },
+    {
+      "item": "bhc:canister"
+    }
+  ],
+  "result": {
+    "item": "bhc:red_heart_canister"
+  }
+}

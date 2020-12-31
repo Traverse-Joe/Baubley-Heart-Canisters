@@ -10,7 +10,11 @@ public class BaseItem extends Item {
         super(new Item.Properties().group(BaubleyHeartCanisters.TAB));
     }
 
-    public BaseItem(int hunger, float saturation){
+    public BaseItem(int maxCount) {
+        super(new Item.Properties().group(BaubleyHeartCanisters.TAB).maxStackSize(maxCount));
+    }
+
+    public BaseItem(int hunger, float saturation) {
         super(new Item.Properties().group(BaubleyHeartCanisters.TAB).food(new Food.Builder().saturation(saturation).setAlwaysEdible().hunger(hunger).build()));
     }
 }

@@ -1,48 +1,21 @@
-modLoader="javafml" #mandatory
-
-loaderVersion="[32,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
-
+modLoader="javafml"
+loaderVersion="[35,)"
 license="All rights reserved"
+issueTrackerURL="https://github.com/Traverse-Joe/Baubley-Heart-Canisters/issues"
 
-issueTrackerURL="http://my.issue.tracker/" #optional
-
-[[mods]] #mandatory
-
-modId="bhc" #mandatory
-
-version="${file.jarVersion}" #mandatory
-
-displayName="Baubley Heart Canisters" #mandatory
-
-updateJSONURL="http://myurl.me/" #optional
-
-displayURL="http://example.com/" #optional
-
-logoFile="examplemod.png" #optional
-
-credits="Thanks goes to UpcraftLP who helped with original build. Also Abused_Master for helping when i bugged him." #optional
-
-authors="Traverse_Joe" #optional
-
+[[mods]]
+modId="bhc"
+version="${file.jarVersion}"
+displayName="Baubley Heart Canisters"
+credits="Thanks goes to UpcraftLP who helped with original build. Also Abused_Master for helping when i bugged him."
+authors="Traverse_Joe"
 description='''
 Heart Canisters for Baubles/Curios Enjoy :D
 '''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
-
-    modId="forge" #mandatory
-
-    mandatory=true #mandatory
-
-    versionRange="[32,)" #mandatory
-
-    ordering="NONE"
-
-    side="BOTH"
 
 [[dependencies.bhc]]
-    modId="minecraft"
+    modId="forge"
     mandatory=true
-    versionRange="[1.16.1]"
+    versionRange="[35,)"
     ordering="NONE"
     side="BOTH"
