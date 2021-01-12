@@ -39,7 +39,7 @@ public class HeartAmuletContainer extends Container {
         for (int row = 0; row < 9; ++row) {
             int x = 8 + row * 18;
             int y = 56 + 86;
-            if(row == playerInventory.getSlotFor(stack)) {
+            if (row == getSlotFor(playerInventory, stack)) {
                 addSlot(new LockedSlot(playerInventory, row, x, y));
                 continue;
             }
@@ -59,14 +59,14 @@ public class HeartAmuletContainer extends Container {
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
         Hand hand = ItemHeartAmulet.getHandForAmulet(playerIn);
-        if(hand != null)
+        if (hand != null)
             InventoryUtil.serializeInventory(this.itemStackHandler, playerIn.getHeldItem(hand));
 
         CompoundNBT nbt = playerIn.getHeldItem(hand).getTag();
-        int[] hearts = new int [this.itemStackHandler.getSlots()];
-        for(int i = 0; i < hearts.length; i++){
+        int[] hearts = new int[this.itemStackHandler.getSlots()];
+        for (int i = 0; i < hearts.length; i++) {
             ItemStack stack = this.itemStackHandler.getStackInSlot(i);
-            if(!stack.isEmpty()) hearts [i] = stack.getCount() *2;
+            if (!stack.isEmpty()) hearts[i] = stack.getCount() * 2;
         }
         nbt.putIntArray(HEART_AMOUNT, hearts);
         playerIn.getHeldItem(hand).setTag(nbt);
@@ -87,8 +87,9 @@ public class HeartAmuletContainer extends Container {
             ItemStack slotStack = slot.getStack();
             stack = slotStack.copy();
             if (index < this.itemStackHandler.getSlots()) {
-                if (!this.mergeItemStack(slotStack, this.itemStackHandler.getSlots(), this.inventorySlots.size(), true)) ;
-                    return ItemStack.EMPTY;
+                if (!this.mergeItemStack(slotStack, this.itemStackHandler.getSlots(), this.inventorySlots.size(), true))
+                    ;
+                return ItemStack.EMPTY;
             } else if (!this.mergeItemStack(slotStack, 0, this.itemStackHandler.getSlots(), false)) {
                 return ItemStack.EMPTY;
             }
@@ -129,5 +130,19 @@ public class HeartAmuletContainer extends Container {
         public boolean canTakeStack(PlayerEntity playerIn) {
             return false;
         }
+    }
+
+    public int getSlotFor(PlayerInventory inventory, ItemStack stack) {
+        for (int i = 0; i < inventory.mainInventory.size(); ++i) {
+            if (!inventory.mainInventory.get(i).isEmpty() && stackEqualExact(stack, inventory.mainInventory.get(i))) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private boolean stackEqualExact(ItemStack stack1, ItemStack stack2) {
+        return stack1.getItem() == stack2.getItem() && ItemStack.areItemStackTagsEqual(stack1, stack2);
     }
 }

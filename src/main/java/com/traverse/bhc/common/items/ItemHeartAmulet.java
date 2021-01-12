@@ -58,7 +58,6 @@ public class ItemHeartAmulet extends BaseItem implements INamedContainerProvider
         return new TranslationTextComponent("container.bhc.heart_amulet");
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity) {
         Hand hand = getHandForAmulet(playerEntity);
