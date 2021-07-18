@@ -45,7 +45,6 @@ public class BaubleyHeartCanisters {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueue);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.configSpec);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigHandler.configSpec);
 
         RegistryHandler.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         RegistryHandler.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -60,7 +59,7 @@ public class BaubleyHeartCanisters {
     }
 
     private void enqueue(InterModEnqueueEvent event) {
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.NECKLACE.getMessageBuilder().build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").build());
     }
 
     private void jsonSetup() {
@@ -77,7 +76,7 @@ public class BaubleyHeartCanisters {
             config.addEntrytoMap("red", "hostile", 0.05);
             config.addEntrytoMap("yellow", "boss", 1.0);
             config.addEntrytoMap("green", "dragon", 1.0);
-            config.addEntrytoMap("blue", "minecraft:evocation_illager", 1.0);
+            config.addEntrytoMap("blue", "minecraft:evoker", 1.0);
             String json = gson.toJson(config, BHCConfig.class);
             FileWriter writer = new FileWriter(file);
             writer.write(json);

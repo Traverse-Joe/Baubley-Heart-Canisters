@@ -8,6 +8,8 @@ public class ConfigHandler {
         public final ForgeConfigSpec.ConfigValue<Integer> heartStackSize;
         public final ForgeConfigSpec.ConfigValue<Double> boneDropRate;
         public final ForgeConfigSpec.ConfigValue<Boolean> allowStartingHeathTweaks;
+        public final ForgeConfigSpec.ConfigValue<Integer> appleHungerValue;
+        public final ForgeConfigSpec.ConfigValue<Double> appleSaturationValue;
         //public final ForgeConfigSpec.ConfigValue<Integer> startingHealth;
 
         General(ForgeConfigSpec.Builder builder) {
@@ -21,6 +23,12 @@ public class ConfigHandler {
             allowStartingHeathTweaks = builder
                     .comment("Allow Starting Health Tweaks")
                     .define("allowStartingHealthTweaks", false);
+            appleHungerValue = builder
+                    .comment("How much Hunger a Relic Apple Gives")
+                    .define("appleHungerValue", 4);
+            appleSaturationValue = builder
+                    .comment("How much Saturation a Relic Apple Gives")
+                    .define("appleHungerSaturation", 10.0);
 /*            startingHealth = builder
                     .comment("Starting Health of Player (Default:20)")
                     .define("startingHealth", 20);*/
