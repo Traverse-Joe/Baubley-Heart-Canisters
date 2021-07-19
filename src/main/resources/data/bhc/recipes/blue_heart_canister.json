@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bhc:blue_heart"
+    },
+    {
+      "item": "bhc:green_heart_canister"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    }
+  ],
+  "result": {
+    "item": "bhc:blue_heart_canister"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " D ",
+    "EAE",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "E": {
+      "tag": "forge:gems/emerald"
+    },
+    "A" : {
+      "item": "minecraft:apple"
+    }
+  },
+  "result": {
+    "item": "bhc:relic_apple"
+  }
+}

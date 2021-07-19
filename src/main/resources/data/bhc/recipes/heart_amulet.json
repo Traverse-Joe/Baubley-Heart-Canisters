@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "S S",
+    "GHG",
+    " G "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:string"
+    },
+    "H": {
+      "tag": "forge:heart"
+    },
+    "G": {
+      "tag": "forge:glass"
+    }
+  },
+  "result": {
+    "item": "bhc:heart_amulet"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bhc:yellow_heart"
+    },
+    {
+      "item": "bhc:red_heart_canister"
+    },
+    {
+      "item": "minecraft:enchanted_golden_apple"
+    }
+  ],
+  "result": {
+    "item": "bhc:yellow_heart_canister"
+  }
+}
