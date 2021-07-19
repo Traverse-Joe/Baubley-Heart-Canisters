@@ -14,24 +14,22 @@ import net.minecraft.world.World;
 
 public class ItemRelicApple extends BaseItem {
 
-    public ItemRelicApple(){
-        super(0,0F);
 
+    public ItemRelicApple(){
+        super(20, 5.0F);
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        int hunger = ConfigHandler.general.appleHungerValue.get();
-        double saturation = ConfigHandler.general.appleSaturationValue.get();
 
         if (!worldIn.isClientSide() && entityLiving instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entityLiving;
-            player.getFoodData().eat(hunger, (float)saturation);
+            player.eat(worldIn,stack);
             player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 20 * 60, 1));
             player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 20 * 60, 1));
             player.addEffect(new EffectInstance(Effects.DIG_SPEED, 20 * 60, 1));
             player.heal(20);
-            stack.shrink(1);
+            //stack.shrink(1);
         }
 
 
