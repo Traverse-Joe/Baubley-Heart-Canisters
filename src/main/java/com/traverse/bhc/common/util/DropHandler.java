@@ -92,7 +92,7 @@ public class DropHandler {
     public static void addWithPercent(List<ItemStack> list, ItemStack stack, double percentage) {
         Random random = new Random();
         int percent = (int) (percentage * 100);
-        if (random.nextInt(100) <= percent) {
+        if (random.nextInt(100) < percent) {
             list.add(stack);
         }
     }
