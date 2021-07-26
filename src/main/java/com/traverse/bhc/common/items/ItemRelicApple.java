@@ -16,7 +16,7 @@ public class ItemRelicApple extends BaseItem {
 
 
     public ItemRelicApple(){
-        super(20, 5.0F);
+        super(20, 0.8F);
     }
 
     @Override
