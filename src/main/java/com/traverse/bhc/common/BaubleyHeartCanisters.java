@@ -9,6 +9,10 @@ import com.traverse.bhc.common.init.RegistryHandler;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +24,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
-import top.theillusivec4.curios.api.SlotTypePreset;
+import top.theillusivec4.curios.api.event.CurioChangeEvent;
 
 import java.io.File;
 import java.io.FileReader;
@@ -31,6 +35,7 @@ import java.io.IOException;
 public class BaubleyHeartCanisters {
 
     public static final String MODID = "bhc";
+    public static final ResourceLocation SLOT_TEXTURE = new ResourceLocation(BaubleyHeartCanisters.MODID, "slots/empty_heartamulet");
     public static final ItemGroup TAB = new ItemGroup("bhcTab") {
         @Override
         public ItemStack makeIcon() {
@@ -54,12 +59,20 @@ public class BaubleyHeartCanisters {
         jsonSetup();
     }
 
+@OnlyIn(Dist.CLIENT)
+    private void textureStitch(TextureStitchEvent.Pre event) {
+        event.addSprite(SLOT_TEXTURE);
+    }
+
+
     private void doClientStuff(final FMLClientSetupEvent event) {
         ScreenManager.register(RegistryHandler.HEART_AMUlET_CONTAINER.get(), HeartAmuletScreen::new);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::textureStitch);
     }
 
     private void enqueue(InterModEnqueueEvent event) {
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").icon(SLOT_TEXTURE).build());
+
     }
 
     private void jsonSetup() {

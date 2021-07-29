@@ -29,7 +29,6 @@ public class ItemRelicApple extends BaseItem {
             player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 20 * 60, 1));
             player.addEffect(new EffectInstance(Effects.DIG_SPEED, 20 * 60, 1));
             player.heal(20);
-            //stack.shrink(1);
         }
 
 

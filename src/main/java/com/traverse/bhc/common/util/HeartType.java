@@ -1,10 +1,10 @@
 package com.traverse.bhc.common.util;
 
 public enum HeartType {
-    RED(10),
-    YELLOW(20),
-    GREEN(30),
-    BLUE(40);
+    RED(20),
+    YELLOW(40),
+    GREEN(60),
+    BLUE(80);
 
     public final int healAmount;
 

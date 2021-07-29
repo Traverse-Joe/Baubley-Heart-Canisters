@@ -11,9 +11,9 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-1.1.5'
+version = '1.16.5-1.1.10'
 group = 'com.traverse.bhc'
-archivesBaseName = 'bhc'
+archivesBaseName = 'baubely-heart-canisters'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
