@@ -6,10 +6,10 @@ import com.traverse.bhc.client.screens.HeartAmuletScreen;
 import com.traverse.bhc.common.config.BHCConfig;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -21,10 +21,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.fml.loading.FMLPaths;;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
-import top.theillusivec4.curios.api.event.CurioChangeEvent;
 
 import java.io.File;
 import java.io.FileReader;
@@ -36,10 +35,10 @@ public class BaubleyHeartCanisters {
 
     public static final String MODID = "bhc";
     public static final ResourceLocation SLOT_TEXTURE = new ResourceLocation(BaubleyHeartCanisters.MODID, "slots/empty_heartamulet");
-    public static final ItemGroup TAB = new ItemGroup("bhcTab") {
+    public static final CreativeModeTab TAB = new CreativeModeTab("bhcTab") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(RegistryHandler.RED_HEART.get());
+            return new ItemStack(RegistryHandler.RED_CANISTER.get());
         }
     };
 
@@ -66,7 +65,7 @@ public class BaubleyHeartCanisters {
 
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        ScreenManager.register(RegistryHandler.HEART_AMUlET_CONTAINER.get(), HeartAmuletScreen::new);
+        MenuScreens.register(RegistryHandler.HEART_AMUlET_CONTAINER.get(), HeartAmuletScreen::new);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::textureStitch);
     }
 

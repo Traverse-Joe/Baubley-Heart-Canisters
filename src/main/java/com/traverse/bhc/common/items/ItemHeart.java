@@ -1,14 +1,14 @@
 package com.traverse.bhc.common.items;
 
 import com.traverse.bhc.common.util.HeartType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 
 public class ItemHeart extends BaseItem {
 
@@ -19,10 +19,13 @@ public class ItemHeart extends BaseItem {
         this.type = type;
     }
 
+
+
     @Override
-    public UseAction getUseAnimation(ItemStack stack) {
-        return UseAction.EAT;
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.EAT;
     }
+
 
     @Override
     public int getUseDuration(ItemStack stack) {
@@ -30,18 +33,20 @@ public class ItemHeart extends BaseItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         playerIn.startUsingItem(handIn);
-        return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getItemInHand(handIn));
+        return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isClientSide && entityLiving instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) entityLiving;
+    public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
+        if (!worldIn.isClientSide && entityLiving instanceof Player) {
+            Player player = (Player) entityLiving;
             player.heal(this.type.healAmount);
             if (!player.isCreative()) stack.shrink(1);
         }
         return stack;
     }
+
+
 }

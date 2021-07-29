@@ -4,17 +4,17 @@ import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.items.*;
 import com.traverse.bhc.common.util.HeartType;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.extensions.IForgeContainerType;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class RegistryHandler {
 
     public static final DeferredRegister <Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BaubleyHeartCanisters.MODID);
-    public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, BaubleyHeartCanisters.MODID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, BaubleyHeartCanisters.MODID);
 
     //Items
     public static final RegistryObject<Item> RED_HEART = ITEMS.register("red_heart", () -> new ItemHeart(HeartType.RED));
@@ -31,5 +31,5 @@ public class RegistryHandler {
     public static final RegistryObject<Item> HEART_AMULET = ITEMS.register("heart_amulet", ItemHeartAmulet::new);
 
     //Container
-    public static final RegistryObject<ContainerType<HeartAmuletContainer>> HEART_AMUlET_CONTAINER = CONTAINERS.register("heart_amulet_container",  () -> IForgeContainerType.create((windowId, inv, data) -> new HeartAmuletContainer(windowId, inv, data.readItem())));
+    public static final RegistryObject<MenuType<HeartAmuletContainer>> HEART_AMUlET_CONTAINER = CONTAINERS.register("heart_amulet_container",  () -> IForgeContainerType.create((windowId, inv, data) -> new HeartAmuletContainer(windowId, inv, data.readItem())));
 }
