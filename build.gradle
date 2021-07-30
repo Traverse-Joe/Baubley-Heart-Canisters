@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.17.1-1.0.0'
+version = "${mod_version}"
 group = 'com.traverse.bhc' 
 archivesBaseName = 'baubley-heart-canisters'
 
@@ -21,9 +21,9 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-   
+    
     mappings channel: 'official', version: '1.17.1'
-	
+
     runs {
         client {
             workingDirectory project.file('run')
@@ -74,38 +74,21 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
- maven {
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
 
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
+	 maven {
+        url  "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
     }
-
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
-
-    maven {
-        url = "https://maven.mcmoddev.com"
-    }
-
-    maven {
-        url = "https://maven.blamejared.com"
-    }
-   
 }
 
 dependencies {
-
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.13'
+    
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.15'
 	
-	//compile fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-${curios_version}")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-${curios_version}:api")
-
+	implementation fg.deobf("curse.maven:${curios_version}")
+ 
 }
 
 jar {
@@ -123,7 +106,6 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
-
 
 publishing {
     publications {
