@@ -7,11 +7,9 @@ import com.traverse.bhc.client.screens.HeartAmuletScreen;
 import com.traverse.bhc.common.config.BHCConfig;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -33,7 +31,7 @@ import java.io.IOException;
 public class BaubleyHeartCanisters {
 
     public static final String MODID = "bhc";
-    public static final ItemGroup TAB = new ItemGroup("bhcTab") {
+    public static final CreativeModeTab TAB = new CreativeModeTab("bhcTab") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(RegistryHandler.RED_HEART.get());
@@ -44,6 +42,7 @@ public class BaubleyHeartCanisters {
 
     public BaubleyHeartCanisters() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueue);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.configSpec);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
@@ -59,6 +58,10 @@ public class BaubleyHeartCanisters {
     private void enqueue(InterModEnqueueEvent event) {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").icon(ClientBaubleyHeartCanisters.SLOT_TEXTURE).build());
 
+    }
+
+    private void doClientStuff(final FMLClientSetupEvent event) {
+        MenuScreens.register(RegistryHandler.HEART_AMUlET_CONTAINER.get(), HeartAmuletScreen::new);
     }
 
     private void jsonSetup() {

@@ -2,7 +2,7 @@ package com.traverse.bhc.common.items;
 
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.util.HeartType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class BaseHeartCanister extends BaseItem {
 

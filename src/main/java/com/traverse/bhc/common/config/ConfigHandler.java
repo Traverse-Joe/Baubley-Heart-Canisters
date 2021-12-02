@@ -18,29 +18,28 @@ public class ConfigHandler {
                     .define("boneDropRate", 0.15);
             builder.pop();
         }
+    }
 
-        public static class BHCServer {
+    public static class BHCServer {
+        public final ForgeConfigSpec.ConfigValue<Boolean> allowStartingHeathTweaks;
+        public final ForgeConfigSpec.ConfigValue<Integer> startingHealth;
 
-            public final ForgeConfigSpec.ConfigValue<Boolean> allowStartingHeathTweaks;
-            public final ForgeConfigSpec.ConfigValue<Integer> startingHealth;
-
-            BHCServer(ForgeConfigSpec.Builder builder) {
-                builder.push("Server");
-                allowStartingHeathTweaks = builder
-                        .comment("Allow Player to Use Starting Tweaks")
-                        .define("allowStartingHealthTweaks", false);
-                startingHealth = builder
-                        .comment("Set Starting Amount for Player to Start with (ALLOW STARTING HEALTH TWEAKS NEEDS TO BE TRUE)")
-                        .define("startingHealth", 20);
-                builder.pop();
-            }
+        BHCServer(ForgeConfigSpec.Builder builder) {
+            builder.push("Server");
+            allowStartingHeathTweaks = builder
+                    .comment("Allow Starting Health Tweaks")
+                    .define("allowStartingHealthTweaks", false);
+           startingHealth = builder
+                    .comment("Starting Health of Player (Default:20)")
+                    .define("startingHealth", 20);
+           builder.pop();
         }
     }
 
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
     public static final General general = new General(BUILDER);
-    public static final General.BHCServer server = new General.BHCServer(SERVER_BUILDER);
+    public static final BHCServer server = new BHCServer(SERVER_BUILDER);
     public static final ForgeConfigSpec configSpec = BUILDER.build();
     public static final ForgeConfigSpec serverConfigSpec = SERVER_BUILDER.build();
 }
