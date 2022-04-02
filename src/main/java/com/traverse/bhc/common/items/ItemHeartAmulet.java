@@ -33,9 +33,13 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if(!level.isClientSide() && !player.isShiftKeyDown()) {
+        if (hand != InteractionHand.MAIN_HAND)
+            return InteractionResultHolder.fail(player.getItemInHand(hand));
+
+        if (!level.isClientSide() && !player.isShiftKeyDown()) {
             NetworkHooks.openGui((ServerPlayer) player, this, friendlyByteBuf -> friendlyByteBuf.writeItem(player.getItemInHand(hand)));
         }
+
         return super.use(level, player, hand);
     }
 
@@ -67,9 +71,9 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider {
     }
 
     public static InteractionHand getHandForAmulet(Player player) {
-        if(player.getMainHandItem().getItem() == RegistryHandler.HEART_AMULET.get())
+        if (player.getMainHandItem().getItem() == RegistryHandler.HEART_AMULET.get())
             return InteractionHand.MAIN_HAND;
-        else if(player.getOffhandItem().getItem() == RegistryHandler.HEART_AMULET.get())
+        else if (player.getOffhandItem().getItem() == RegistryHandler.HEART_AMULET.get())
             return InteractionHand.OFF_HAND;
 
         return null;

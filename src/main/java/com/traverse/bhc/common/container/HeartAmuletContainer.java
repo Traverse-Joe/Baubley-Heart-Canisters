@@ -59,9 +59,10 @@ public class HeartAmuletContainer extends AbstractContainerMenu {
     @Override
     public void removed(Player playerIn) {
         InteractionHand hand = ItemHeartAmulet.getHandForAmulet(playerIn);
-        if (hand != null)
-            InventoryUtil.serializeInventory(this.itemStackHandler, playerIn.getItemInHand(hand));
+        if (hand == null)
+            return;
 
+        InventoryUtil.serializeInventory(this.itemStackHandler, playerIn.getItemInHand(hand));
         CompoundTag nbt = playerIn.getItemInHand(hand).getTag();
         int[] hearts = new int[this.itemStackHandler.getSlots()];
         for (int i = 0; i < hearts.length; i++) {
