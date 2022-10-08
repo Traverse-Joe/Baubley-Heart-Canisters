@@ -51,7 +51,7 @@ public class HealthModifier {
                     Optional<ImmutableTriple<String, Integer, ItemStack>> stackOptional = CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.HEART_AMULET.get(), livingEntity);
 
                     stackOptional.ifPresent(triple -> {
-                        if(livingEntity instanceof Player) {
+                        if (livingEntity instanceof Player) {
                             ItemStack stack = triple.getRight();
                             updatePlayerHealth((Player) livingEntity, stack, true);
                         }
@@ -65,8 +65,8 @@ public class HealthModifier {
 
                 @Override
                 public void onUnequip(SlotContext slotContext, ItemStack newStack) {
-                    if(slotContext.getWearer() instanceof Player)
-                        updatePlayerHealth((Player) slotContext.getWearer(), ItemStack.EMPTY, false);
+                    if (slotContext.entity() instanceof Player player)
+                        updatePlayerHealth(player, ItemStack.EMPTY, false);
                 }
 
             };
@@ -82,8 +82,7 @@ public class HealthModifier {
             };
 
             event.addCapability(CuriosCapability.ID_ITEM, provider);
-        }
-        else if(event.getObject().getItem() == RegistryHandler.SOUL_HEART_AMULET.get()) {
+        } else if (event.getObject().getItem() == RegistryHandler.SOUL_HEART_AMULET.get()) {
             ICurio curio = new ICurio() {
 
                 @Override
@@ -97,7 +96,7 @@ public class HealthModifier {
                     Optional<ImmutableTriple<String, Integer, ItemStack>> stackOptional = CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.SOUL_HEART_AMULET.get(), livingEntity);
 
                     stackOptional.ifPresent(triple -> {
-                        if(livingEntity instanceof Player) {
+                        if (livingEntity instanceof Player) {
                             ItemStack stack = triple.getRight();
                             updatePlayerHealth((Player) livingEntity, stack, true);
                         }
@@ -111,7 +110,7 @@ public class HealthModifier {
 
                 @Override
                 public void onUnequip(SlotContext slotContext, ItemStack newStack) {
-                    if(slotContext.getWearer() instanceof Player)
+                    if (slotContext.getWearer() instanceof Player)
                         updatePlayerHealth((Player) slotContext.getWearer(), ItemStack.EMPTY, false);
                 }
 
@@ -139,15 +138,14 @@ public class HealthModifier {
 
         int[] hearts = new int[4];
 
-        if(addHealth && !stack.isEmpty()) {
-            int[] amuletHearts = new int[0];
-            if(stack.getItem() instanceof ItemHeartAmulet amulet) {
+        if (addHealth && !stack.isEmpty()) {
+            int[] amuletHearts = null;
+            if (stack.getItem() instanceof ItemHeartAmulet amulet) {
+                amuletHearts = amulet.getHeartCount(stack);
+            } else if (stack.getItem() instanceof ItemSoulHeartAmulet amulet) {
                 amuletHearts = amulet.getHeartCount(stack);
             }
-            else if(stack.getItem() instanceof ItemSoulHeartAmulet amulet) {
-                amuletHearts = amulet.getHeartCount(stack);
-            }
-            Preconditions.checkArgument(amuletHearts.length == HeartType.values().length, "Array must be same length as enum length!");
+            Preconditions.checkArgument(amuletHearts != null, "amuletHearts was never initialized - is this a soul canister?");
             for (int i = 0; i < hearts.length; i++) {
                 hearts[i] += amuletHearts[i];
             }

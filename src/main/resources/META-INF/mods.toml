@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[37,)"
+loaderVersion="[43,)"
 license="MIT"
 issueTrackerURL="https://github.com/Traverse-Joe/Baubley-Heart-Canisters/issues"
 
@@ -16,6 +16,6 @@ Heart Canisters for Baubles/Curios Enjoy :D
 [[dependencies.bhc]]
     modId="forge"
     mandatory=true
-    versionRange="[37,)"
+    versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
