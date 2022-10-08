@@ -5,6 +5,7 @@ import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
+import com.traverse.bhc.common.items.ItemSoulHeartAmulet;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,63 +37,116 @@ public class HealthModifier {
 
     @SubscribeEvent
     public static void attachCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
-        if (event.getObject().getItem() != RegistryHandler.HEART_AMULET.get())
-            return;
+        if (event.getObject().getItem() == RegistryHandler.HEART_AMULET.get()) {
+            ICurio curio = new ICurio() {
 
-        ICurio curio = new ICurio() {
+                @Override
+                public ItemStack getStack() {
+                    return new ItemStack(RegistryHandler.HEART_AMULET.get());
+                }
 
-            @Override
-            public ItemStack getStack() {
-                return new ItemStack(RegistryHandler.HEART_AMULET.get());
-            }
+                @Override
+                public void onEquip(SlotContext slotContext, ItemStack prevStack) {
+                    LivingEntity livingEntity = slotContext.getWearer();
+                    Optional<ImmutableTriple<String, Integer, ItemStack>> stackOptional = CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.HEART_AMULET.get(), livingEntity);
 
-            @Override
-            public void onEquip(SlotContext slotContext, ItemStack prevStack) {
-                LivingEntity livingEntity = slotContext.getWearer();
-                Optional<ImmutableTriple<String, Integer, ItemStack>> stackOptional = CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.HEART_AMULET.get(), livingEntity);
+                    stackOptional.ifPresent(triple -> {
+                        if(livingEntity instanceof Player) {
+                            ItemStack stack = triple.getRight();
+                            updatePlayerHealth((Player) livingEntity, stack, true);
+                        }
+                    });
+                }
 
-                stackOptional.ifPresent(triple -> {
-                    if(livingEntity instanceof Player) {
-                        ItemStack stack = triple.getRight();
-                        updatePlayerHealth((Player) livingEntity, stack, true);
-                    }
-                });
-            }
+                @Override
+                public boolean canRightClickEquip() {
+                    return false;
+                }
 
-            @Override
-            public boolean canRightClickEquip() {
-               return false;
-            }
+                @Override
+                public void onUnequip(SlotContext slotContext, ItemStack newStack) {
+                    if(slotContext.getWearer() instanceof Player)
+                        updatePlayerHealth((Player) slotContext.getWearer(), ItemStack.EMPTY, false);
+                }
 
-            @Override
-            public void onUnequip(SlotContext slotContext, ItemStack newStack) {
-                if(slotContext.getWearer() instanceof Player)
-                    updatePlayerHealth((Player) slotContext.getWearer(), ItemStack.EMPTY, false);
-            }
+            };
 
-        };
+            ICapabilityProvider provider = new ICapabilityProvider() {
+                private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
 
-        ICapabilityProvider provider = new ICapabilityProvider() {
-            private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
+                @Nonnull
+                @Override
+                public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+                    return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
+                }
+            };
 
-            @Nonnull
-            @Override
-            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-                return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
-            }
-        };
+            event.addCapability(CuriosCapability.ID_ITEM, provider);
+        }
+        else if(event.getObject().getItem() == RegistryHandler.SOUL_HEART_AMULET.get()) {
+            ICurio curio = new ICurio() {
 
-        event.addCapability(CuriosCapability.ID_ITEM, provider);
+                @Override
+                public ItemStack getStack() {
+                    return new ItemStack(RegistryHandler.SOUL_HEART_AMULET.get());
+                }
+
+                @Override
+                public void onEquip(SlotContext slotContext, ItemStack prevStack) {
+                    LivingEntity livingEntity = slotContext.getWearer();
+                    Optional<ImmutableTriple<String, Integer, ItemStack>> stackOptional = CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.SOUL_HEART_AMULET.get(), livingEntity);
+
+                    stackOptional.ifPresent(triple -> {
+                        if(livingEntity instanceof Player) {
+                            ItemStack stack = triple.getRight();
+                            updatePlayerHealth((Player) livingEntity, stack, true);
+                        }
+                    });
+                }
+
+                @Override
+                public boolean canRightClickEquip() {
+                    return false;
+                }
+
+                @Override
+                public void onUnequip(SlotContext slotContext, ItemStack newStack) {
+                    if(slotContext.getWearer() instanceof Player)
+                        updatePlayerHealth((Player) slotContext.getWearer(), ItemStack.EMPTY, false);
+                }
+
+            };
+
+            ICapabilityProvider provider = new ICapabilityProvider() {
+                private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
+
+                @Nonnull
+                @Override
+                public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+                    return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
+                }
+            };
+
+            event.addCapability(CuriosCapability.ID_ITEM, provider);
+        }
+
+
     }
 
     public static void updatePlayerHealth(Player player, ItemStack stack, boolean addHealth) {
         AttributeInstance health = player.getAttribute(Attributes.MAX_HEALTH);
         float diff = player.getMaxHealth() - player.getHealth();
 
-        int[] hearts = new int[HeartType.values().length];
+        int[] hearts = new int[4];
 
         if(addHealth && !stack.isEmpty()) {
-            int[] amuletHearts = ((ItemHeartAmulet) stack.getItem()).getHeartCount(stack);
+            int[] amuletHearts = new int[0];
+            if(stack.getItem() instanceof ItemHeartAmulet amulet) {
+                amuletHearts = amulet.getHeartCount(stack);
+            }
+            else if(stack.getItem() instanceof ItemSoulHeartAmulet amulet) {
+                amuletHearts = amulet.getHeartCount(stack);
+            }
             Preconditions.checkArgument(amuletHearts.length == HeartType.values().length, "Array must be same length as enum length!");
             for (int i = 0; i < hearts.length; i++) {
                 hearts[i] += amuletHearts[i];

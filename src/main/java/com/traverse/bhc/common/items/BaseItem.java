@@ -15,6 +15,6 @@ public class BaseItem extends Item {
     }
 
     public BaseItem(int hunger, float saturation) {
-        super(new Item.Properties().tab(BaubleyHeartCanisters.TAB).food(new FoodProperties.Builder().saturationMod(saturation).alwaysEat().nutrition(hunger).build()));
+        super(new Item.Properties().tab(BaubleyHeartCanisters.TAB).food(new FoodProperties.Builder().saturationMod(saturation).alwaysEat ().nutrition(hunger).build()));
     }
 }

@@ -4,6 +4,7 @@ import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.BaseHeartCanister;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
+import com.traverse.bhc.common.items.ItemSoulHeartAmulet;
 import com.traverse.bhc.common.util.InventoryUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
@@ -19,28 +20,28 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class HeartAmuletContainer extends AbstractContainerMenu {
-
+public class SoulHeartAmuletContainer extends AbstractContainerMenu {
     public static final String HEART_AMOUNT = "heart_amount";
 
     public ItemStackHandler itemStackHandler;
 
-    public HeartAmuletContainer(int windowId, Inventory playerInventory, ItemStack stack) {
-        super(RegistryHandler.HEART_AMUlET_CONTAINER.get(), windowId);
-        this.itemStackHandler = InventoryUtil.createVirtualInventory(4, stack);
+    public SoulHeartAmuletContainer(int windowId, Inventory playerInventory, ItemStack stack) {
+        super(RegistryHandler.SOUL_HEART_AMUlET_CONTAINER.get(), windowId);
+        this.itemStackHandler = InventoryUtil.createVirtualInventory(5, stack);
 
         //Heart Container Slots
-        this.addSlot(new SlotPendant(this.itemStackHandler, 0, 80, 9));//RED
-        this.addSlot(new SlotPendant(this.itemStackHandler, 1, 53, 33));//YELLOW
-        this.addSlot(new SlotPendant(this.itemStackHandler, 2, 107, 33));//GREEN
-        this.addSlot(new SlotPendant(this.itemStackHandler, 3, 80, 57));//BLUE
+        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 0, 80, 7));//RED
+        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 1, 53, 33));//YELLOW
+        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 2, 107, 33));//GREEN
+        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 3, 80, 59));//BLUE
+        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 4, 81, 33));//SOUL
 
         //Add player inventory slots
         for (int row = 0; row < 9; ++row) {
             int x = 8 + row * 18;
             int y = 56 + 86;
             if (row == getSlotFor(playerInventory, stack)) {
-                addSlot(new LockedSlot(playerInventory, row, x, y));
+                addSlot(new SoulHeartAmuletContainer.LockedSlot(playerInventory, row, x, y));
                 continue;
             }
 
@@ -58,10 +59,10 @@ public class HeartAmuletContainer extends AbstractContainerMenu {
 
     @Override
     public void removed(Player playerIn) {
-        InteractionHand hand = ItemHeartAmulet.getHandForAmulet(playerIn);
+        InteractionHand hand = ItemSoulHeartAmulet.getHandForAmulet(playerIn);
         if (hand == null) return;
 
-            InventoryUtil.serializeInventory(this.itemStackHandler, playerIn.getItemInHand(hand));
+        InventoryUtil.serializeInventory(this.itemStackHandler, playerIn.getItemInHand(hand));
 
         CompoundTag nbt = playerIn.getItemInHand(hand).getTag();
         int[] hearts = new int[this.itemStackHandler.getSlots()];

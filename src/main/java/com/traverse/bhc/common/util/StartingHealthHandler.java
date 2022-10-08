@@ -5,7 +5,7 @@ import com.traverse.bhc.common.config.ConfigHandler;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 public class StartingHealthHandler {
 
     @SubscribeEvent
-    public static void setStartingHealth(final EntityJoinWorldEvent evt) {
+    public static void setStartingHealth(final EntityJoinLevelEvent evt) {
         if(ConfigHandler.server.allowStartingHeathTweaks.get() && evt.getEntity() instanceof Player && !(evt.getEntity()instanceof FakePlayer)) {
             final Player player = (Player) evt.getEntity();
             if(ConfigHandler.server.startingHealth.get() > 0) {

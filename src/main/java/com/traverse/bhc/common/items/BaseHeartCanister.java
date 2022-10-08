@@ -8,11 +8,12 @@ public class BaseHeartCanister extends BaseItem {
 
     public HeartType type;
     public BaseHeartCanister(HeartType type){
+        super();
         this.type = type;
     }
 
     @Override
-    public int getItemStackLimit(ItemStack stack) {
+    public int getMaxStackSize(ItemStack stack) {
         return ConfigHandler.general.heartStackSize.get();
     }
 }
