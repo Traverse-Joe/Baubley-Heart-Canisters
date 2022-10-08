@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
-@Mod.EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, value = Dist.CLIENT, bus = MOD)
+@Mod.EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = MOD)
 public class ClientBaubleyHeartCanisters {
 
     public static final ResourceLocation SLOT_TEXTURE = new ResourceLocation(BaubleyHeartCanisters.MODID, "slots/empty_heartamulet");

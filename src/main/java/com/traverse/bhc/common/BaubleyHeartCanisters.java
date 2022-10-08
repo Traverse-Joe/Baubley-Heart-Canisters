@@ -4,23 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.traverse.bhc.client.ClientBaubleyHeartCanisters;
 import com.traverse.bhc.client.proxy.ClientProxy;
-import com.traverse.bhc.client.screens.HeartAmuletScreen;
-import com.traverse.bhc.client.screens.SoulHeartAmuletScreen;
 import com.traverse.bhc.common.config.BHCConfig;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.proxy.CommonProxy;
-import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -65,7 +60,6 @@ public class BaubleyHeartCanisters {
 
     private void enqueue(InterModEnqueueEvent event) {
         InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").icon(ClientBaubleyHeartCanisters.SLOT_TEXTURE).build());
-
     }
 
     /*private void doClientStuff(final FMLClientSetupEvent event) {
