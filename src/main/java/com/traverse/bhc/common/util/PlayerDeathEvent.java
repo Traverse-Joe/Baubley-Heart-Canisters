@@ -31,28 +31,30 @@ public class PlayerDeathEvent {
 
     @SubscribeEvent
     public static void onPlayerDeathEvent(LivingDeathEvent evt) {
-        if (evt.getEntity() instanceof Player player) {
-            Optional<SlotResult> firstCurio = CuriosApi.getCuriosHelper().findFirstCurio(evt.getEntity(), itemStack -> itemStack.getItem() instanceof ItemSoulHeartAmulet);
-            firstCurio.ifPresent(slotResult -> {
-                ItemStackHandler soulInventory = InventoryUtil.createVirtualInventory(5, slotResult.stack());
+        if (!evt.getEntity().level.isClientSide()) {
+            if (evt.getEntity() instanceof Player player) {
+                Optional<SlotResult> firstCurio = CuriosApi.getCuriosHelper().findFirstCurio(evt.getEntity(), itemStack -> itemStack.getItem() instanceof ItemSoulHeartAmulet);
+                firstCurio.ifPresent(slotResult -> {
+                    ItemStackHandler soulInventory = InventoryUtil.createVirtualInventory(5, slotResult.stack());
 
-                if (!soulInventory.getStackInSlot(4).isEmpty()) {
-                    soulInventory.getStackInSlot(4).shrink(1);
-                    InventoryUtil.serializeInventory(soulInventory, slotResult.stack());
-                    player.displayClientMessage(Component.translatable("soulheartused.bhc.message").setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
-                    player.level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
-                    //15% chance
-                    if(random.nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {
-                       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(RegistryHandler.BLUE_CANISTER.get()));
+                    if (!soulInventory.getStackInSlot(4).isEmpty()) {
+                        soulInventory.getStackInSlot(4).shrink(1);
+                        InventoryUtil.serializeInventory(soulInventory, slotResult.stack());
+                        player.displayClientMessage(Component.translatable("soulheartused.bhc.message").setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
+                        player.level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
+                        //15% chance
+                        if (random.nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {
+                            ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(RegistryHandler.BLUE_CANISTER.get()));
+                        }
+                        evt.setCanceled(true);
+                        player.setHealth(player.getMaxHealth());
+                        player.removeAllEffects();
+                        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
+                        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
+                        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
                     }
-                    evt.setCanceled(true);
-                    player.setHealth(1.0F);
-                    player.removeAllEffects();
-                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
-                    player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
-                    player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
-                }
-            });
+                });
+            }
         }
     }
 }

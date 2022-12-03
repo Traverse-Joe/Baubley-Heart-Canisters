@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -22,7 +23,6 @@ import javax.annotation.Nonnull;
 
 public class SoulHeartAmuletContainer extends AbstractContainerMenu {
     public static final String HEART_AMOUNT = "heart_amount";
-
     public ItemStackHandler itemStackHandler;
 
     public SoulHeartAmuletContainer(int windowId, Inventory playerInventory, ItemStack stack) {
@@ -34,7 +34,7 @@ public class SoulHeartAmuletContainer extends AbstractContainerMenu {
         this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 1, 53, 33));//YELLOW
         this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 2, 107, 33));//GREEN
         this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 3, 80, 59));//BLUE
-        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 4, 81, 33));//SOUL
+        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 4, 80, 33));//SOUL
 
         //Add player inventory slots
         for (int row = 0; row < 9; ++row) {
