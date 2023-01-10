@@ -1,0 +1,18 @@
+{
+    "itemGroup.bhcTab" : "Vasilhas de Coração Baubley",
+    "item.bhc.red_heart" : "Coração vermelho em Miniatura",
+    "item.bhc.yellow_heart" : "coração amarelo em Miniatura",
+    "item.bhc.green_heart" : "Coração verde em Miniatura",
+    "item.bhc.blue_heart" : "coração azul em Miniatura",
+    "item.bhc.canister" : "Vasilha",
+    "item.bhc.red_heart_canister" : "Lata de Coração Vermelho",
+    "item.bhc.yellow_heart_canister" : "Vasilha de Coração amarelo",
+    "item.bhc.green_heart_canister" : "Recipiente de Coração Verde",
+    "item.bhc.blue_heart_canister" : "Recipiente Coração Azul",
+    "item.bhc.wither_bone" : "Osso de Wither",
+    "item.bhc.relic_apple" : "Maçã Relíquia",
+    "item.bhc.heart_amulet" : "Amuleto do Coração",
+    "container.bhc.heart_amulet" : "Amuleto do Coração",
+    "tooltip.bhc.heartamulet": "Clique-direito para abrir!",
+    "curios.identifier.heartamulet": "Amuleto do Coração"
+}
