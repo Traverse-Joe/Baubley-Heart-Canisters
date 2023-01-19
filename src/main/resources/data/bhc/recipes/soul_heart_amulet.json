@@ -1,0 +1,14 @@
+{
+  "type": "bhc:amulet_shapeless",
+  "ingredients": [
+    {
+      "item": "bhc:soul_heart_crystal"
+    },
+    {
+      "item": "bhc:heart_amulet"
+    }
+  ],
+  "result": {
+    "item": "bhc:soul_heart_amulet"
+  }
+}

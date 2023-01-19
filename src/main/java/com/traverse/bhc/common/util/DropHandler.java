@@ -3,12 +3,13 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.WitherSkeletonEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.monster.warden.Warden;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -24,10 +25,10 @@ public class DropHandler {
 
     @SubscribeEvent
     public static void onEntityDrop(LivingDropsEvent event) {
-        LivingEntity entity = event.getEntityLiving();
-        if (entity.level.isClientSide || entity instanceof PlayerEntity) return;
+        LivingEntity entity = event.getEntity();
+        if (entity.level.isClientSide || entity instanceof Player) return;
 
-        if (!ModList.get().isLoaded("tinkersconstruct") && entity instanceof WitherSkeletonEntity) {
+        if (!ModList.get().isLoaded("tinkersconstruct") && entity instanceof WitherSkeleton) {
             if (entity.level.random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
                 entity.spawnAtLocation(RegistryHandler.WITHER_BONE.get(), 1);
             }
@@ -69,18 +70,23 @@ public class DropHandler {
                 addWithPercent(items, stack, entry.getValue());
             } else {
                 switch (entry.getKey()) {
+                    case "passive":
+                        if((!(entity instanceof Monster) && !(entity instanceof Player))) {
+                            addWithPercent(items, stack, entry.getValue());
+                        }
+                        break;
                     case "hostile":
-                        if (entity instanceof IMob && entity.canChangeDimensions()) {
+                        if (entity instanceof Monster && entity.canChangeDimensions() && !(entity instanceof Warden)) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
                     case "boss":
-                        if (!entity.canChangeDimensions() && !(entity instanceof EnderDragonEntity)) {
+                        if (!entity.canChangeDimensions() && !(entity instanceof EnderDragon)) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
                     case "dragon":
-                        if (entity instanceof EnderDragonEntity) {
+                        if (entity instanceof EnderDragon) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;

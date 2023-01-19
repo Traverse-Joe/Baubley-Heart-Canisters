@@ -1,16 +1,11 @@
 package com.traverse.bhc.common.items;
 
-import com.traverse.bhc.common.config.ConfigHandler;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Food;
-import net.minecraft.item.Foods;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class ItemRelicApple extends BaseItem {
 
@@ -20,14 +15,14 @@ public class ItemRelicApple extends BaseItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+    public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
 
-        if (!worldIn.isClientSide() && entityLiving instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) entityLiving;
+        if (!worldIn.isClientSide() && entityLiving instanceof Player) {
+            Player player = (Player) entityLiving;
             player.eat(worldIn,stack);
-            player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 20 * 60, 1));
-            player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 20 * 60, 1));
-            player.addEffect(new EffectInstance(Effects.DIG_SPEED, 20 * 60, 1));
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 60, 1));
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 60, 1));
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 60, 1));
             player.heal(20);
         }
 
