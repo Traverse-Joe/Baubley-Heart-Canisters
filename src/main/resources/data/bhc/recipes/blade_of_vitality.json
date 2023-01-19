@@ -1,0 +1,34 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "RSY",
+    "GHB",
+    " I "
+  ],
+  "key": {
+    "R": {
+      "item": "bhc:red_heart_canister"
+    },
+    "S": {
+      "item": "bhc:soul_heart_crystal"
+    },
+    "Y": {
+      "item": "bhc:yellow_heart_canister"
+    },
+    "G": {
+      "item": "bhc:green_heart_canister"
+    },
+    "H": {
+      "item": "bhc:heart_amulet"
+    },
+    "B": {
+      "item": "bhc:blue_heart_canister"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "bhc:blade_of_vitality"
+  }
+}

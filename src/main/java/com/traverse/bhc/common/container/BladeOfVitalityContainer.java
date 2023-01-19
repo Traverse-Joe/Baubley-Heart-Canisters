@@ -3,8 +3,6 @@ package com.traverse.bhc.common.container;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.BaseHeartCanister;
-import com.traverse.bhc.common.items.ItemHeartAmulet;
-import com.traverse.bhc.common.items.ItemSoulHeartAmulet;
 import com.traverse.bhc.common.util.InventoryUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
@@ -14,35 +12,33 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class SoulHeartAmuletContainer extends AbstractContainerMenu {
+public class BladeOfVitalityContainer extends AbstractContainerMenu {
     public static final String HEART_AMOUNT = "heart_amount";
     public ItemStackHandler itemStackHandler;
 
-    public SoulHeartAmuletContainer(int windowId, Inventory playerInventory, ItemStack stack) {
-        super(RegistryHandler.SOUL_HEART_AMUlET_CONTAINER.get(), windowId);
-        this.itemStackHandler = InventoryUtil.createVirtualInventory(5, stack);
+    public BladeOfVitalityContainer(int windowId, Inventory playerInventory, ItemStack stack) {
+        super(RegistryHandler.BLADE_OF_VITALITY_CONTAINER.get(), windowId);
+        this.itemStackHandler = InventoryUtil.createVirtualInventory(4, stack);
 
 
         //Heart Container Slots
-        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 0, 80, 7));//RED
-        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 1, 53, 33));//YELLOW
-        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 2, 107, 33));//GREEN
-        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 3, 80, 59));//BLUE
-        this.addSlot(new SoulHeartAmuletContainer.SlotPendant(this.itemStackHandler, 4, 80, 33));//SOUL
+        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 0, 80, 5));//RED
+        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 1, 80, 25));//YELLOW
+        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 2, 80, 45));//GREEN
+        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 3, 80, 65));//BLUE
 
         //Add player inventory slots
         for (int row = 0; row < 9; ++row) {
             int x = 8 + row * 18;
             int y = 56 + 86;
             if (row == getSlotFor(playerInventory, stack)) {
-                addSlot(new SoulHeartAmuletContainer.LockedSlot(playerInventory, row, x, y));
+                addSlot(new BladeOfVitalityContainer.LockedSlot(playerInventory, row, x, y));
                 continue;
             }
 
@@ -60,19 +56,19 @@ public class SoulHeartAmuletContainer extends AbstractContainerMenu {
 
     @Override
     public void removed(Player playerIn) {
-        InteractionHand hand = ItemSoulHeartAmulet.getHandForAmulet(playerIn);
-        if (hand == null) return;
+        ItemStack sword = playerIn.getMainHandItem();
+        InventoryUtil.serializeInventory(this.itemStackHandler, sword);
 
-        InventoryUtil.serializeInventory(this.itemStackHandler, playerIn.getItemInHand(hand));
 
-        CompoundTag nbt = playerIn.getItemInHand(hand).getTag();
+
+        CompoundTag nbt = sword.getTag();
         int[] hearts = new int[this.itemStackHandler.getSlots()];
         for (int i = 0; i < hearts.length; i++) {
             ItemStack stack = this.itemStackHandler.getStackInSlot(i);
             if (!stack.isEmpty()) hearts[i] = stack.getCount() * 2;
         }
         nbt.putIntArray(HEART_AMOUNT, hearts);
-        playerIn.getItemInHand(hand).setTag(nbt);
+        sword.setTag(nbt);
 
         super.removed(playerIn);
     }

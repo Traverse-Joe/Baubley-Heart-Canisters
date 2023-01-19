@@ -20,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.RegisterEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
@@ -45,6 +46,7 @@ public class BaubleyHeartCanisters {
     public BaubleyHeartCanisters() {
         RegistryHandler.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         RegistryHandler.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        RegistryHandler.RECIPESERIALIZER.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.configSpec);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 

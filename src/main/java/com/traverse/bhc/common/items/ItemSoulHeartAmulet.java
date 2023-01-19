@@ -68,7 +68,6 @@ public class ItemSoulHeartAmulet extends BaseItem implements MenuProvider {
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         tooltip.add(Component.translatable(Util.makeDescriptionId("tooltip", new ResourceLocation(BaubleyHeartCanisters.MODID, "heartamulet"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
-        tooltip.add(Component.translatable(Util.makeDescriptionId("tooltip", new ResourceLocation(BaubleyHeartCanisters.MODID, "warning"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
     }
 
     public static InteractionHand getHandForAmulet(Player player) {

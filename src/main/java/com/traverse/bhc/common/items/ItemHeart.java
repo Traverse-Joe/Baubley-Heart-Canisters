@@ -19,8 +19,6 @@ public class ItemHeart extends BaseItem {
         this.type = type;
     }
 
-
-
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.EAT;

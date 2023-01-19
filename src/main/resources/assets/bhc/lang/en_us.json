@@ -14,11 +14,12 @@
   "item.bhc.relic_apple" : "Relic Apple",
   "item.bhc.heart_amulet" : "Heart Amulet",
   "item.bhc.soul_heart_crystal": "Soul Heart Crystal",
+  "item.bhc.blade_of_vitality": "Vitality Blade",
   "item.bhc.soul_heart_amulet" : "Soul Amulet",
   "container.bhc.heart_amulet" : "Heart Amulet",
   "container.bhc.soul_heart_amulet" : "Soul Amulet",
   "tooltip.bhc.heartamulet": "Right click to open!",
-  "tooltip.bhc.warning": "REMOVE ALL CANISTERS FROM OLD AMULET BEFORE CRAFTING!!!",
+  "container.bhc.blade_of_vitality": "Vitality Blade",
   "soulheartused.bhc.message": "Soul Heart Has Been Consumed!",
   "curios.identifier.heartamulet": "Heart Amulet"
 }

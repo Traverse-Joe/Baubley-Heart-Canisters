@@ -1,5 +1,5 @@
 {
-  "type": "crafting_shapeless",
+  "type": "bhc:amulet_shapeless",
   "ingredients": [
     {
       "item": "bhc:soul_heart_crystal"
