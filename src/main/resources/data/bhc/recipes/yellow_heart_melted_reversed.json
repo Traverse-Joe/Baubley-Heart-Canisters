@@ -1,0 +1,12 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "bhc:green_heart_melted"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "bhc:yellow_heart_melted"
+  }
+}

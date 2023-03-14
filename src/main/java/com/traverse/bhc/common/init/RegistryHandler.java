@@ -37,6 +37,11 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BLUE_CANISTER = ITEMS.register("blue_heart_canister", () -> new BaseHeartCanister(HeartType.BLUE));
     public static final RegistryObject<Item> SOUL_CANISTER = ITEMS.register("soul_heart_canister", () -> new BaseHeartCanister(HeartType.SOUL));
 
+    public static final RegistryObject<Item> RED_HEART_MELTED = ITEMS.register("red_heart_melted", BaseItem::new);
+    public static final RegistryObject<Item> YELLOW_HEART_MELTED = ITEMS.register("yellow_heart_melted", BaseItem::new);
+    public static final RegistryObject<Item> GREEN_HEART_MELTED = ITEMS.register("green_heart_melted", BaseItem::new);
+    public static final RegistryObject<Item> BLUE_HEART_MELTED = ITEMS.register("blue_heart_melted", BaseItem::new);
+
     public static final RegistryObject<Item> RED_HEART = ITEMS.register("red_heart", () -> new ItemHeart(HeartType.RED));
     public static final RegistryObject<Item> YELLOW_HEART = ITEMS.register("yellow_heart", () -> new ItemHeart(HeartType.YELLOW));
     public static final RegistryObject<Item> GREEN_HEART = ITEMS.register("green_heart", () -> new ItemHeart(HeartType.GREEN));
