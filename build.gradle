@@ -80,6 +80,7 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.2-43.1.32'
     implementation fg.deobf("curse.maven:${curios_version}")
+    implementation fg.deobf("curse.maven:${jei_version}")
 }
 
 jar {

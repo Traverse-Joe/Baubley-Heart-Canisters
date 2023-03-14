@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "YYY",
+    "YYY",
+    "YYY"
+  ],
+  "key": {
+    "Y": {
+      "item": "bhc:yellow_heart_melted"
+    }
+  },
+  "result": {
+    "item": "bhc:green_heart_melted"
+  }
+}

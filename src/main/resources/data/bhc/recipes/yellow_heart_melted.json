@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RRR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "bhc:red_heart_melted"
+    }
+  },
+  "result": {
+    "item": "bhc:yellow_heart_melted"
+  }
+}

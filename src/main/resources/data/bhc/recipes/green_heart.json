@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GHG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "bhc:green_heart_melted"
+    },
+    "H": {
+      "tag": "forge:heart"
+    }
+  },
+  "result": {
+    "item": "bhc:green_heart"
+  }
+}

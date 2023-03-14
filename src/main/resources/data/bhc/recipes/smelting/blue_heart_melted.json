@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 20,
+  "ingredient": {
+    "item": "bhc:blue_heart"
+  },
+  "result": "bhc:blue_heart_melted"
+}
