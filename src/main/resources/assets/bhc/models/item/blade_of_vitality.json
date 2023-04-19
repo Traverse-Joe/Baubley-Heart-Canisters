@@ -1,5 +1,13 @@
 {
   "parent": "item/handheld",
+  "overrides": [
+    {
+      "model": "bhc:item/heart_amulet",
+      "predicate": {
+        "bhc:darkness": 1.0
+      }
+    }
+  ],
   "textures" : {
     "layer0" : "bhc:items/blade_of_vitality"
   }

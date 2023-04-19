@@ -7,6 +7,7 @@ public class ConfigHandler {
     public static class General {
         public final ForgeConfigSpec.ConfigValue<Integer> heartStackSize;
         public final ForgeConfigSpec.ConfigValue<Double> boneDropRate;
+        public final ForgeConfigSpec.ConfigValue<Double> echoShardDropRate;
         public final ForgeConfigSpec.ConfigValue<Double> soulHeartReturnChance;
 
         General(ForgeConfigSpec.Builder builder) {
@@ -17,6 +18,9 @@ public class ConfigHandler {
             boneDropRate = builder
                     .comment("How often do wither bones Drop? (1.0 = 100 % and 0.0 means 0%)")
                     .define("boneDropRate", 0.15);
+            echoShardDropRate = builder
+                    .comment("How often do echo shards drop from Warden? (1.0 = 100 % and 0.0 means 0%)")
+                    .define("echoShardDropRate", 0.5);
             soulHeartReturnChance = builder
                     .comment("Chance for the Soul Heart to return a Blue Heart Canister after being broken")
                     .define("soulHeartReturnChance", 1.0);
