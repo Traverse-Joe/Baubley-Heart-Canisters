@@ -26,10 +26,10 @@ public class DropHandler {
     @SubscribeEvent
     public static void onEntityDrop(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity.level.isClientSide || entity instanceof Player) return;
+        if (entity.level().isClientSide || entity instanceof Player) return;
 
         if (!ModList.get().isLoaded("tinkersconstruct") && entity instanceof WitherSkeleton) {
-            if (entity.level.random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
+            if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
                 entity.spawnAtLocation(RegistryHandler.WITHER_BONE.get(), 1);
             }
         }

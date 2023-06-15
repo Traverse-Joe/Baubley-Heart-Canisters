@@ -143,6 +143,6 @@ public class BladeOfVitalityContainer extends AbstractContainerMenu {
     }
 
     private boolean stackEqualExact(ItemStack stack1, ItemStack stack2) {
-        return stack1.getItem() == stack2.getItem() && ItemStack.tagMatches(stack1, stack2);
+        return stack1.getItem() == stack2.getItem() && ItemStack.isSameItemSameTags(stack1, stack2);
     }
 }

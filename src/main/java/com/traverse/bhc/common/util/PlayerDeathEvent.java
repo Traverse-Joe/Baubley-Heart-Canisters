@@ -31,7 +31,7 @@ public class PlayerDeathEvent {
 
     @SubscribeEvent
     public static void onPlayerDeathEvent(LivingDeathEvent evt) {
-        if (!evt.getEntity().level.isClientSide()) {
+        if (!evt.getEntity().level().isClientSide()) {
             if (evt.getEntity() instanceof Player player) {
                 Optional<SlotResult> firstCurio = CuriosApi.getCuriosHelper().findFirstCurio(evt.getEntity(), itemStack -> itemStack.getItem() instanceof ItemSoulHeartAmulet);
                 firstCurio.ifPresent(slotResult -> {
@@ -41,7 +41,7 @@ public class PlayerDeathEvent {
                         soulInventory.getStackInSlot(4).shrink(1);
                         InventoryUtil.serializeInventory(soulInventory, slotResult.stack());
                         player.displayClientMessage(Component.translatable("soulheartused.bhc.message").setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
-                        player.level.playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
+                        player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
                         //15% chance
                         if (random.nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {
                             ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(RegistryHandler.BLUE_CANISTER.get()));

@@ -7,6 +7,7 @@ import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.InventoryUtil;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -22,16 +23,16 @@ public class HeartAmuletRecipe extends ShapelessRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer p_44260_) {
+    public ItemStack assemble(CraftingContainer craftingContainer, RegistryAccess registryAccess) {
         ItemStack oldCanister = ItemStack.EMPTY;
-        for (int i = 0; i < p_44260_.getContainerSize(); i++) {
-            ItemStack input = p_44260_.getItem(i);
+        for (int i = 0; i < craftingContainer.getContainerSize(); i++) {
+            ItemStack input = craftingContainer.getItem(i);
             if(input.getItem() == RegistryHandler.HEART_AMULET.get()) {
                 oldCanister = input;
                 break;
             }
         }
-        ItemStack stack = super.assemble(p_44260_);
+        ItemStack stack = super.assemble(craftingContainer, registryAccess);
         ItemStackHandler oldInv = InventoryUtil.createVirtualInventory(4, oldCanister);
         ItemStackHandler newInv = InventoryUtil.createVirtualInventory(5, stack);
         for (int i = 0; i < oldInv.getSlots(); i++) {
@@ -93,15 +94,14 @@ public class HeartAmuletRecipe extends ShapelessRecipe {
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf p_44281_, HeartAmuletRecipe p_44282_) {
-            p_44281_.writeUtf(p_44282_.getGroup());
-            p_44281_.writeVarInt(p_44282_.getIngredients().size());
+        public void toNetwork(FriendlyByteBuf buf, HeartAmuletRecipe heartAmuletRecipe) {
+            buf.writeUtf(heartAmuletRecipe.getGroup());
+            buf.writeVarInt(heartAmuletRecipe.getIngredients().size());
 
-            for(Ingredient ingredient : p_44282_.getIngredients()) {
-                ingredient.toNetwork(p_44281_);
+            for(Ingredient ingredient : heartAmuletRecipe.getIngredients()) {
+                ingredient.toNetwork(buf);
             }
-
-            p_44281_.writeItem(p_44282_.getResultItem());
+            buf.writeItem(heartAmuletRecipe.getResultItem(RegistryAccess.EMPTY));
         }
 
     }

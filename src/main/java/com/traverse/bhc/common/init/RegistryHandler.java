@@ -9,6 +9,7 @@ import com.traverse.bhc.common.items.*;
 import com.traverse.bhc.common.items.tools.ItemBladeOfVitality;
 import com.traverse.bhc.common.recipes.HeartAmuletRecipe;
 import com.traverse.bhc.common.util.HeartType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
@@ -28,7 +29,7 @@ public class RegistryHandler {
     public static final DeferredRegister <Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BaubleyHeartCanisters.MODID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, BaubleyHeartCanisters.MODID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPESERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, BaubleyHeartCanisters.MODID);
-    public static DeferredRegister<CreativeModeTab> TAB;
+    public static DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BaubleyHeartCanisters.MODID);
 
     //Items
     public static final RegistryObject<Item> RED_CANISTER = ITEMS.register("red_heart_canister", () -> new BaseHeartCanister(HeartType.RED));
@@ -41,6 +42,11 @@ public class RegistryHandler {
     public static final RegistryObject<Item> YELLOW_HEART_MELTED = ITEMS.register("yellow_heart_melted", BaseItem::new);
     public static final RegistryObject<Item> GREEN_HEART_MELTED = ITEMS.register("green_heart_melted", BaseItem::new);
     public static final RegistryObject<Item> BLUE_HEART_MELTED = ITEMS.register("blue_heart_melted", BaseItem::new);
+
+    public static final RegistryObject<Item> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(2, 10*20, 20));
+    public static final RegistryObject<Item> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(6, 5*20, 40));
+    public static final RegistryObject<Item> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(10, 2*20, 60));
+    public static final RegistryObject<Item> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(20, 20, 100));
 
     public static final RegistryObject<Item> RED_HEART = ITEMS.register("red_heart", () -> new ItemHeart(HeartType.RED));
     public static final RegistryObject<Item> YELLOW_HEART = ITEMS.register("yellow_heart", () -> new ItemHeart(HeartType.YELLOW));
@@ -62,4 +68,11 @@ public class RegistryHandler {
 
     //Recipe Serializer
     public static final RegistryObject<RecipeSerializer<HeartAmuletRecipe>> HEART_AMULET_RECIPE_SERIALIZER = RECIPESERIALIZER.register(HeartAmuletRecipe.BHCSerializer.NAME.getPath(),HeartAmuletRecipe.BHCSerializer::new);
+
+    //Creative Mod Tab
+    public static final RegistryObject<CreativeModeTab> BHC_TAB = TAB.register("bhc_tab", () -> CreativeModeTab.builder()
+            .icon(() -> new ItemStack(RegistryHandler.HEART_AMULET.get()))
+            .displayItems((params, output) -> RegistryHandler.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
+            .build());
+
 }
