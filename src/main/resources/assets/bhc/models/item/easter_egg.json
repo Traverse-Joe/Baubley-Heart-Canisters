@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures" : {
+    "layer0" : "bhc:items/easter_egg"
+  }
+}

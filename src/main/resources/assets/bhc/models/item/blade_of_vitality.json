@@ -2,7 +2,7 @@
   "parent": "item/handheld",
   "overrides": [
     {
-      "model": "bhc:item/heart_amulet",
+      "model": "bhc:item/easter_egg",
       "predicate": {
         "bhc:darkness": 1.0
       }
