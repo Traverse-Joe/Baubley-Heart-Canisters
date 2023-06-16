@@ -2,6 +2,7 @@ package com.traverse.bhc.client;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.init.RegistryHandler;
+import com.traverse.bhc.common.util.EasterEgg;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -26,5 +27,11 @@ public class ClientBaubleyHeartCanisters {
     @SubscribeEvent
     public static void textureStitch(final TextureStitchEvent.Pre evt) {
         evt.addSprite(ClientBaubleyHeartCanisters.SLOT_TEXTURE);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void addItemProperty(FMLClientSetupEvent evt) {
+        EasterEgg.secretCode();
     }
 }

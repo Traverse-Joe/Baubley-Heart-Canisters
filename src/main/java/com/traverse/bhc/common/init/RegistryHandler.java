@@ -49,6 +49,12 @@ public class RegistryHandler {
     public static final RegistryObject<Item> YELLOW_HEART_MELTED = ITEMS.register("yellow_heart_melted", BaseItem::new);
     public static final RegistryObject<Item> GREEN_HEART_MELTED = ITEMS.register("green_heart_melted", BaseItem::new);
     public static final RegistryObject<Item> BLUE_HEART_MELTED = ITEMS.register("blue_heart_melted", BaseItem::new);
+
+    public static final RegistryObject<Item> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(2, 5*20, 20));
+    public static final RegistryObject<Item> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(6, 10*20, 25));
+    public static final RegistryObject<Item> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(10, 20*20, 30));
+    public static final RegistryObject<Item> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(20, 30*20, 50));
+
     //Container
     public static final RegistryObject<MenuType<HeartAmuletContainer>> HEART_AMUlET_CONTAINER = CONTAINERS.register("heart_amulet_container",  () -> IForgeMenuType.create((windowId, inv, data) -> new HeartAmuletContainer(windowId, inv, data.readItem())));
     public static final RegistryObject<MenuType<SoulHeartAmuletContainer>> SOUL_HEART_AMUlET_CONTAINER = CONTAINERS.register("soul_heart_amulet_container",  () -> IForgeMenuType.create((windowId, inv, data) -> new SoulHeartAmuletContainer(windowId, inv, data.readItem())));
