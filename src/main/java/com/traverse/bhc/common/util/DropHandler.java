@@ -10,6 +10,7 @@ import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -31,6 +32,12 @@ public class DropHandler {
         if (!ModList.get().isLoaded("tinkersconstruct") && entity instanceof WitherSkeleton) {
             if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
                 entity.spawnAtLocation(RegistryHandler.WITHER_BONE.get(), 1);
+            }
+        }
+
+        if(event.getEntity() instanceof Warden warden) {
+            if(warden.level().random.nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
+                entity.spawnAtLocation(Items.ECHO_SHARD, 1);
             }
         }
 

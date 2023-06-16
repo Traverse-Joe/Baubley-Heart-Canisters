@@ -43,10 +43,10 @@ public class RegistryHandler {
     public static final RegistryObject<Item> GREEN_HEART_MELTED = ITEMS.register("green_heart_melted", BaseItem::new);
     public static final RegistryObject<Item> BLUE_HEART_MELTED = ITEMS.register("blue_heart_melted", BaseItem::new);
 
-    public static final RegistryObject<Item> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(2, 10*20, 20));
-    public static final RegistryObject<Item> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(6, 5*20, 40));
-    public static final RegistryObject<Item> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(10, 2*20, 60));
-    public static final RegistryObject<Item> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(20, 20, 100));
+    public static final RegistryObject<Item> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(2, 5*20, 20));
+    public static final RegistryObject<Item> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(6, 10*20, 25));
+    public static final RegistryObject<Item> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(10, 20*20, 30));
+    public static final RegistryObject<Item> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(20, 30*20, 50));
 
     public static final RegistryObject<Item> RED_HEART = ITEMS.register("red_heart", () -> new ItemHeart(HeartType.RED));
     public static final RegistryObject<Item> YELLOW_HEART = ITEMS.register("yellow_heart", () -> new ItemHeart(HeartType.YELLOW));
