@@ -2,13 +2,11 @@ package com.traverse.bhc.common.items.tools;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HeartType;
-import com.traverse.bhc.common.util.InventoryUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -28,8 +26,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -91,7 +87,7 @@ public class ItemBladeOfVitality extends SwordItem implements MenuProvider {
     //ToDo Actually check the length of the Hearts on the Weapon and Add to the damage
     @Override
     public float getDamage() {
-        return this.getMaxDamage(RegistryHandler.BLADE_OF_VITALITIY.get().getDefaultInstance()) + HeartAmuletContainer.HEART_AMOUNT.length();
+        return this.getMaxDamage(RegistryHandler.BLADE_OF_VITALITY.get().getDefaultInstance()) + HeartAmuletContainer.HEART_AMOUNT.length();
     }
 
     @Override

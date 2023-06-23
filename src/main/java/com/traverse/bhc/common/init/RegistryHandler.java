@@ -1,7 +1,6 @@
 package com.traverse.bhc.common.init;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
-import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
@@ -11,14 +10,11 @@ import com.traverse.bhc.common.recipes.HeartAmuletRecipe;
 import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -53,7 +49,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> GREEN_HEART = ITEMS.register("green_heart", () -> new ItemHeart(HeartType.GREEN));
     public static final RegistryObject<Item> BLUE_HEART = ITEMS.register("blue_heart", () -> new ItemHeart(HeartType.BLUE));
     public static final RegistryObject<Item> CANISTER = ITEMS.register("canister", BaseItem::new);
-    public static final RegistryObject<Item> BLADE_OF_VITALITIY = ITEMS.register("blade_of_vitality", ItemBladeOfVitality::new);
+    public static final RegistryObject<Item> BLADE_OF_VITALITY = ITEMS.register("blade_of_vitality", ItemBladeOfVitality::new);
 
     public static final RegistryObject<Item> WITHER_BONE = ITEMS.register("wither_bone", BaseItem::new);
     public static final RegistryObject<Item> RELIC_APPLE = ITEMS.register("relic_apple", ItemRelicApple::new);
@@ -73,6 +69,6 @@ public class RegistryHandler {
     public static final RegistryObject<CreativeModeTab> BHC_TAB = TAB.register("bhc_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(RegistryHandler.HEART_AMULET.get()))
             .displayItems((params, output) -> RegistryHandler.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
+            .title(Component.translatable("itemGroup.bhcTab"))
             .build());
-
 }
