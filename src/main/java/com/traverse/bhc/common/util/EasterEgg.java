@@ -10,7 +10,7 @@ import java.util.Locale;
 public class EasterEgg {
 
     public static void secretCode() {
-        ItemProperties.register(RegistryHandler.BLADE_OF_VITALITIY.get(), new ResourceLocation(BaubleyHeartCanisters.MODID, "easter_egg"), (stack, level, entity, value) -> {
+        ItemProperties.register(RegistryHandler.BLADE_OF_VITALITY.get(), new ResourceLocation(BaubleyHeartCanisters.MODID, "easter_egg"), (stack, level, entity, value) -> {
             String hoverName = stack.hasCustomHoverName() ? stack.getHoverName().getString().toLowerCase(Locale.ROOT) : "";
             float result = 0.0F;
 
