@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "YYY",
+    "YHY",
+    "YYY"
+  ],
+  "key": {
+    "Y": {
+      "item": "bhc:yellow_heart_melted"
+    },
+    "H": {
+      "tag": "forge:heart"
+    }
+  },
+  "result": {
+    "item": "bhc:yellow_heart"
+  }
+}

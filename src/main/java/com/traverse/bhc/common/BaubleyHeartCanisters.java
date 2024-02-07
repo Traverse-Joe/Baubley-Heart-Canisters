@@ -2,27 +2,19 @@ package com.traverse.bhc.common;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.traverse.bhc.client.ClientBaubleyHeartCanisters;
-import com.traverse.bhc.client.screens.HeartAmuletScreen;
+import com.traverse.bhc.client.proxy.ClientProxy;
 import com.traverse.bhc.common.config.BHCConfig;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotTypeMessage;
+import com.traverse.bhc.common.proxy.CommonProxy;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.DistExecutor;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.FileReader;
@@ -33,33 +25,32 @@ import java.io.IOException;
 public class BaubleyHeartCanisters {
 
     public static final String MODID = "bhc";
-    public static final ItemGroup TAB = new ItemGroup("bhcTab") {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(RegistryHandler.RED_HEART.get());
-        }
-    };
 
     public static BHCConfig config;
+    public static final CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
-    public BaubleyHeartCanisters() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueue);
+    public BaubleyHeartCanisters(IEventBus eventBus) {
+        RegistryHandler.ITEMS.register(eventBus);
+        RegistryHandler.TAB.register(eventBus);
+        RegistryHandler.CONTAINERS.register(eventBus);
+        RegistryHandler.RECIPESERIALIZER.register(eventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.configSpec);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 
-        RegistryHandler.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        RegistryHandler.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+       eventBus.addListener(this::setup);
+       eventBus.addListener(this::enqueue);
+
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        proxy.doClientStuff();
         jsonSetup();
     }
 
     private void enqueue(InterModEnqueueEvent event) {
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").icon(ClientBaubleyHeartCanisters.SLOT_TEXTURE).build());
-
+      //  InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").icon(ClientBaubleyHeartCanisters.SLOT_TEXTURE).build());
     }
+
 
     private void jsonSetup() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -75,7 +66,7 @@ public class BaubleyHeartCanisters {
             config.addEntrytoMap("red", "hostile", 0.05);
             config.addEntrytoMap("yellow", "boss", 1.0);
             config.addEntrytoMap("green", "dragon", 1.0);
-            config.addEntrytoMap("blue", "minecraft:evoker", 1.0);
+            config.addEntrytoMap("blue", "minecraft:warden", 1.0);
             String json = gson.toJson(config, BHCConfig.class);
             FileWriter writer = new FileWriter(file);
             writer.write(json);

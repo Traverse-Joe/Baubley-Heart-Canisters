@@ -1,21 +1,21 @@
 modLoader="javafml"
-loaderVersion="[35,)"
-license="All rights reserved"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
 issueTrackerURL="https://github.com/Traverse-Joe/Baubley-Heart-Canisters/issues"
 
 [[mods]]
-modId="bhc"
-version="${file.jarVersion}"
-displayName="Baubley Heart Canisters"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
 credits="Thanks goes to UpcraftLP who helped with original build. Also Abused_Master for helping when i bugged him."
-authors="Traverse_Joe"
+authors="${mod_authors}"
 description='''
-Heart Canisters for Baubles/Curios Enjoy :D
+{mod_description}
 '''
 
 [[dependencies.bhc]]
-    modId="forge"
-    mandatory=true
-    versionRange="[35,)"
+    modId="neoforge"
+    type = "required"
+    versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"

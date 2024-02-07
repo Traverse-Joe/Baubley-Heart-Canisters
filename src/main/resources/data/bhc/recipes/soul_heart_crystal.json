@@ -1,0 +1,31 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "ERE",
+    "YAG",
+    "EBE"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "R": {
+      "item": "bhc:red_heart"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "Y": {
+      "item": "bhc:yellow_heart"
+    },
+    "G": {
+      "item": "bhc:green_heart"
+    },
+    "B": {
+      "item": "bhc:blue_heart"
+    }
+  },
+  "result": {
+    "item": "bhc:soul_heart_crystal"
+  }
+}

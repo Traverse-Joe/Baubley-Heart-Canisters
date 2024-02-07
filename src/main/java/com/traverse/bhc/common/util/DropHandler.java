@@ -3,16 +3,25 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.WitherSkeletonEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.monster.warden.Warden;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +33,18 @@ public class DropHandler {
 
     @SubscribeEvent
     public static void onEntityDrop(LivingDropsEvent event) {
-        LivingEntity entity = event.getEntityLiving();
-        if (entity.level.isClientSide || entity instanceof PlayerEntity) return;
+        LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide || entity instanceof Player) return;
 
-        if (!ModList.get().isLoaded("tinkersconstruct") && entity instanceof WitherSkeletonEntity) {
-            if (entity.level.random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
+        if (!ModList.get().isLoaded("tinkersconstruct") && entity instanceof WitherSkeleton) {
+            if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
                 entity.spawnAtLocation(RegistryHandler.WITHER_BONE.get(), 1);
+            }
+        }
+
+        if(event.getEntity() instanceof Warden warden) {
+            if(warden.level().random.nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
+                entity.spawnAtLocation(Items.ECHO_SHARD, 1);
             }
         }
 
@@ -69,18 +84,23 @@ public class DropHandler {
                 addWithPercent(items, stack, entry.getValue());
             } else {
                 switch (entry.getKey()) {
+                    case "passive":
+                        if((!(entity instanceof Monster) && !(entity instanceof Player))) {
+                            addWithPercent(items, stack, entry.getValue());
+                        }
+                        break;
                     case "hostile":
-                        if (entity instanceof IMob && entity.canChangeDimensions()) {
+                        if (entity instanceof Monster && !(isBoss(entity) && !(entity instanceof Warden))) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
                     case "boss":
-                        if (!entity.canChangeDimensions() && !(entity instanceof EnderDragonEntity)) {
+                        if (isBoss(entity) && !(entity instanceof EnderDragon)) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
                     case "dragon":
-                        if (entity instanceof EnderDragonEntity) {
+                        if (entity instanceof EnderDragon) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
@@ -96,4 +116,14 @@ public class DropHandler {
             list.add(stack);
         }
     }
+
+    private static boolean isBoss(Entity entity) {
+        if(entity != null) {
+           if(entity.getType().is(Tags.EntityTypes.BOSSES)) {
+               return true;
+           }
+        }
+        return false;
+    }
+
 }

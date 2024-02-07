@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "bhc:green_heart_melted"
+    }
+  },
+  "result": {
+    "item": "bhc:blue_heart_melted"
+  }
+}

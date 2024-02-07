@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures" : {
+    "layer0" : "bhc:item/green_heart_patch"
+  }
+}

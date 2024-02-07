@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " W ",
+    "SHS",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "H": {
+      "item": "bhc:red_heart"
+    }
+  },
+  "result": {
+    "item": "bhc:red_heart_patch"
+  }
+}
