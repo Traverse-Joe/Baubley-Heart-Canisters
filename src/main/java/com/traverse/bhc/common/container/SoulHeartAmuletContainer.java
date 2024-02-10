@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -83,6 +84,16 @@ public class SoulHeartAmuletContainer extends AbstractContainerMenu {
     }
 
     @Override
+    public void clicked(int slotId, int button, ClickType clickType, Player playerIn) {
+        if (clickType == ClickType.SWAP) {
+            int offsetButton = button + 5; //Offset the pressed button by 5 to get the correct hotbar slot
+            if (getSlot(offsetButton).getItem().getItem() instanceof ItemHeartAmulet)
+                return;
+        }
+        super.clicked(slotId, button, clickType, playerIn);
+    }
+
+    @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
@@ -91,8 +102,7 @@ public class SoulHeartAmuletContainer extends AbstractContainerMenu {
             stack = slotStack.copy();
             if (index < this.itemStackHandler.getSlots()) {
                 if (!this.moveItemStackTo(slotStack, this.itemStackHandler.getSlots(), this.slots.size(), true))
-                    ;
-                return ItemStack.EMPTY;
+                    return ItemStack.EMPTY;
             } else if (!this.moveItemStackTo(slotStack, 0, this.itemStackHandler.getSlots(), false)) {
                 return ItemStack.EMPTY;
             }
