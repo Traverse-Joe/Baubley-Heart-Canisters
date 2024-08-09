@@ -29,12 +29,12 @@ public class ConfigHandler {
     }
 
     public static class BHCServer {
-        public final ModConfigSpec.ConfigValue<Boolean> allowStartingHeathTweaks;
+        public final ModConfigSpec.ConfigValue<Boolean> allowStartingHealthTweaks;
         public final ModConfigSpec.ConfigValue<Integer> startingHealth;
 
         BHCServer(ModConfigSpec.Builder builder) {
             builder.push("Server");
-            allowStartingHeathTweaks = builder
+            allowStartingHealthTweaks = builder
                     .comment("Allow Starting Health Tweaks")
                     .define("allowStartingHealthTweaks", false);
             startingHealth = builder

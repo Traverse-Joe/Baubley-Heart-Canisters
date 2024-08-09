@@ -1,7 +1,6 @@
 package com.traverse.bhc.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,7 +15,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SoulHeartAmuletScreen extends AbstractContainerScreen<SoulHeartAmuletContainer> {
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(BaubleyHeartCanisters.MODID, "textures/gui/soul_heart_amulet.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = BaubleyHeartCanisters.id("textures/gui/soul_heart_amulet.png");
 
     public SoulHeartAmuletScreen(SoulHeartAmuletContainer container, Inventory inventory, Component title) {
         super(container, inventory, title);

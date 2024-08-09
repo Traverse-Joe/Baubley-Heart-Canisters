@@ -59,25 +59,6 @@ public class SoulHeartAmuletContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public void removed(Player playerIn) {
-        InteractionHand hand = ItemSoulHeartAmulet.getHandForAmulet(playerIn);
-        if (hand == null) return;
-
-        InventoryUtil.serializeInventory(this.itemStackHandler, playerIn.getItemInHand(hand));
-
-        CompoundTag nbt = playerIn.getItemInHand(hand).getTag();
-        int[] hearts = new int[this.itemStackHandler.getSlots()];
-        for (int i = 0; i < hearts.length; i++) {
-            ItemStack stack = this.itemStackHandler.getStackInSlot(i);
-            if (!stack.isEmpty()) hearts[i] = stack.getCount() * 2;
-        }
-        nbt.putIntArray(HEART_AMOUNT, hearts);
-        playerIn.getItemInHand(hand).setTag(nbt);
-
-        super.removed(playerIn);
-    }
-
-    @Override
     public boolean stillValid(Player playerIn) {
         return true;
     }

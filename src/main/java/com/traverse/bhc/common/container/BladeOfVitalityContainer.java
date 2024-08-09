@@ -4,9 +4,7 @@ import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.BaseHeartCanister;
 import com.traverse.bhc.common.util.InventoryUtil;
-import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -14,27 +12,29 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-
 import javax.annotation.Nonnull;
-import java.awt.*;
+import java.util.List;
 
 public class BladeOfVitalityContainer extends AbstractContainerMenu {
-    DataComponentType<Integer> HEART_AMOUNT_COMPONENT = DataComponentType.<Integer>builder().build();
-    public ItemStackHandler itemStackHandler;
+
+    public static final int SLOT_COUNT = 4;
+
+    DataComponentType<List<Integer>> HEART_AMOUNT_COMPONENT = DataComponentType.<List<Integer>>builder().build();
+    public IItemHandlerModifiable itemStackHandler;
 
     public BladeOfVitalityContainer(int windowId, Inventory playerInventory, ItemStack stack) {
         super(RegistryHandler.BLADE_OF_VITALITY_CONTAINER.get(), windowId);
-        this.itemStackHandler = InventoryUtil.createVirtualInventory(4, stack);
+        this.itemStackHandler = InventoryUtil.createVirtualInventory(SLOT_COUNT, stack);
 
 
         //Heart Container Slots
-        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 0, 80, 5));//RED
-        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 1, 80, 25));//YELLOW
-        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 2, 80, 45));//GREEN
-        this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, 3, 80, 65));//BLUE
+        for (int i = 0; i < SLOT_COUNT; i++) {
+            int y = i * 20 + 5;
+            this.addSlot(new BladeOfVitalityContainer.SlotPendant(this.itemStackHandler, i, 80,  y));
+        }
 
         //Add player inventory slots
         for (int row = 0; row < 9; ++row) {
@@ -48,32 +48,13 @@ public class BladeOfVitalityContainer extends AbstractContainerMenu {
             addSlot(new Slot(playerInventory, row, x, y));
         }
 
-        for (int row = 1; row < 4; ++row) {
+        for (int row = 1; row < SLOT_COUNT; ++row) {
             for (int col = 0; col < 9; ++col) {
                 int x = 8 + col * 18;
                 int y = row * 18 + (56 + 10);
                 addSlot(new Slot(playerInventory, col + row * 9, x, y));
             }
         }
-    }
-
-    @Override
-    public void removed(Player playerIn) {
-        ItemStack sword = playerIn.getMainHandItem();
-        InventoryUtil.serializeInventory(this.itemStackHandler, sword);
-
-
-
-        DataComponentType<Integer> nbt = sword.getOrDefault(HEART_AMOUNT_COMPONENT, 0);
-        int[] hearts = new int[this.itemStackHandler.getSlots()];
-        for (int i = 0; i < hearts.length; i++) {
-            ItemStack stack = this.itemStackHandler.getStackInSlot(i);
-            if (!stack.isEmpty()) hearts[i] = stack.getCount() * 2;
-        }
-        nbt.putIntArray(HEART_AMOUNT, hearts);
-        sword.setTag(nbt);
-
-        super.removed(playerIn);
     }
 
     @Override

@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class BladeOfVitalityScreen extends AbstractContainerScreen<BladeOfVitalityContainer> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(BaubleyHeartCanisters.MODID, "textures/gui/blade_of_vitality.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = BaubleyHeartCanisters.id("textures/gui/blade_of_vitality.png");
 
     public BladeOfVitalityScreen(BladeOfVitalityContainer container, Inventory inventory, Component title) {
         super(container, inventory, title);

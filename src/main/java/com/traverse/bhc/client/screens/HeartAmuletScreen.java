@@ -15,7 +15,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class HeartAmuletScreen extends AbstractContainerScreen<HeartAmuletContainer> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(BaubleyHeartCanisters.MODID, "textures/gui/heart_amulet.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = BaubleyHeartCanisters.id("textures/gui/heart_amulet.png");
 
     public HeartAmuletScreen(HeartAmuletContainer container, Inventory inventory, Component title) {
         super(container, inventory, title);

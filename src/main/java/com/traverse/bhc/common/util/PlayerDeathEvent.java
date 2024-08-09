@@ -13,19 +13,15 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
-import java.util.Random;
-
-@Mod.EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
+@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class PlayerDeathEvent {
-    private static final Random random = new Random();
 
     @SubscribeEvent
     public static void onPlayerDeathEvent(LivingDeathEvent evt) {
@@ -35,15 +31,16 @@ public class PlayerDeathEvent {
                 if (handler == null) return;
                 SlotResult equipped = handler.findFirstCurio(itemStack -> itemStack.getItem() instanceof ItemSoulHeartAmulet).orElse(null);
                 if (equipped != null) {
-                    ItemStackHandler soulInventory = InventoryUtil.createVirtualInventory(5, equipped.stack());
+                    var soulInventory = InventoryUtil.createVirtualInventory(5, equipped.stack());
 
                     if (!soulInventory.getStackInSlot(4).isEmpty()) {
-                        soulInventory.getStackInSlot(4).shrink(1);
-                        InventoryUtil.serializeInventory(soulInventory, equipped.stack());
+                        var stack = soulInventory.getStackInSlot(4);
+                        stack.shrink(1);
+                        soulInventory.setStackInSlot(4, stack);
                         player.displayClientMessage(Component.translatable("soulheartused.bhc.message").setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
                         player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
                         //15% chance
-                        if (random.nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {
+                        if (player.getRandom().nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {
                             ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(RegistryHandler.BLUE_CANISTER.get()));
                         }
                         evt.setCanceled(true);

@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -40,11 +41,12 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider, ICurioIte
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (hand != InteractionHand.MAIN_HAND)
-            return InteractionResultHolder.fail(player.getItemInHand(hand));
-
-        if (!level.isClientSide() && !player.isShiftKeyDown()) {
-            player.openMenu(this, friendlyByteBuf -> friendlyByteBuf.writeItem(player.getItemInHand(hand)));
+        if(player.isShiftKeyDown()) {
+            var stack = player.getItemInHand(hand);
+            if (!level.isClientSide()) {
+                player.openMenu(this, friendlyByteBuf -> friendlyByteBuf.writeItem(player.getItemInHand(hand)));
+            }
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
         }
 
         return super.use(level, player, hand);
@@ -72,18 +74,9 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider, ICurioIte
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(Component.translatable(Util.makeDescriptionId("tooltip", new ResourceLocation(BaubleyHeartCanisters.MODID, "heartamulet"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
-    }
-
-    public static InteractionHand getHandForAmulet(Player player) {
-        if (player.getMainHandItem().getItem() == RegistryHandler.HEART_AMULET.get())
-            return InteractionHand.MAIN_HAND;
-        else if (player.getOffhandItem().getItem() == RegistryHandler.HEART_AMULET.get())
-            return InteractionHand.OFF_HAND;
-
-        return null;
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heartamulet"))).withStyle(ChatFormatting.GOLD));
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
     @Override
@@ -103,7 +96,7 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider, ICurioIte
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         if (slotContext.entity() instanceof Player player) {
-            updatePlayerHealth((Player) player, ItemStack.EMPTY, false);
+            updatePlayerHealth(player, ItemStack.EMPTY, false);
         }
     }
 }

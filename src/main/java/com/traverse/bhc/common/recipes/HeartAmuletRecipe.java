@@ -44,12 +44,11 @@ public class HeartAmuletRecipe extends ShapelessRecipe {
             }
         }
         ItemStack stack = super.assemble(craftingContainer, registryAccess);
-        ItemStackHandler oldInv = InventoryUtil.createVirtualInventory(4, oldCanister);
-        ItemStackHandler newInv = InventoryUtil.createVirtualInventory(5, stack);
+        var oldInv = InventoryUtil.createVirtualInventory(4, oldCanister);
+        var newInv = InventoryUtil.createVirtualInventory(5, stack);
         for (int i = 0; i < oldInv.getSlots(); i++) {
             newInv.setStackInSlot(i, oldInv.getStackInSlot(i));
         }
-        InventoryUtil.serializeInventory(newInv, stack);
         return stack;
     }
 
