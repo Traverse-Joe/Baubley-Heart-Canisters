@@ -17,8 +17,7 @@ public class ItemRelicApple extends BaseItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
 
-        if (!worldIn.isClientSide() && entityLiving instanceof Player) {
-            Player player = (Player) entityLiving;
+        if (!worldIn.isClientSide() && entityLiving instanceof Player player) {
             player.eat(worldIn,stack);
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 60, 1));
             player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 60, 1));

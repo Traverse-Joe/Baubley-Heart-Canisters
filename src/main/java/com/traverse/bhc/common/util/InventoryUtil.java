@@ -13,7 +13,7 @@ public class InventoryUtil {
     }
 
     @Deprecated
-    public static boolean hasAmulet(Player player) {
+    public static boolean hasAmulet(Player player, int slot) {
         return player.getInventory().hasAnyMatching(stack -> stack.is(RegistryHandler.HEART_AMULET.get()));
     }
 }

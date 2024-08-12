@@ -1,6 +1,5 @@
 package com.traverse.bhc.common.items;
 
-import com.traverse.bhc.common.BaubleyHeartCanisters;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 
@@ -15,6 +14,6 @@ public class BaseItem extends Item {
     }
 
     public BaseItem(int hunger, float saturation) {
-        super(new Item.Properties().food(new FoodProperties.Builder().saturationMod(saturation).alwaysEat ().nutrition(hunger).build()));
+        super(new Item.Properties().food(new FoodProperties.Builder().saturationModifier(saturation).alwaysEdible().nutrition(hunger).build()));
     }
 }

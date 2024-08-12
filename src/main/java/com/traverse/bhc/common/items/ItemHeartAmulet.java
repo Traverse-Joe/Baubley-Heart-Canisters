@@ -1,23 +1,17 @@
 package com.traverse.bhc.common.items;
 
-import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
+import com.traverse.bhc.common.init.BHCDataComponents;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HeartType;
+import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -27,13 +21,12 @@ import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.traverse.bhc.common.util.HealthModifier.updatePlayerHealth;
 
-;
-
-public class ItemHeartAmulet extends BaseItem implements MenuProvider, ICurioItem {
+public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, ICurioItem {
 
     public ItemHeartAmulet() {
         super(1);
@@ -44,7 +37,7 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider, ICurioIte
         if(player.isShiftKeyDown()) {
             var stack = player.getItemInHand(hand);
             if (!level.isClientSide()) {
-                player.openMenu(this, friendlyByteBuf -> friendlyByteBuf.writeItem(player.getItemInHand(hand)));
+                openMenu(player, hand, HeartAmuletContainer::new);
             }
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
         }
@@ -52,30 +45,24 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider, ICurioIte
         return super.use(level, player, hand);
     }
 
-    public int[] getHeartCount(ItemStack stack) {
-        if (stack.hasTag()) {
-            CompoundTag nbt = stack.getTag();
-            if (nbt.contains(HeartAmuletContainer.HEART_AMOUNT))
-                return nbt.getIntArray(HeartAmuletContainer.HEART_AMOUNT);
+    public static int[] getHeartCount(ItemStack stack) {
+        int valuesLength = HeartType.values().length;
+        if(!stack.has(BHCDataComponents.STORED_HEARTS)) {
+            return new int[valuesLength];
         }
 
-        return new int[HeartType.values().length];
-    }
+        //noinspection DataFlowIssue -- list cannot be null here
+        var values = stack.get(BHCDataComponents.STORED_HEARTS).stream().mapToInt(it -> it).toArray();
+        if(values.length != valuesLength) {
+            return Arrays.copyOf(values, valuesLength);
+        }
 
-    @Override
-    public Component getDisplayName() {
-        return Component.translatable("container.bhc.heart_amulet");
-    }
-
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        InteractionHand hand = getHandForAmulet(player);
-        return new HeartAmuletContainer(id, inventory, hand != null ? player.getItemInHand(hand) : ItemStack.EMPTY);
+        return values;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heartamulet"))).withStyle(ChatFormatting.GOLD));
+        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.HEART_AMULET.getId())).withStyle(ChatFormatting.GOLD));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
@@ -98,5 +85,10 @@ public class ItemHeartAmulet extends BaseItem implements MenuProvider, ICurioIte
         if (slotContext.entity() instanceof Player player) {
             updatePlayerHealth(player, ItemStack.EMPTY, false);
         }
+    }
+
+    @Override
+    public Component getContainerName(ItemStack stack) {
+        return Component.translatable("container.bhc.heart_amulet");
     }
 }

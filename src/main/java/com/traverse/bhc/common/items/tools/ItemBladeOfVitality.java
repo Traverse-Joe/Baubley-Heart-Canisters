@@ -7,6 +7,7 @@ import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HeartType;
+import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +27,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,14 +38,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
-public class ItemBladeOfVitality extends SwordItem implements MenuProvider {
+public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvider {
 
     public static final UUID DAMAGE_MODIFIER_ID = UUID.fromString("432ba3b0-c3bd-4f1c-b14c-76a0b32a386c");
 
 
-    //ToDo: make an actual Tier for Blade of Vitality Easier to Customize
+    // TODO: make an actual Tier for Blade of Vitality Easier to Customize
     public ItemBladeOfVitality() {
-        super(Tiers.NETHERITE, 3, -2.4F , new Item.Properties());
+        super(Tiers.NETHERITE, new Item.Properties().attributes(createAttributes(Tiers.NETHERITE, 3, -2.4F)));
     }
 
     @Override
@@ -50,7 +54,7 @@ public class ItemBladeOfVitality extends SwordItem implements MenuProvider {
             return InteractionResultHolder.fail(player.getItemInHand(hand));
 
         if (!level.isClientSide() && player.isShiftKeyDown()) {
-            player.openMenu(this, friendlyByteBuf -> friendlyByteBuf.writeItem(player.getItemInHand(hand)));
+            this.openMenu(player, hand, BladeOfVitalityContainer::new);
         }
 
         return super.use(level, player, hand);
@@ -59,6 +63,13 @@ public class ItemBladeOfVitality extends SwordItem implements MenuProvider {
     @Override
     public boolean isRepairable(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
+        var result = super.getDefaultAttributeModifiers(stack);
+
+        return result;
     }
 
     @Override
@@ -97,24 +108,18 @@ public class ItemBladeOfVitality extends SwordItem implements MenuProvider {
     }
 
     @Override
-    public Component getDisplayName() {
-        return Component.translatable("container.bhc.blade_of_vitality");
-    }
-
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new BladeOfVitalityContainer(id, inventory, player.getMainHandItem());
-    }
-
-    @Override
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("vitality_blade"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
+        tooltip.add(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.BLADE_OF_VITALITY.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return true;
+    }
+
+    @Override
+    public Component getContainerName(ItemStack stack) {
+        return Component.translatable("container.bhc.blade_of_vitality");
     }
 }

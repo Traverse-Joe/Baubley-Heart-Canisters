@@ -14,6 +14,6 @@ public class BaseHeartCanister extends BaseItem {
 
     @Override
     public int getMaxStackSize(ItemStack stack) {
-        return ConfigHandler.general.heartStackSize.get();
+        return Math.min(super.getMaxStackSize(stack), ConfigHandler.general.heartStackSize.get());
     }
 }

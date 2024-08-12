@@ -3,7 +3,6 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Monster;
@@ -26,12 +25,14 @@ import java.util.Random;
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class DropHandler {
 
+    private static final boolean TCONSTRUCT_LOADED = ModList.get().isLoaded("tinkersconstruct");
+
     @SubscribeEvent
     public static void onEntityDrop(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || entity instanceof Player) return;
 
-        if (!ModList.get().isLoaded("tinkersconstruct") && entity instanceof WitherSkeleton) {
+        if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
             if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
                 entity.spawnAtLocation(RegistryHandler.WITHER_BONE.get(), 1);
             }
@@ -85,12 +86,12 @@ public class DropHandler {
                         }
                         break;
                     case "hostile":
-                        if (entity instanceof Monster && !(isBoss(entity) && !(entity instanceof Warden))) {
+                        if (entity instanceof Monster && !(entity.getType().is(Tags.EntityTypes.BOSSES) && !(entity instanceof Warden))) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
                     case "boss":
-                        if (isBoss(entity) && !(entity instanceof EnderDragon)) {
+                        if (entity.getType().is(Tags.EntityTypes.BOSSES) && !(entity instanceof EnderDragon)) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
@@ -111,14 +112,4 @@ public class DropHandler {
             list.add(stack);
         }
     }
-
-    private static boolean isBoss(Entity entity) {
-        if(entity != null) {
-           if(entity.getType().is(Tags.EntityTypes.BOSSES)) {
-               return true;
-           }
-        }
-        return false;
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.traverse.bhc.common.items;
 
 import com.traverse.bhc.common.util.HeartType;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -24,9 +25,8 @@ public class ItemHeart extends BaseItem {
         return UseAnim.EAT;
     }
 
-
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 30;
     }
 
@@ -38,11 +38,18 @@ public class ItemHeart extends BaseItem {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isClientSide && entityLiving instanceof Player) {
-            Player player = (Player) entityLiving;
-            player.heal(this.type.healAmount);
-            if (!player.isCreative()) stack.shrink(1);
+        if (!worldIn.isClientSide()) {
+            entityLiving.heal(this.type.healAmount);
+
+            if (!(entityLiving instanceof Player player) || !player.isCreative()) {
+                stack.shrink(1);
+            }
+
+            if(entityLiving instanceof ServerPlayer player) {
+                player.resetSentInfo();
+            }
         }
+
         return stack;
     }
 

@@ -22,7 +22,7 @@ public class BladeOfVitalityScreen extends AbstractContainerScreen<BladeOfVitali
     protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, this.BACKGROUND_TEXTURE);
+        RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
         guiGraphics.blit(BACKGROUND_TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 
