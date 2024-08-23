@@ -11,7 +11,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import net.neoforged.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,15 +37,10 @@ public class BaubleyHeartCanisters {
         modContainer.registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 
        modEventBus.addListener(this::setup);
-       modEventBus.addListener(this::interModComms);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
         jsonSetup();
-    }
-
-    private void interModComms(InterModEnqueueEvent event) {
-      //  InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("heartamulet").icon(ClientBaubleyHeartCanisters.SLOT_TEXTURE).build());
     }
 
     private void jsonSetup() {
