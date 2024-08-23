@@ -1,47 +1,37 @@
 package com.traverse.bhc.common.items.tools;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
-import com.traverse.bhc.common.util.HeartType;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
+@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvider {
 
     public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("blade_of_vitality");
@@ -69,18 +59,14 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
         return false;
     }
 
-    @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> RESULT = ImmutableMultimap.builder();
-        RESULT.putAll(super.getAttributeModifiers(slot, stack));
-        if(slot == EquipmentSlot.MAINHAND) {
-            int[] heartCount = ItemHeartAmulet.getHeartCount(stack);
+    @SubscribeEvent
+    public static void onAttributeModifiers(ItemAttributeModifierEvent event) {
+        if(event.getItemStack().is(RegistryHandler.BLADE_OF_VITALITY)) {
+            int[] heartCount = ItemHeartAmulet.getHeartCount(event.getItemStack());
             int heartTotal = IntStream.of(heartCount).sum();
-            if (heartTotal > 0) {
-                RESULT.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, heartTotal, AttributeModifier.Operation.ADD_VALUE));
-            }
+            event.removeModifier(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
+            event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, heartTotal, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
         }
-        return RESULT.build();
     }
 
     //TODO Actually check the length of the Hearts on the Weapon and Add to the damage
@@ -90,8 +76,12 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
     }
 
     @Override
-    public boolean canBeDepleted() {
-        return false;
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken) {
+        if(stack.getDamageValue() == stack.getMaxDamage() - 1) {
+            return 0;
+        }
+
+        return super.damageItem(stack, amount, entity, onBroken);
     }
 
     @Override
