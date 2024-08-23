@@ -41,7 +41,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         this.itemStackHandler = InventoryUtil.createVirtualInventory(slotCount, stack);
         this.slotCount = slotCount;
 
-        if(!stack.is(getContainerItem())) {
+        if (!stack.is(getContainerItem())) {
             LOGGER.error("Item in slot {} of player {} was not of expected type, closing menu!", containerSlotId, playerInventory.player.getGameProfile().getName());
             playerInventory.player.closeContainer();
         }
@@ -100,16 +100,18 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
             ItemStack slotStack = slot.getItem();
             stack = slotStack.copy();
             if (index < this.itemStackHandler.getSlots()) {
-                if (!this.moveItemStackTo(slotStack, this.itemStackHandler.getSlots(), this.slots.size(), true))
-                    ;
-                return ItemStack.EMPTY;
+                if (!this.moveItemStackTo(slotStack, this.itemStackHandler.getSlots(), this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
             } else if (!this.moveItemStackTo(slotStack, 0, this.itemStackHandler.getSlots(), false)) {
                 return ItemStack.EMPTY;
             }
-            if (slotStack.isEmpty())
+            if (slotStack.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
-            else
+            }
+            else {
                 slot.setChanged();
+            }
         }
         return stack;
     }
