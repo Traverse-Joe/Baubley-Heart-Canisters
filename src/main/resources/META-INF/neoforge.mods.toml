@@ -1,0 +1,23 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "${loader_version_range}" #mandatory
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/Traverse-Joe/Baubley-Heart-Canisters/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+displayURL = "https://www.curseforge.com/projects/282947" #optional (displayed in the mod UI)
+logoFile = "icon.png" #optional
+credits = "Thanks goes to Up who helped with original build. Also Abused_Master for helping when i bugged him."
+authors = "${mod_authors}"
+description = '''
+${mod_description}
+'''
+
+[dependencies]
+"${mod_id}" = [
+    { modId = "neoforge", type = 'required', versionRange = "[${neo_version},)", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
+    { modId = "minecraft", type = 'required', versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
+    { modId = "curios", type = 'required', versionRange = "[9.0.5,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "1037991", modrinth = "BaqCltvf" } },
+]
