@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 
 public class BladeOfVitalityContainer extends SoulContainerMenu {
 
-    private static final int SLOT_COUNT = 4;
+    public static final int SLOT_COUNT = 4;
 
     public BladeOfVitalityContainer(int containerId, Inventory playerInventory, int containerSlotId) {
         super(RegistryHandler.BLADE_OF_VITALITY_CONTAINER.get(), containerId, playerInventory, SLOT_COUNT, containerSlotId);

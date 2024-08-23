@@ -9,12 +9,14 @@ import com.traverse.bhc.common.items.*;
 import com.traverse.bhc.common.items.tools.ItemBladeOfVitality;
 import com.traverse.bhc.common.recipes.HeartAmuletRecipe;
 import com.traverse.bhc.common.util.HeartType;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -28,7 +30,8 @@ public class RegistryHandler {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(BaubleyHeartCanisters.MODID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(Registries.MENU, BaubleyHeartCanisters.MODID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPESERIALIZER = DeferredRegister.create(Registries.RECIPE_SERIALIZER, BaubleyHeartCanisters.MODID);
-    public static DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BaubleyHeartCanisters.MODID);
+    public static final DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BaubleyHeartCanisters.MODID);
+    public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(BaubleyHeartCanisters.MODID);
 
     //Items
     public static final DeferredHolder<Item, BaseHeartCanister> RED_CANISTER = ITEMS.register("red_heart_canister", () -> new BaseHeartCanister(HeartType.RED));
@@ -70,4 +73,6 @@ public class RegistryHandler {
 
     //Creative Mod Tab
     public static final Supplier<CreativeModeTab> BHC_TAB = TAB.register("bhc_tab", () -> CreativeModeTab.builder().icon(() -> new ItemStack(RegistryHandler.HEART_AMULET.get())).displayItems((params, output) -> RegistryHandler.ITEMS.getEntries().forEach(item -> output.accept(item.get()))).title(Component.translatable("itemGroup.bhcTab")).build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> STORED_HEARTS_COMPONENT = DATA_COMPONENT_TYPES.registerComponentType("hearts", builder -> builder.persistent(ItemContainerContents.CODEC).networkSynchronized(ItemContainerContents.STREAM_CODEC).cacheEncoding());
 }

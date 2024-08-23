@@ -1,8 +1,8 @@
 package com.traverse.bhc.common.items.tools;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
+import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
-import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
 import com.traverse.bhc.common.util.SoulContainerProvider;
@@ -12,6 +12,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -34,8 +35,9 @@ import java.util.stream.IntStream;
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvider {
 
-    public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("blade_of_vitality");
+    private static final double EXTRA_DAMAGE_PER_HEART = 1.0F;
 
+    public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("blade_of_vitality");
 
     // TODO: make an actual Tier for Blade of Vitality Easier to Customize
     public ItemBladeOfVitality() {
@@ -62,26 +64,28 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
     @SubscribeEvent
     public static void onAttributeModifiers(ItemAttributeModifierEvent event) {
         if(event.getItemStack().is(RegistryHandler.BLADE_OF_VITALITY)) {
+            // need to remove previous modifier first
+            event.removeModifier(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
+
             int[] heartCount = ItemHeartAmulet.getHeartCount(event.getItemStack());
             int heartTotal = IntStream.of(heartCount).sum();
-            event.removeModifier(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
-            event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, heartTotal, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+            event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, heartTotal * EXTRA_DAMAGE_PER_HEART, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
         }
     }
 
-    //TODO Actually check the length of the Hearts on the Weapon and Add to the damage
     @Override
     public int getDamage(ItemStack stack) {
-        return getMaxDamage(stack) + HeartAmuletContainer.HEART_AMOUNT.length();
+        return Mth.clamp(getMaxDamage(stack) - IntStream.of(ItemHeartAmulet.getHeartCount(stack)).sum(), 0, stack.getMaxDamage());
+    }
+
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        return BladeOfVitalityContainer.SLOT_COUNT * ConfigHandler.general.heartStackSize.get();
     }
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken) {
-        if(stack.getDamageValue() == stack.getMaxDamage() - 1) {
-            return 0;
-        }
-
-        return super.damageItem(stack, amount, entity, onBroken);
+        return 0;
     }
 
     @Override

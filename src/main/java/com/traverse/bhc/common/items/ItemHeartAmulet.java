@@ -1,7 +1,6 @@
 package com.traverse.bhc.common.items;
 
 import com.traverse.bhc.common.container.HeartAmuletContainer;
-import com.traverse.bhc.common.init.BHCDataComponents;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HeartType;
 import com.traverse.bhc.common.util.SoulContainerProvider;
@@ -47,12 +46,12 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
 
     public static int[] getHeartCount(ItemStack stack) {
         int valuesLength = HeartType.values().length;
-        if(!stack.has(BHCDataComponents.STORED_HEARTS)) {
+        if(!stack.has(RegistryHandler.STORED_HEARTS_COMPONENT)) {
             return new int[valuesLength];
         }
 
         //noinspection DataFlowIssue -- list cannot be null here
-        var values = stack.get(BHCDataComponents.STORED_HEARTS).stream().mapToInt(it -> it).toArray();
+        var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).stream().mapToInt(ItemStack::getCount).toArray();
         if(values.length != valuesLength) {
             return Arrays.copyOf(values, valuesLength);
         }
