@@ -9,7 +9,6 @@ import net.minecraft.world.item.Item;
 public class HeartAmuletContainer extends SoulContainerMenu {
 
     private static final int SLOT_COUNT = 4;
-    public static final String HEART_AMOUNT = "heart_amount";
 
     public HeartAmuletContainer(int windowId, Inventory playerInventory, int containerSlotId) {
         super(RegistryHandler.HEART_AMUlET_CONTAINER.get(), windowId, playerInventory, SLOT_COUNT, containerSlotId);

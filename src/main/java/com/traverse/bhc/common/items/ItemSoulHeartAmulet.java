@@ -1,7 +1,7 @@
 package com.traverse.bhc.common.items;
 
-import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
+import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -41,7 +41,7 @@ public class ItemSoulHeartAmulet extends BaseItem implements SoulContainerProvid
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heartamulet"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
+        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.HEART_AMULET.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
     }
 
     @Override
