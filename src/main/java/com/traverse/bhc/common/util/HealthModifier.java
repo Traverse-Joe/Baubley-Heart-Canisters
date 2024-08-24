@@ -3,6 +3,7 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -166,9 +167,12 @@ public class HealthModifier {
         }
 
         health.addPermanentModifier(new AttributeModifier(HEALTH_MODIFIER_ID, extraHearts, AttributeModifier.Operation.ADD_VALUE));
-        float amount = Mth.clamp(player.getMaxHealth() - diff, 0.0f, player.getMaxHealth());
-        if (amount > 0.0F) {
-            player.setHealth(amount);
+        float newHealth = Mth.clamp(player.getMaxHealth() - diff, 0.0F, player.getMaxHealth());
+        if (newHealth > 0.0F) {
+            player.setHealth(newHealth);
+            if(player instanceof ServerPlayer serverPlayer) {
+                serverPlayer.resetSentInfo();
+            }
         } else {
             player.closeContainer();
             player.kill();
