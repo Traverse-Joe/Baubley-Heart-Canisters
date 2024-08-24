@@ -33,7 +33,7 @@ public class BaubleyHeartCanisters {
         RegistryHandler.CONTAINERS.register(modEventBus);
         RegistryHandler.RECIPESERIALIZER.register(modEventBus);
         RegistryHandler.DATA_COMPONENT_TYPES.register(modEventBus);
-        modContainer.registerConfig(ModConfig.Type.COMMON, ConfigHandler.configSpec);
+        modContainer.registerConfig(ModConfig.Type.STARTUP, ConfigHandler.configSpec);
         modContainer.registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 
        modEventBus.addListener(this::setup);

@@ -1,7 +1,6 @@
 package com.traverse.bhc.common.util;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
-import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -10,8 +9,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Arrays;
 
 //@Mod.EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class HealthModifier {
@@ -154,15 +151,11 @@ public class HealthModifier {
 
         float diff = player.getMaxHealth() - player.getHealth();
 
-        // no need to check item type, either the stack has our component or it doesnt
-        int[] hearts = addHealth ? ItemHeartAmulet.getHeartCount(stack) : new int[4];
-        if(hearts.length != 4) {
-            hearts = Arrays.copyOf(hearts, 4);
-        }
-
         int extraHearts = 0;
-        for (int i = 0; i < hearts.length; i++) {
-            extraHearts += Mth.clamp(hearts[i], 0, ConfigHandler.general.heartStackSize.get() * 2);
+
+        if(addHealth) {
+            // no need to check item type, either the stack has our component or it doesnt
+            extraHearts = ItemHeartAmulet.getHeartCount(stack);
         }
 
         AttributeModifier modifier = health.getModifier(HEALTH_MODIFIER_ID);

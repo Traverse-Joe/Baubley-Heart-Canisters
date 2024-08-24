@@ -33,7 +33,7 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if(player.isShiftKeyDown()) {
+        if (player.isShiftKeyDown()) {
             var stack = player.getItemInHand(hand);
             if (!level.isClientSide()) {
                 openMenu(player, hand, HeartAmuletContainer::new);
@@ -42,21 +42,6 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
         }
 
         return super.use(level, player, hand);
-    }
-
-    public static int[] getHeartCount(ItemStack stack) {
-        int valuesLength = HeartType.values().length;
-        if(!stack.has(RegistryHandler.STORED_HEARTS_COMPONENT)) {
-            return new int[valuesLength];
-        }
-
-        //noinspection DataFlowIssue -- list cannot be null here
-        var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).stream().mapToInt(ItemStack::getCount).toArray();
-        if(values.length != valuesLength) {
-            return Arrays.copyOf(values, valuesLength);
-        }
-
-        return values;
     }
 
     @Override
@@ -68,15 +53,16 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         LivingEntity livingEntity = slotContext.entity();
-        if(livingEntity instanceof Player player) {
+        if (livingEntity instanceof Player player) {
             ICuriosItemHandler handler = CuriosApi.getCuriosInventory(livingEntity).orElse(null);
-            if (handler == null) return;
+            if (handler == null)
+                return;
             SlotResult equipped = handler.findFirstCurio(RegistryHandler.HEART_AMULET.get()).orElse(null);
             if (equipped != null) {
                 updatePlayerHealth(player, equipped.stack(), true);
             }
         }
-            }
+    }
 
 
     @Override
@@ -89,5 +75,28 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
     @Override
     public Component getContainerName(ItemStack stack) {
         return Component.translatable("container.bhc.heart_amulet");
+    }
+
+    public static int[] getHeartValues(ItemStack stack) {
+        int valuesLength = HeartType.values().length;
+        if (!stack.has(RegistryHandler.STORED_HEARTS_COMPONENT)) {
+            return new int[valuesLength];
+        }
+
+        //noinspection DataFlowIssue -- list cannot be null here
+        var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).stream().mapToInt(ItemStack::getCount).toArray();
+        if (values.length != valuesLength) {
+            return Arrays.copyOf(values, valuesLength);
+        }
+
+        return values;
+    }
+
+    public static int getHeartCount(ItemStack stack) {
+        int sum = 0;
+        for (int hearts : getHeartValues(stack)) {
+            sum += hearts;
+        }
+        return sum;
     }
 }

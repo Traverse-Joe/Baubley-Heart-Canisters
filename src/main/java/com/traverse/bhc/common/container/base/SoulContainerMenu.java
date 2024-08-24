@@ -1,6 +1,5 @@
 package com.traverse.bhc.common.container.base;
 
-import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.items.BaseHeartCanister;
 import com.traverse.bhc.common.util.InventoryUtil;
 import net.minecraft.core.Holder;
@@ -93,7 +92,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) { //FIXME this will eat items if trying to merge onto an existing stack
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
         if (slot.hasItem()) {
@@ -141,11 +140,6 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         @Override
         public boolean mayPlace(@Nonnull ItemStack stack) {
             return super.mayPlace(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).type.ordinal() == this.getSlotIndex();
-        }
-
-        @Override
-        public int getMaxStackSize() {
-            return ConfigHandler.general.heartStackSize.get();
         }
     }
 

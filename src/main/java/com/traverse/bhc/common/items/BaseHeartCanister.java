@@ -2,18 +2,13 @@ package com.traverse.bhc.common.items;
 
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.util.HeartType;
-import net.minecraft.world.item.ItemStack;
 
 public class BaseHeartCanister extends BaseItem {
 
     public HeartType type;
-    public BaseHeartCanister(HeartType type){
-        super();
-        this.type = type;
-    }
 
-    @Override
-    public int getMaxStackSize(ItemStack stack) {
-        return Math.min(super.getMaxStackSize(stack), ConfigHandler.general.heartStackSize.get());
+    public BaseHeartCanister(HeartType type) {
+        super(ConfigHandler.general.heartStackSize.get());
+        this.type = type;
     }
 }
