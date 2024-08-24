@@ -106,7 +106,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
                 return ItemStack.EMPTY;
             }
             if (slotStack.isEmpty()) {
-                slot.set(ItemStack.EMPTY);
+                slot.setByPlayer(ItemStack.EMPTY);
             }
             else {
                 slot.setChanged();
