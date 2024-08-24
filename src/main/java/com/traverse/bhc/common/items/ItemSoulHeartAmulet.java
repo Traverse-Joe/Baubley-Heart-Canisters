@@ -29,13 +29,17 @@ public class ItemSoulHeartAmulet extends BaseItem implements SoulContainerProvid
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        var stack = player.getItemInHand(hand);
+        if(!player.isShiftKeyDown()) {
+            var stack = player.getItemInHand(hand);
+            if (!level.isClientSide()) {
+                this.openMenu(player, hand, SoulHeartAmuletContainer::new);
+            }
 
-        if (!level.isClientSide() && !player.isShiftKeyDown()) {
-            this.openMenu(player, hand, SoulHeartAmuletContainer::new);
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
         }
 
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        return super.use(level, player, hand);
+
     }
 
     @Override
@@ -61,6 +65,6 @@ public class ItemSoulHeartAmulet extends BaseItem implements SoulContainerProvid
 
     @Override
     public Component getContainerName(ItemStack stack) {
-        return Component.translatable("container.bhc.soul_heart_amulet");
+        return Component.translatable(Util.makeDescriptionId("container", RegistryHandler.SOUL_HEART_AMUlET_CONTAINER.getId()));
     }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": "bhc:green_heart"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "bhc:green_heart_melted_from_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_heart"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bhc:green_heart_melted_from_blasting"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bhc:yellow_heart_canister",
+  "ingredients": [
+    {
+      "item": "bhc:red_heart_canister"
+    },
+    {
+      "item": "bhc:yellow_heart"
+    },
+    {
+      "item": "minecraft:enchanted_golden_apple"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:yellow_heart_canister"
+  }
+}

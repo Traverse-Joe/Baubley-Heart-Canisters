@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bhc:red_heart",
+  "key": {
+    "#": {
+      "item": "bhc:red_heart_melted"
+    },
+    "H": {
+      "tag": "c:hearts"
+    }
+  },
+  "pattern": [
+    "###",
+    "#H#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:red_heart"
+  }
+}

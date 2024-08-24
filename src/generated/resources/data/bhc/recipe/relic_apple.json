@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bhc:relic_apple",
+  "key": {
+    "#": {
+      "item": "minecraft:apple"
+    },
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "E": {
+      "tag": "c:gems/emerald"
+    }
+  },
+  "pattern": [
+    " D ",
+    "E#E",
+    " D "
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:relic_apple"
+  }
+}

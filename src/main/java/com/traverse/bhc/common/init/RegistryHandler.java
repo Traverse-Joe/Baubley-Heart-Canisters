@@ -22,8 +22,6 @@ import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
 
 public class RegistryHandler {
 
@@ -64,15 +62,15 @@ public class RegistryHandler {
     public static final DeferredHolder<Item, BaseItem> SOUL_HEART_CRYSTAL = ITEMS.register("soul_heart_crystal", () -> new BaseItem());
 
     //Container
-    public static final Supplier<MenuType<HeartAmuletContainer>> HEART_AMUlET_CONTAINER = CONTAINERS.register("heart_amulet_container", () -> IMenuTypeExtension.create((windowId, inv, data) -> new HeartAmuletContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
-    public static final Supplier<MenuType<SoulHeartAmuletContainer>> SOUL_HEART_AMUlET_CONTAINER = CONTAINERS.register("soul_heart_amulet_container", () -> IMenuTypeExtension.create((windowId, inv, data) -> new SoulHeartAmuletContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
-    public static final Supplier<MenuType<BladeOfVitalityContainer>> BLADE_OF_VITALITY_CONTAINER = CONTAINERS.register("blade_of_vitality_container", () -> IMenuTypeExtension.create((windowId, inv, data) -> new BladeOfVitalityContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
+    public static final DeferredHolder<MenuType<?>, MenuType<HeartAmuletContainer>> HEART_AMUlET_CONTAINER = CONTAINERS.register("heart_amulet", () -> IMenuTypeExtension.create((windowId, inv, data) -> new HeartAmuletContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
+    public static final DeferredHolder<MenuType<?>, MenuType<SoulHeartAmuletContainer>> SOUL_HEART_AMUlET_CONTAINER = CONTAINERS.register("soul_heart_amulet", () -> IMenuTypeExtension.create((windowId, inv, data) -> new SoulHeartAmuletContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
+    public static final DeferredHolder<MenuType<?>, MenuType<BladeOfVitalityContainer>> BLADE_OF_VITALITY_CONTAINER = CONTAINERS.register("blade_of_vitality", () -> IMenuTypeExtension.create((windowId, inv, data) -> new BladeOfVitalityContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
 
     //Recipe Serializer
-    public static final Supplier<RecipeSerializer<HeartAmuletRecipe>> HEART_AMULET_RECIPE_SERIALIZER = RECIPESERIALIZER.register("amulet_shapeless", HeartAmuletRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<HeartAmuletRecipe>> HEART_AMULET_RECIPE_SERIALIZER = RECIPESERIALIZER.register("amulet_shapeless", HeartAmuletRecipe.Serializer::new);
 
     //Creative Mod Tab
-    public static final Supplier<CreativeModeTab> BHC_TAB = TAB.register("bhc_tab", () -> CreativeModeTab.builder().icon(() -> new ItemStack(RegistryHandler.HEART_AMULET.get())).displayItems((params, output) -> RegistryHandler.ITEMS.getEntries().forEach(item -> output.accept(item.get()))).title(Component.translatable("itemGroup.bhcTab")).build());
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> BHC_TAB = TAB.register("bhc_tab", () -> CreativeModeTab.builder().icon(() -> new ItemStack(RegistryHandler.HEART_AMULET.get())).displayItems((params, output) -> RegistryHandler.ITEMS.getEntries().forEach(item -> output.accept(item.get()))).title(Component.translatable("itemGroup.bhcTab")).build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> STORED_HEARTS_COMPONENT = DATA_COMPONENT_TYPES.registerComponentType("hearts", builder -> builder.persistent(ItemContainerContents.CODEC).networkSynchronized(ItemContainerContents.STREAM_CODEC).cacheEncoding());
 }

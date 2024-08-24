@@ -33,7 +33,7 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (player.isShiftKeyDown()) {
+        if (!player.isShiftKeyDown()) {
             var stack = player.getItemInHand(hand);
             if (!level.isClientSide()) {
                 openMenu(player, hand, HeartAmuletContainer::new);
@@ -74,7 +74,7 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
 
     @Override
     public Component getContainerName(ItemStack stack) {
-        return Component.translatable("container.bhc.heart_amulet");
+        return Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.HEART_AMUlET_CONTAINER.getId()));
     }
 
     public static int[] getHeartValues(ItemStack stack) {

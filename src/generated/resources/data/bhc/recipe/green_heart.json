@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bhc:green_heart",
+  "key": {
+    "#": {
+      "item": "bhc:green_heart_melted"
+    },
+    "H": {
+      "tag": "c:hearts"
+    }
+  },
+  "pattern": [
+    "###",
+    "#H#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:green_heart"
+  }
+}

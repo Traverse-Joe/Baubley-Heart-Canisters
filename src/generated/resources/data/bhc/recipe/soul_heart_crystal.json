@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bhc:soul_heart_crystal",
+  "key": {
+    "#": {
+      "item": "minecraft:echo_shard"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "B": {
+      "item": "bhc:blue_heart"
+    },
+    "G": {
+      "item": "bhc:green_heart"
+    },
+    "R": {
+      "item": "bhc:red_heart"
+    },
+    "Y": {
+      "item": "bhc:yellow_heart"
+    }
+  },
+  "pattern": [
+    "#R#",
+    "YAG",
+    "#B#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:soul_heart_crystal"
+  }
+}

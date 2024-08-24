@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bhc:canister",
+  "key": {
+    "#": {
+      "tag": "c:bones"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    " I ",
+    "I#I",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:canister"
+  }
+}

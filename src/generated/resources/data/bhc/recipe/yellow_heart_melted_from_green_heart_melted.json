@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bhc:yellow_heart_melted",
+  "ingredients": [
+    {
+      "item": "bhc:green_heart_melted"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "bhc:yellow_heart_melted"
+  }
+}

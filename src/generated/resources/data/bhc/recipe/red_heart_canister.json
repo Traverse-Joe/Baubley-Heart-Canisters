@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bhc:red_heart_canister",
+  "ingredients": [
+    {
+      "item": "bhc:canister"
+    },
+    {
+      "item": "bhc:red_heart"
+    },
+    {
+      "item": "bhc:relic_apple"
+    },
+    {
+      "tag": "c:wither_bones"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:red_heart_canister"
+  }
+}

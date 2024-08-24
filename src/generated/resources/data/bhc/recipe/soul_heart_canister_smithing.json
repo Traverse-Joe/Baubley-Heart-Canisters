@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:totem_of_undying"
+  },
+  "base": {
+    "item": "bhc:blue_heart_canister"
+  },
+  "result": {
+    "count": 1,
+    "id": "bhc:soul_heart_canister"
+  },
+  "template": {
+    "tag": "c:hearts"
+  }
+}

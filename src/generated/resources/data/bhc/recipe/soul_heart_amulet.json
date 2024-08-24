@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bhc:soul_heart_amulet",
+  "ingredients": [
+    {
+      "item": "bhc:heart_amulet"
+    },
+    {
+      "item": "bhc:soul_heart_crystal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:soul_heart_amulet"
+  }
+}

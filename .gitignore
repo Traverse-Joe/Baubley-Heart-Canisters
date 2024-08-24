@@ -25,3 +25,4 @@ run-data
 
 repo
 java_pid*
+/src/generated/resources/.cache/**

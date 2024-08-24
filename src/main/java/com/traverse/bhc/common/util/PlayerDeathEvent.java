@@ -5,6 +5,7 @@ import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemSoulHeartAmulet;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
@@ -37,7 +38,7 @@ public class PlayerDeathEvent {
                         var stack = soulInventory.getStackInSlot(4);
                         stack.shrink(1);
                         soulInventory.setStackInSlot(4, stack);
-                        player.displayClientMessage(Component.translatable("soulheartused.bhc.message").setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
+                        player.displayClientMessage(Component.translatable(Util.makeDescriptionId("message", BaubleyHeartCanisters.id("soul_heart_used"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
                         player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
                         //15% chance
                         if (player.getRandom().nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {

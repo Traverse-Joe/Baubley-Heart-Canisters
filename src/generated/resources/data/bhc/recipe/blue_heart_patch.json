@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "bhc:blue_heart_patch",
+  "key": {
+    "H": {
+      "item": "bhc:red_heart"
+    },
+    "S": {
+      "tag": "c:strings"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    " W ",
+    "SHS",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:blue_heart_patch"
+  }
+}
