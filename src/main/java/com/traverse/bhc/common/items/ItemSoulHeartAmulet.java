@@ -29,14 +29,13 @@ public class ItemSoulHeartAmulet extends BaseItem implements SoulContainerProvid
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if (hand != InteractionHand.MAIN_HAND)
-            return InteractionResultHolder.fail(player.getItemInHand(hand));
+        var stack = player.getItemInHand(hand);
 
         if (!level.isClientSide() && !player.isShiftKeyDown()) {
             this.openMenu(player, hand, SoulHeartAmuletContainer::new);
         }
 
-        return super.use(level, player, hand);
+        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
 
     @Override

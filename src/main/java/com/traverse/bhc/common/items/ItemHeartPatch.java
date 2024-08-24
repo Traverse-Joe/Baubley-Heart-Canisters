@@ -6,11 +6,9 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -43,15 +41,19 @@ public class ItemHeartPatch extends BaseItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        if(!worldIn.isClientSide()) {
-            ItemStack stack = playerIn.getItemInHand(handIn);
-            worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.NEUTRAL, 0.5F, 0.4F / (worldIn.getRandom().nextFloat() * 0.4F + 0.8F));
+        ItemStack stack = playerIn.getItemInHand(handIn);
+
+        playerIn.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), 0.5F, worldIn.getRandom().nextFloat() * 0.4F / 0.4F / +0.8F);
+
+        if (!worldIn.isClientSide()) {
             playerIn.getCooldowns().addCooldown(stack.getItem(), cooldown);
             playerIn.heal(amount);
-            if(!playerIn.isCreative()) stack.hurtAndBreak(1, playerIn, handIn == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
-            return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
+            if (!playerIn.isCreative()) {
+                stack.hurtAndBreak(1, playerIn, LivingEntity.getSlotForHand(handIn));
+            }
         }
-       return new InteractionResultHolder<>(InteractionResult.FAIL, playerIn.getItemInHand(handIn));
+
+        return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
     }
 
     @Override

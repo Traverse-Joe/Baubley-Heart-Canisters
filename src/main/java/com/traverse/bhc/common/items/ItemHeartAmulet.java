@@ -83,7 +83,7 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
             return new int[valuesLength];
         }
 
-        //noinspection DataFlowIssue -- list cannot be null here
+        //noinspection DataFlowIssue -- inventory cannot be null here
         var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).stream().mapToInt(ItemStack::getCount).toArray();
         if (values.length != valuesLength) {
             return Arrays.copyOf(values, valuesLength);

@@ -3,7 +3,6 @@ package com.traverse.bhc.common.items;
 import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -31,9 +30,9 @@ public class ItemHeart extends BaseItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        playerIn.startUsingItem(handIn);
-        return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
+    public InteractionResultHolder<ItemStack> use(Level level, Player playerIn, InteractionHand hand) {
+        playerIn.startUsingItem(hand);
+        return InteractionResultHolder.sidedSuccess(playerIn.getItemInHand(hand), level.isClientSide());
     }
 
     @Override
