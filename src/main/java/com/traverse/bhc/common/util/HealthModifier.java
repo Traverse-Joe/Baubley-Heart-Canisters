@@ -155,7 +155,7 @@ public class HealthModifier {
 
         if(addHealth) {
             // no need to check item type, either the stack has our component or it doesnt
-            extraHearts = ItemHeartAmulet.getHeartCount(stack);
+            extraHearts = ItemHeartAmulet.getHeartCount(stack) * 2;
         }
 
         AttributeModifier modifier = health.getModifier(HEALTH_MODIFIER_ID);
