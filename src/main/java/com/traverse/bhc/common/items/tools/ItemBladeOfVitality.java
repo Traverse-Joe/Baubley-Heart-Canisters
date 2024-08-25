@@ -1,6 +1,7 @@
 package com.traverse.bhc.common.items.tools;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
+import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
@@ -115,7 +116,8 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
 
         int total = 0;
         for (int i = 0; i < inv.getSlots(); i++) {
-            total += inv.getStackInSlot(i).getMaxStackSize();
+            var invStack = inv.getStackInSlot(i);
+            total += !invStack.isEmpty() ? invStack.getMaxStackSize() : ConfigHandler.general.heartStackSize.get();
         }
 
         return total;
