@@ -13,7 +13,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ComponentItemHandler;
-import net.neoforged.neoforge.items.StackCopySlot;
+import net.neoforged.neoforge.items.ItemHandlerCopySlot;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,30 +131,18 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         }
     }
 
-    public static class SlotPendant extends StackCopySlot {
+    public static class SlotPendant extends ItemHandlerCopySlot {
 
-        private final ComponentItemHandler itemHandler;
         private final int slotIndex;
 
         public SlotPendant(ComponentItemHandler itemHandler, int slotIndex, int xPosition, int yPosition) {
-            super(xPosition, yPosition);
-            this.itemHandler = itemHandler;
+            super(itemHandler, slotIndex, xPosition, yPosition);
             this.slotIndex = slotIndex;
         }
 
         @Override
         public boolean mayPlace(@Nonnull ItemStack stack) {
-            return super.mayPlace(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).type.ordinal() == slotIndex;
-        }
-
-        @Override
-        protected ItemStack getStackCopy() {
-            return itemHandler.getStackInSlot(this.slotIndex);
-        }
-
-        @Override
-        protected void setStackCopy(ItemStack stack) {
-            itemHandler.setStackInSlot(this.slotIndex, stack);
+            return super.mayPlace(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).getType().ordinal() == slotIndex;
         }
     }
 
