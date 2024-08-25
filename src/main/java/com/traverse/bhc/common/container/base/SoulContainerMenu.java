@@ -13,8 +13,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ComponentItemHandler;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.StackCopySlot;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +91,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) { //FIXME this will eat items if trying to merge onto an existing stack
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
         if (slot.hasItem()) {
@@ -132,14 +131,30 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         }
     }
 
-    public static class SlotPendant extends SlotItemHandler {
-        public SlotPendant(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-            super(itemHandler, index, xPosition, yPosition);
+    public static class SlotPendant extends StackCopySlot {
+
+        private final ComponentItemHandler itemHandler;
+        private final int slotIndex;
+
+        public SlotPendant(ComponentItemHandler itemHandler, int slotIndex, int xPosition, int yPosition) {
+            super(xPosition, yPosition);
+            this.itemHandler = itemHandler;
+            this.slotIndex = slotIndex;
         }
 
         @Override
         public boolean mayPlace(@Nonnull ItemStack stack) {
-            return super.mayPlace(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).type.ordinal() == this.getSlotIndex();
+            return super.mayPlace(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).type.ordinal() == slotIndex;
+        }
+
+        @Override
+        protected ItemStack getStackCopy() {
+            return itemHandler.getStackInSlot(this.slotIndex);
+        }
+
+        @Override
+        protected void setStackCopy(ItemStack stack) {
+            itemHandler.setStackInSlot(this.slotIndex, stack);
         }
     }
 
