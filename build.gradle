@@ -81,12 +81,19 @@ repositories {
         name = "OctoStudios"
         url = "https://maven.octo-studios.com/releases"
     }
-//    maven {
-//        url  "https://www.cursemaven.com"
-//        content {
-//            includeGroup "curse.maven"
-//        }
-//    }
+
+    maven {
+        name = "Shedaniel"
+        url = "https://maven.shedaniel.me"
+    }
+
+    maven {
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
 }
 
 dependencies {
@@ -98,6 +105,8 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    implementation "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.783"
+    implementation "curse.maven:jade-324717:${jade_id}"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

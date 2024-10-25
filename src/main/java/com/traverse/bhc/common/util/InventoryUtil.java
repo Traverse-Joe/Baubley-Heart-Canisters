@@ -5,6 +5,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 
+import java.util.Arrays;
+
 public class InventoryUtil {
 
     public static ComponentItemHandler createVirtualInventory(int slots, ItemStack stack) {
@@ -15,4 +17,5 @@ public class InventoryUtil {
     public static boolean hasAmulet(Player player, int slot) {
         return player.getInventory().hasAnyMatching(stack -> stack.is(RegistryHandler.HEART_AMULET.get()));
     }
+
 }

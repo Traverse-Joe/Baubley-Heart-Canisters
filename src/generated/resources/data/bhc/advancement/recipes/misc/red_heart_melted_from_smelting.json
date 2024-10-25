@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:red_heart_melted_from_blasting"
+        "recipe": "bhc:red_heart_melted_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "bhc:red_heart_melted_from_blasting"
+      "bhc:red_heart_melted_from_smelting"
     ]
   }
 }

@@ -5,6 +5,7 @@ import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
+import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.InventoryUtil;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
@@ -66,6 +67,7 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
         return false;
     }
 
+    /* DISABLED UNTIL A BETTER BAR SYSTEM IS IMPLEMENTED
     @Override
     public boolean isBarVisible(ItemStack stack) {
         return ItemHeartAmulet.getHeartCount(stack) < ItemBladeOfVitality.getMaxHearts(stack);
@@ -81,14 +83,14 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
     public int getBarWidth(ItemStack stack) {
         return Mth.clamp(Math.round(13.0F * (ItemHeartAmulet.getHeartCount(stack) / (float) getMaxHearts(stack))), 0, 13);
     }
-
+*/
     @SubscribeEvent
     public static void onAttributeModifiers(ItemAttributeModifierEvent event) {
         if (event.getItemStack().is(RegistryHandler.BLADE_OF_VITALITY)) {
             // need to remove previous modifier first
             event.removeModifier(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
 
-            int heartCount = ItemHeartAmulet.getHeartCount(event.getItemStack());
+            int heartCount = HealthModifier.getHeartCount(event.getItemStack());
             if (heartCount > 0) {
                 event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, heartCount * EXTRA_DAMAGE_PER_HEART, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
             }

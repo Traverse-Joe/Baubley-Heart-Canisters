@@ -4,9 +4,11 @@ import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
+import com.traverse.bhc.common.container.VigorBowContainer;
 import com.traverse.bhc.common.container.base.SoulContainerMenu;
 import com.traverse.bhc.common.items.*;
 import com.traverse.bhc.common.items.tools.ItemBladeOfVitality;
+import com.traverse.bhc.common.items.tools.ItemVigorBow;
 import com.traverse.bhc.common.recipes.HeartAmuletRecipe;
 import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.core.component.DataComponentType;
@@ -21,6 +23,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.awt.*;
 
 
 public class RegistryHandler {
@@ -43,10 +47,10 @@ public class RegistryHandler {
     public static final DeferredHolder<Item, BaseItem> GREEN_HEART_MELTED = ITEMS.register("green_heart_melted", () -> new BaseItem());
     public static final DeferredHolder<Item, BaseItem> BLUE_HEART_MELTED = ITEMS.register("blue_heart_melted", () -> new BaseItem());
 
-    public static final DeferredHolder<Item, ItemHeartPatch> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(2, 5 * 20, 20));
-    public static final DeferredHolder<Item, ItemHeartPatch> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(6, 10 * 20, 25));
-    public static final DeferredHolder<Item, ItemHeartPatch> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(10, 20 * 20, 30));
-    public static final DeferredHolder<Item, ItemHeartPatch> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(20, 30 * 20, 50));
+    public static final DeferredHolder<Item, ItemHeartPatch> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(2, 5 * 20, 20, Color.red.getRGB()));
+    public static final DeferredHolder<Item, ItemHeartPatch> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(6, 10 * 20, 25, Color.yellow.getRGB()));
+    public static final DeferredHolder<Item, ItemHeartPatch> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(10, 20 * 20, 30, Color.green.getRGB()));
+    public static final DeferredHolder<Item, ItemHeartPatch> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(20, 30 * 20, 50, Color.blue.getRGB()));
 
     public static final DeferredHolder<Item, ItemHeart> RED_HEART = ITEMS.register("red_heart", () -> new ItemHeart(HeartType.RED));
     public static final DeferredHolder<Item, ItemHeart> YELLOW_HEART = ITEMS.register("yellow_heart", () -> new ItemHeart(HeartType.YELLOW));
@@ -54,6 +58,7 @@ public class RegistryHandler {
     public static final DeferredHolder<Item, ItemHeart> BLUE_HEART = ITEMS.register("blue_heart", () -> new ItemHeart(HeartType.BLUE));
     public static final DeferredHolder<Item, BaseItem> CANISTER = ITEMS.register("canister", () -> new BaseItem());
     public static final DeferredHolder<Item, ItemBladeOfVitality> BLADE_OF_VITALITY = ITEMS.register("blade_of_vitality", ItemBladeOfVitality::new);
+    public static final DeferredHolder<Item, ItemVigorBow> VIGOR_BOW = ITEMS.register("vigor_bow", ItemVigorBow::new);
 
     public static final DeferredHolder<Item, BaseItem> WITHER_BONE = ITEMS.register("wither_bone", () -> new BaseItem());
     public static final DeferredHolder<Item, ItemRelicApple> RELIC_APPLE = ITEMS.register("relic_apple", ItemRelicApple::new);
@@ -65,6 +70,7 @@ public class RegistryHandler {
     public static final DeferredHolder<MenuType<?>, MenuType<HeartAmuletContainer>> HEART_AMUlET_CONTAINER = CONTAINERS.register("heart_amulet", () -> IMenuTypeExtension.create((windowId, inv, data) -> new HeartAmuletContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
     public static final DeferredHolder<MenuType<?>, MenuType<SoulHeartAmuletContainer>> SOUL_HEART_AMUlET_CONTAINER = CONTAINERS.register("soul_heart_amulet", () -> IMenuTypeExtension.create((windowId, inv, data) -> new SoulHeartAmuletContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
     public static final DeferredHolder<MenuType<?>, MenuType<BladeOfVitalityContainer>> BLADE_OF_VITALITY_CONTAINER = CONTAINERS.register("blade_of_vitality", () -> IMenuTypeExtension.create((windowId, inv, data) -> new BladeOfVitalityContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
+    public static final DeferredHolder<MenuType<?>, MenuType<VigorBowContainer>> VIGOR_BOW_CONTAINER = CONTAINERS.register("vigor_bow", () -> IMenuTypeExtension.create((windowId, inv, data) -> new VigorBowContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
 
     //Recipe Serializer
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<HeartAmuletRecipe>> HEART_AMULET_RECIPE_SERIALIZER = RECIPESERIALIZER.register("amulet_shapeless", HeartAmuletRecipe.Serializer::new);

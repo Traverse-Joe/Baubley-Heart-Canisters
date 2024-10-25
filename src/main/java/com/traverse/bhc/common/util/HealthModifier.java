@@ -1,6 +1,7 @@
 package com.traverse.bhc.common.util;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
+import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemHeartAmulet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,6 +11,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.Arrays;
 
 //@Mod.EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class HealthModifier {
@@ -156,7 +159,7 @@ public class HealthModifier {
 
         if(addHealth) {
             // no need to check item type, either the stack has our component or it doesnt
-            extraHearts = ItemHeartAmulet.getHeartCount(stack) * 2;
+            extraHearts = HealthModifier.getHeartCount(stack) * 2;
         }
 
         AttributeModifier modifier = health.getModifier(HEALTH_MODIFIER_ID);
@@ -177,5 +180,29 @@ public class HealthModifier {
             player.closeContainer();
             player.kill();
         }
+    }
+
+    public static int[] getHeartValues(ItemStack stack) {
+        int valuesLength = HeartType.values().length;
+        if (!stack.has(RegistryHandler.STORED_HEARTS_COMPONENT)) {
+            return new int[valuesLength];
+        }
+
+        //noinspection DataFlowIssue -- inventory cannot be null here
+        var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).stream().mapToInt(ItemStack::getCount).toArray();
+        if (values.length != valuesLength) {
+            return Arrays.copyOf(values, valuesLength);
+        }
+
+        return values;
+    }
+
+
+    public static int getHeartCount(ItemStack stack) {
+        int sum = 0;
+        for (int hearts : getHeartValues(stack)) {
+            sum += hearts;
+        }
+        return sum;
     }
 }

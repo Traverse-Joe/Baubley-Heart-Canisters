@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:blasting",
+  "type": "minecraft:smelting",
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.3,
   "group": "bhc:yellow_heart_melted",
   "ingredient": {
-    "item": "bhc:red_heart"
+    "item": "bhc:yellow_heart"
   },
   "result": {
     "count": 1,

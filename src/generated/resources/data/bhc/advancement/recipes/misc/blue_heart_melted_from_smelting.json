@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "bhc:green_heart"
+            "items": "bhc:blue_heart"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:green_heart_melted_from_blasting"
+        "recipe": "bhc:blue_heart_melted_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "bhc:green_heart_melted_from_blasting"
+      "bhc:blue_heart_melted_from_smelting"
     ]
   }
 }

@@ -74,29 +74,6 @@ public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, 
 
     @Override
     public Component getContainerName(ItemStack stack) {
-        return Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.HEART_AMUlET_CONTAINER.getId()));
-    }
-
-    public static int[] getHeartValues(ItemStack stack) {
-        int valuesLength = HeartType.values().length;
-        if (!stack.has(RegistryHandler.STORED_HEARTS_COMPONENT)) {
-            return new int[valuesLength];
-        }
-
-        //noinspection DataFlowIssue -- inventory cannot be null here
-        var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).stream().mapToInt(ItemStack::getCount).toArray();
-        if (values.length != valuesLength) {
-            return Arrays.copyOf(values, valuesLength);
-        }
-
-        return values;
-    }
-
-    public static int getHeartCount(ItemStack stack) {
-        int sum = 0;
-        for (int hearts : getHeartValues(stack)) {
-            sum += hearts;
-        }
-        return sum;
+        return Component.translatable(Util.makeDescriptionId("container", RegistryHandler.HEART_AMUlET_CONTAINER.getId()));
     }
 }

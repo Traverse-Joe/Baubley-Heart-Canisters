@@ -4,7 +4,7 @@
   "group": "bhc:blue_heart_patch",
   "key": {
     "H": {
-      "item": "bhc:red_heart"
+      "item": "bhc:blue_heart"
     },
     "S": {
       "tag": "c:strings"

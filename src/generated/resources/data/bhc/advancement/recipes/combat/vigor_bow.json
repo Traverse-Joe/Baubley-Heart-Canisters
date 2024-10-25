@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_heart": {
+    "has_crystal": {
       "conditions": {
         "items": [
           {
-            "items": "bhc:blue_heart"
+            "items": "bhc:soul_heart_crystal"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:blue_heart_melted_from_blasting"
+        "recipe": "bhc:vigor_bow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_heart"
+      "has_crystal"
     ]
   ],
   "rewards": {
     "recipes": [
-      "bhc:blue_heart_melted_from_blasting"
+      "bhc:vigor_bow"
     ]
   }
 }
