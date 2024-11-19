@@ -10,6 +10,7 @@ import com.traverse.bhc.common.util.InventoryUtil;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -31,6 +32,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvider {
@@ -101,6 +103,11 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.BLADE_OF_VITALITY.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
+        if(Screen.hasShiftDown()) {
+            int[] heartCount = new int[]{HealthModifier.getHeartCount(stack)};
+            int heartTotal = IntStream.of(heartCount).sum();
+            tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));
+        }
     }
 
     @Override

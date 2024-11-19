@@ -7,6 +7,7 @@ import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ItemVigorBow extends BowItem implements SoulContainerProvider {
 
@@ -126,5 +128,11 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
         if(HealthModifier.getHeartCount(stack) > 0) {
             tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("bonus")), HealthModifier.getHeartCount(stack)).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         }
+        if(Screen.hasShiftDown()) {
+            int[] heartCount = new int[]{HealthModifier.getHeartCount(stack)};
+            int heartTotal = IntStream.of(heartCount).sum();
+            tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));
+        }
+
     }
 }

@@ -1,10 +1,13 @@
 package com.traverse.bhc.common.items;
 
+import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
+import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
@@ -18,6 +21,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static com.traverse.bhc.common.util.HealthModifier.updatePlayerHealth;
 
@@ -46,6 +50,11 @@ public class ItemSoulHeartAmulet extends BaseItem implements SoulContainerProvid
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.HEART_AMULET.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
+        if(Screen.hasShiftDown()) {
+            int[] heartCount = new int[]{HealthModifier.getHeartCount(stack)};
+            int heartTotal = IntStream.of(heartCount).sum();
+            tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));
+        }
     }
 
     @Override

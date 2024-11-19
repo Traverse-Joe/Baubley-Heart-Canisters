@@ -34,8 +34,8 @@
   "tooltip.bhc.blade_of_vitality": "Sneak + right click to open!",
   "tooltip.bhc.patch_amount": "Heal Amount: %s",
   "tooltip.bhc.patch_durability": "Remaining uses: %s",
+  "tooltip.bhc.heart_amount": "Total Canisters: %s",
   "tooltip.bhc.bonus": "+%s Bonus Damage",
-
   "message.bhc.soul_heart_used": "Soul Heart Has Been Consumed!",
   "curios.identifier.heart_amulet": "Heart Amulet"
 }
