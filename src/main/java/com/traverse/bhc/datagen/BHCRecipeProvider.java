@@ -3,7 +3,6 @@ package com.traverse.bhc.datagen;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.data.BHCItemTags;
 import com.traverse.bhc.common.init.RegistryHandler;
-import com.traverse.bhc.common.recipes.HeartAmuletRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;

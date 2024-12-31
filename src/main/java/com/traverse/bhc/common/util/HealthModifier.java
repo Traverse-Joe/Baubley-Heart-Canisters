@@ -2,7 +2,6 @@ package com.traverse.bhc.common.util;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.init.RegistryHandler;
-import com.traverse.bhc.common.items.ItemHeartAmulet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
