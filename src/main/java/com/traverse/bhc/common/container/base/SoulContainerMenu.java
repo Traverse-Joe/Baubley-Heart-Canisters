@@ -71,7 +71,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         //Hotbar
         for (int idx = 0; idx < 9; ++idx) {
             int x = 8 + idx * 18;
-            int y = 56 + 86;
+            int y = 142;
             if (idx == this.containerSlotId) {
                 addSlot(new LockedSlot(playerInventory, idx, x, y));
                 continue;
@@ -81,11 +81,11 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         }
 
         //Main inventory
-        for (int row = 1; row < this.slotCount; ++row) {
-            for (int col = 0; col < 9; ++col) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 9; col++) {
                 int x = 8 + col * 18;
-                int y = row * 18 + (56 + 10);
-                addSlot(new Slot(playerInventory, col + row * 9, x, y));
+                int y = 84 + row * 18;
+                addSlot(new Slot(playerInventory, col + row * 9 + 9, x, y));
             }
         }
     }
