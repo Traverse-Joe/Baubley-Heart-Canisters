@@ -55,10 +55,9 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
     }
 
     @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity, InteractionHand hand) {
         Level level = entity.level();
         Player player = (Player) entity;
-        InteractionHand hand = player.getUsedItemHand();
         if (entity.isShiftKeyDown()) {
             if (!level.isClientSide()) {
                 this.openMenu(player, hand, VigorBowContainer::new);
@@ -66,7 +65,7 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
             }
 
         }
-        return super.onEntitySwing(stack, entity);
+        return super.onEntitySwing(stack, entity, hand);
     }
 
 
