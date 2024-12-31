@@ -105,7 +105,7 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
-    implementation "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.783"
+    implementation "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
     implementation "curse.maven:jade-324717:${jade_id}"
 
     // Example optional mod dependency with JEI
