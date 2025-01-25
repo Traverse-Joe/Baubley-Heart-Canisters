@@ -78,8 +78,8 @@ configurations {
 
 repositories {
     maven {
-        name = "OctoStudios"
-        url = "https://maven.octo-studios.com/releases"
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
     }
 
     maven {
