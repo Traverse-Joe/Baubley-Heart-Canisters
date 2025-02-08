@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
-import com.traverse.bhc.common.container.HeartAmuletContainer;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
