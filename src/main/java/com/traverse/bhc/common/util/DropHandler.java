@@ -3,16 +3,16 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -85,12 +85,12 @@ public class DropHandler {
                         }
                         break;
                     case "hostile":
-                        if (entity instanceof Monster && entity.canChangeDimensions() && !(entity instanceof Warden)) {
+                        if (entity instanceof Monster && !(isBoss(entity) && !(entity instanceof Warden))) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
                     case "boss":
-                        if (!entity.canChangeDimensions() && !(entity instanceof EnderDragon)) {
+                        if (isBoss(entity) && !(entity instanceof EnderDragon)) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
@@ -110,5 +110,14 @@ public class DropHandler {
         if (random.nextInt(100) < percent) {
             list.add(stack);
         }
+    }
+
+    private static boolean isBoss(Entity entity) {
+        if(entity != null) {
+           if(entity.getType().is(Tags.EntityTypes.BOSSES)) {
+               return true;
+           }
+        }
+        return false;
     }
 }

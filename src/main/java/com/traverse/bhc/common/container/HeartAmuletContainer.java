@@ -78,7 +78,12 @@ public class HeartAmuletContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return true;
+        if(InventoryUtil.hasAmulet(playerIn)) {
+            return true;
+        }
+        else {
+             return false;
+        }
     }
 
     @Override
@@ -142,7 +147,9 @@ public class HeartAmuletContainer extends AbstractContainerMenu {
         public boolean mayPickup(Player playerIn) {
             return false;
         }
+
     }
+
 
     public int getSlotFor(Inventory inventory, ItemStack stack) {
         for (int i = 0; i < inventory.items.size(); ++i) {
