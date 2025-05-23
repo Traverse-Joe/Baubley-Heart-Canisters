@@ -11,7 +11,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,18 +30,17 @@ import static com.traverse.bhc.common.util.HealthModifier.updatePlayerHealth;
 
 public class ItemHeartAmulet extends BaseItem implements SoulContainerProvider, ICurioItem {
 
-    public ItemHeartAmulet() {
-        super(1);
+    public ItemHeartAmulet(Properties properties) {
+        super(properties, 1);
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (!player.isShiftKeyDown()) {
-            var stack = player.getItemInHand(hand);
             if (!level.isClientSide()) {
                 openMenu(player, hand, HeartAmuletContainer::new);
             }
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
 
         return super.use(level, player, hand);

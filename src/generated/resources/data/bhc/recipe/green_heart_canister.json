@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "bhc:green_heart_canister",
   "ingredients": [
-    {
-      "item": "bhc:yellow_heart_canister"
-    },
-    {
-      "item": "bhc:green_heart"
-    },
-    {
-      "tag": "c:nether_stars"
-    },
-    {
-      "item": "minecraft:shulker_shell"
-    }
+    "bhc:yellow_heart_canister",
+    "bhc:green_heart",
+    "#c:nether_stars",
+    "minecraft:shulker_shell"
   ],
   "result": {
     "count": 1,

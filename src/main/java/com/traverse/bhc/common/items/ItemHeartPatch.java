@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -22,8 +22,8 @@ public class ItemHeartPatch extends BaseItem {
     protected final int durabilty;
     protected final int color;
 
-    public ItemHeartPatch(int healAmount, int cooldown, int durabilty, int color) {
-        super();
+    public ItemHeartPatch(Properties properties, int healAmount, int cooldown, int durabilty, int color) {
+        super(properties);
         this.amount = healAmount;
         this.cooldown = cooldown;
         this.durabilty = durabilty;
@@ -41,21 +41,21 @@ public class ItemHeartPatch extends BaseItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack stack = playerIn.getItemInHand(handIn);
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-        playerIn.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), 0.5F, worldIn.getRandom().nextFloat() * 0.4F / 0.4F / +0.8F);
+        player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), 0.5F, level.getRandom().nextFloat() * 0.4F / 0.4F / +0.8F);
 
-        if (!worldIn.isClientSide()) {
-            playerIn.getCooldowns().addCooldown(stack.getItem(), cooldown);
-            playerIn.heal(amount);
+        if (!level.isClientSide()) {
+            player.getCooldowns().addCooldown(stack, cooldown);
+            player.heal(amount);
             stack.setDamageValue(stack.getDamageValue() + 1);
-            if (!playerIn.isCreative() && stack.getDamageValue() >= stack.getMaxDamage()) {
+            if (!player.isCreative() && stack.getDamageValue() >= stack.getMaxDamage()) {
                 stack.shrink(1);
             }
         }
 
-        return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override

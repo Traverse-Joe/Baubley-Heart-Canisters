@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "bhc:blue_heart_canister",
   "ingredients": [
-    {
-      "item": "bhc:green_heart_canister"
-    },
-    {
-      "item": "bhc:blue_heart"
-    },
-    {
-      "tag": "c:storage_blocks/netherite"
-    },
-    {
-      "tag": "c:gems/amethyst"
-    }
+    "bhc:green_heart_canister",
+    "bhc:blue_heart",
+    "#c:storage_blocks/netherite",
+    "#c:gems/amethyst"
   ],
   "result": {
     "count": 1,

@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "bhc:soul_heart_amulet",
   "key": {
-    "#": {
-      "tag": "c:glass_blocks/colorless"
-    },
-    "H": {
-      "tag": "c:hearts"
-    },
-    "S": {
-      "tag": "c:strings"
-    }
+    "#": "#c:glass_blocks/colorless",
+    "H": "#c:hearts",
+    "S": "#c:strings"
   },
   "pattern": [
     "S S",

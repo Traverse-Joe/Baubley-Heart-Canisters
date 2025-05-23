@@ -1,6 +1,0 @@
-{
-  "parent": "bhc:item/vigor_bow",
-  "textures": {
-    "layer0": "bhc:item/vigor_bow_pulling_1"
-  }
-}

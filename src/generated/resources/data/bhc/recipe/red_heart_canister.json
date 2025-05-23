@@ -3,18 +3,10 @@
   "category": "misc",
   "group": "bhc:red_heart_canister",
   "ingredients": [
-    {
-      "item": "bhc:canister"
-    },
-    {
-      "item": "bhc:red_heart"
-    },
-    {
-      "item": "bhc:relic_apple"
-    },
-    {
-      "tag": "c:wither_bones"
-    }
+    "bhc:canister",
+    "bhc:red_heart",
+    "bhc:relic_apple",
+    "#c:wither_bones"
   ],
   "result": {
     "count": 1,

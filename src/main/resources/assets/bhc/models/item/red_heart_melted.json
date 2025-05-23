@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures" : {
-    "layer0" : "bhc:item/red_heart_melted"
-  }
-}

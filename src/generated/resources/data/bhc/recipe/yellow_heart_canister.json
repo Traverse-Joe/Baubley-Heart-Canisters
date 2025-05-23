@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "bhc:yellow_heart_canister",
   "ingredients": [
-    {
-      "item": "bhc:red_heart_canister"
-    },
-    {
-      "item": "bhc:yellow_heart"
-    },
-    {
-      "item": "minecraft:enchanted_golden_apple"
-    }
+    "bhc:red_heart_canister",
+    "bhc:yellow_heart",
+    "minecraft:enchanted_golden_apple"
   ],
   "result": {
     "count": 1,

@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "bhc:relic_apple",
   "key": {
-    "#": {
-      "item": "minecraft:apple"
-    },
-    "D": {
-      "tag": "c:gems/diamond"
-    },
-    "E": {
-      "tag": "c:gems/emerald"
-    }
+    "#": "minecraft:apple",
+    "D": "#c:gems/diamond",
+    "E": "#c:gems/emerald"
   },
   "pattern": [
     " E ",

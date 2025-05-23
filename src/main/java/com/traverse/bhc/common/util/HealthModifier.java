@@ -177,7 +177,9 @@ public class HealthModifier {
             }
         } else {
             player.closeContainer();
-            player.kill();
+            if (player instanceof ServerPlayer serverPlayer) {
+                serverPlayer.kill(serverPlayer.serverLevel());
+            }
         }
     }
 

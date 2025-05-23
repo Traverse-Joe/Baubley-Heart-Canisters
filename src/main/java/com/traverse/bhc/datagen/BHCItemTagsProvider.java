@@ -11,15 +11,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BHCItemTagsProvider extends ItemTagsProvider {
 
-    public BHCItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, blockTagProvider, BaubleyHeartCanisters.MODID, existingFileHelper);
+    public BHCItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider) {
+        super(output, lookupProvider, blockTagProvider, BaubleyHeartCanisters.MODID);
     }
 
     @Override
@@ -30,6 +28,6 @@ public class BHCItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.SWORD_ENCHANTABLE).add(RegistryHandler.BLADE_OF_VITALITY.get());
         tag(ItemTags.BOW_ENCHANTABLE).add(RegistryHandler.VIGOR_BOW.get());
 
-        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CuriosApi.MODID, "heart_amulet"))).addTag(BHCItemTags.HEART_AMULETS);
+        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("curios", "heart_amulet"))).addTag(BHCItemTags.HEART_AMULETS);
     }
 }

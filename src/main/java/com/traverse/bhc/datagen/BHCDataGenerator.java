@@ -6,7 +6,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
@@ -15,14 +14,14 @@ import java.util.concurrent.CompletableFuture;
 public class BHCDataGenerator {
 
     @SubscribeEvent
-    public static void onDataGeneration(GatherDataEvent event) {
+    public static void onDataGeneration(GatherDataEvent.Client event) {
         DataGenerator gen = event.getGenerator();
         PackOutput packOutput = gen.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        var blockTags = gen.addProvider(event.includeServer(), new BHCBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
-        gen.addProvider(event.includeServer(), new BHCItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
-        gen.addProvider(event.includeServer(), new BHCRecipeProvider(packOutput, lookupProvider));
+        var blockTags = gen.addProvider(true, new BHCBlockTagsProvider(packOutput, lookupProvider));
+        gen.addProvider(true, new BHCItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter()));
+        gen.addProvider(true, new BHCRecipeProvider.Runner(packOutput, lookupProvider));
+        gen.addProvider(true, new BHCModelProvider(packOutput));
     }
 }

@@ -3,6 +3,7 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Monster;
@@ -31,21 +32,22 @@ public class DropHandler {
     public static void onEntityDrop(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || entity instanceof Player) return;
-
-        if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
-            if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
-                entity.spawnAtLocation(RegistryHandler.WITHER_BONE.get(), 1);
+        if (entity.level() instanceof ServerLevel serverLevel) {
+            if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
+                if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
+                    entity.spawnAtLocation(serverLevel, RegistryHandler.WITHER_BONE.get(), 1);
+                }
             }
-        }
 
-        if(event.getEntity() instanceof Warden warden) {
-            if(warden.level().random.nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
-                entity.spawnAtLocation(Items.ECHO_SHARD, 1);
+            if(event.getEntity() instanceof Warden warden) {
+                if(warden.level().random.nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
+                    entity.spawnAtLocation(serverLevel, Items.ECHO_SHARD, 1);
+                }
             }
-        }
 
-        for (ItemStack stack : getEntityDrops(entity)) {
-            entity.spawnAtLocation(stack.getItem(), 0);
+            for (ItemStack stack : getEntityDrops(entity)) {
+                entity.spawnAtLocation(serverLevel, stack.getItem(), 0);
+            }
         }
     }
 

@@ -20,7 +20,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -34,17 +33,12 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
     public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("vigor_bow");
     private static final double EXTRA_DAMAGE_PER_HEART = 1.0F;
 
-    public ItemVigorBow() {
-        super(new Item.Properties());
+    public ItemVigorBow(Properties properties) {
+        super(properties);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return true;
-    }
-
-    @Override
-    public boolean isEnchantable(ItemStack stack) {
         return true;
     }
 
@@ -67,20 +61,19 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
         return super.onEntitySwing(stack, entity, hand);
     }
 
-
-
     @Override
-    public boolean isRepairable(ItemStack stack) {
+    public boolean isCombineRepairable(ItemStack stack) {
         return false;
     }
 
+
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
         if (entity instanceof Player player) {
             ItemStack itemstack = player.getProjectile(stack);
             int i = (int) ((this.getUseDuration(stack, entity) - timeLeft) * (Math.max(HealthModifier.getHeartCount(stack)/2, 1)));
             i = EventHooks.onArrowLoose(stack, level, player, i, !itemstack.isEmpty());
-            if (i < 0) return;
+            if (i < 0) return false;
 
             float f = getPowerForTime(i);
             if (!((double) f < 0.1)) {
@@ -100,8 +93,10 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
                         1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F
                 );
                 player.awardStat(Stats.ITEM_USED.get(this));
+                return true;
             }
         }
+        return false;
     }
 
     @Override

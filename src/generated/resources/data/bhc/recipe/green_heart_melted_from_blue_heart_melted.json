@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "bhc:green_heart_melted",
   "ingredients": [
-    {
-      "item": "bhc:blue_heart_melted"
-    }
+    "bhc:blue_heart_melted"
   ],
   "result": {
     "count": 9,

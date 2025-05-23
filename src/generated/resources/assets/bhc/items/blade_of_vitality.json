@@ -1,0 +1,42 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "component": "minecraft:custom_name",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "bhc:item/blade_of_vitality"
+    },
+    "on_true": {
+      "type": "minecraft:select",
+      "cases": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "bhc:item/lash_blade"
+          },
+          "when": "beautiful eyes"
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "bhc:item/traverse_blade"
+          },
+          "when": "traverse"
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "bhc:item/jamiscus_blade"
+          },
+          "when": "jamiscus"
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "bhc:item/blade_of_vitality"
+      },
+      "property": "bhc:custom_name"
+    },
+    "property": "minecraft:has_component"
+  }
+}

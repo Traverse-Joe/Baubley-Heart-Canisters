@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "bhc:soul_heart_amulet",
   "ingredients": [
-    {
-      "item": "bhc:heart_amulet"
-    },
-    {
-      "item": "bhc:soul_heart_crystal"
-    }
+    "bhc:heart_amulet",
+    "bhc:soul_heart_crystal"
   ],
   "result": {
     "count": 1,

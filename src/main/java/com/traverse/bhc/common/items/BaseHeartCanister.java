@@ -7,8 +7,8 @@ public class BaseHeartCanister extends BaseItem {
 
     private final HeartType type;
 
-    public BaseHeartCanister(HeartType type) {
-        super(ConfigHandler.general.heartStackSize.get());
+    public BaseHeartCanister(Properties properties, HeartType type) {
+        super(properties, ConfigHandler.general.heartStackSize.get());
         this.type = type;
     }
 

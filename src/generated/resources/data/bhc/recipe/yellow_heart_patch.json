@@ -3,15 +3,9 @@
   "category": "equipment",
   "group": "bhc:yellow_heart_patch",
   "key": {
-    "H": {
-      "item": "bhc:yellow_heart"
-    },
-    "S": {
-      "tag": "c:strings"
-    },
-    "W": {
-      "tag": "minecraft:wool"
-    }
+    "H": "bhc:yellow_heart",
+    "S": "#c:strings",
+    "W": "#minecraft:wool"
   },
   "pattern": [
     " W ",

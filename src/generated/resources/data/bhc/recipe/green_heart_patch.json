@@ -3,15 +3,9 @@
   "category": "equipment",
   "group": "bhc:green_heart_patch",
   "key": {
-    "H": {
-      "item": "bhc:green_heart"
-    },
-    "S": {
-      "tag": "c:strings"
-    },
-    "W": {
-      "tag": "minecraft:wool"
-    }
+    "H": "bhc:green_heart",
+    "S": "#c:strings",
+    "W": "#minecraft:wool"
   },
   "pattern": [
     " W ",

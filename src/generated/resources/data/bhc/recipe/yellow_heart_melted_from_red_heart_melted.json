@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "bhc:yellow_heart_melted",
   "key": {
-    "#": {
-      "item": "bhc:red_heart_melted"
-    }
+    "#": "bhc:red_heart_melted"
   },
   "pattern": [
     "###",

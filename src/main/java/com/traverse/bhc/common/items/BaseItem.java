@@ -5,15 +5,15 @@ import net.minecraft.world.item.Item;
 
 public class BaseItem extends Item {
 
-    public BaseItem() {
-        super(new Item.Properties());
+    public BaseItem(Properties properties) {
+        super(properties);
     }
 
-    public BaseItem(int maxCount) {
-        super(new Item.Properties().stacksTo(maxCount));
+    public BaseItem(Properties properties, int maxCount) {
+        super(properties.stacksTo(maxCount));
     }
 
-    public BaseItem(int hunger, float saturation) {
-        super(new Item.Properties().food(new FoodProperties.Builder().saturationModifier(saturation).alwaysEdible().nutrition(hunger).build()));
+    public BaseItem(Properties properties, int hunger, float saturation) {
+        super(properties.food(new FoodProperties.Builder().saturationModifier(saturation).alwaysEdible().nutrition(hunger).build()));
     }
 }

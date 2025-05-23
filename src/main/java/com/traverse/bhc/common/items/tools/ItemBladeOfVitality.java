@@ -16,12 +16,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.Unbreakable;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
@@ -40,25 +43,26 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
     public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("blade_of_vitality");
 
     // TODO: make an actual Tier for Blade of Vitality Easier to Customize
-    public ItemBladeOfVitality() {
-        super(Tiers.NETHERITE, new Item.Properties().attributes(createAttributes(Tiers.NETHERITE, 3, -2.4F)).component(DataComponents.UNBREAKABLE, new Unbreakable(false)));
+    public ItemBladeOfVitality(Properties properties) {
+        super(ToolMaterial.NETHERITE, 3, -2.4F,
+                properties.component(DataComponents.UNBREAKABLE, new Unbreakable(false)));
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide()) {
                 this.openMenu(player, hand, BladeOfVitalityContainer::new);
             }
 
-            return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
 
         return super.use(level, player, hand);
     }
 
     @Override
-    public boolean isRepairable(ItemStack stack) {
+    public boolean isCombineRepairable(ItemStack stack) {
         return false;
     }
 

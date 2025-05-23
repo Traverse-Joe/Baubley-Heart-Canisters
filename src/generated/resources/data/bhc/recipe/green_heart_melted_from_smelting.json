@@ -4,9 +4,7 @@
   "cookingtime": 300,
   "experience": 0.7,
   "group": "bhc:green_heart_melted",
-  "ingredient": {
-    "item": "bhc:green_heart"
-  },
+  "ingredient": "bhc:green_heart",
   "result": {
     "count": 1,
     "id": "bhc:green_heart_melted"

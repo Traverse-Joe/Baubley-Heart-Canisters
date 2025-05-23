@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": {
-      "item": "bhc:soul_heart_amulet"
-    },
-    "C": {
-      "item": "bhc:soul_heart_crystal"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "A": "bhc:soul_heart_amulet",
+    "C": "bhc:soul_heart_crystal",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     "C",

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "enchanted_golden_apple",
   "key": {
-    "#": {
-      "tag": "c:storage_blocks/gold"
-    },
-    "A": {
-      "item": "minecraft:apple"
-    }
+    "#": "#c:storage_blocks/gold",
+    "A": "minecraft:apple"
   },
   "pattern": [
     "###",

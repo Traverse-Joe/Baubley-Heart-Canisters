@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "bhc:red_heart",
   "key": {
-    "#": {
-      "item": "bhc:red_heart_melted"
-    },
-    "H": {
-      "tag": "c:hearts"
-    }
+    "#": "bhc:red_heart_melted",
+    "H": "#c:hearts"
   },
   "pattern": [
     "###",
