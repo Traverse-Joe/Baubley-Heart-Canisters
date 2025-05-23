@@ -3,7 +3,6 @@
   "addition": "minecraft:totem_of_undying",
   "base": "bhc:blue_heart_canister",
   "result": {
-    "count": 1,
     "id": "bhc:soul_heart_canister"
   },
   "template": "#c:hearts"

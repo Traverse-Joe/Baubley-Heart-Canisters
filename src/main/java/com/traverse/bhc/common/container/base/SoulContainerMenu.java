@@ -48,7 +48,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
     public static int getSlotIdForHand(Player player, InteractionHand hand) {
         int slotId;
         if (hand == InteractionHand.MAIN_HAND) {
-            slotId = player.getInventory().selected;
+            slotId = player.getInventory().getSelectedSlot();
             if (!Inventory.isHotbarSlot(slotId)) {
                 LOGGER.error("Unable to find main hand slot for player {}", player.getGameProfile().getName());
             }

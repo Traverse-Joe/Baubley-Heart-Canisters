@@ -20,9 +20,9 @@ public class ItemRelicApple extends BaseItem {
         Consumable consumable = stack.get(DataComponents.CONSUMABLE);
         if (!level.isClientSide() && consumable != null) {
             consumable.onConsume(level, entityLiving, stack);
-            entityLiving.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 60, 1));
-            entityLiving.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 60, 1));
-            entityLiving.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 60, 1));
+            entityLiving.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 60, 1));
+            entityLiving.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 20 * 60, 1));
+            entityLiving.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 20 * 60, 1));
             entityLiving.heal(20);
         }
 

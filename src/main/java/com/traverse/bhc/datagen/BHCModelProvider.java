@@ -39,7 +39,7 @@ public class BHCModelProvider extends ModelProvider {
 	}
 
 	private void generateBladeOfVitality(ItemModelGenerators itemModels) {
-		ItemBladeOfVitality bladeOfVitality = RegistryHandler.BLADE_OF_VITALITY.get();
+		Item bladeOfVitality = RegistryHandler.BLADE_OF_VITALITY.asItem();
 		ItemModel.Unbaked base = ItemModelUtils.plainModel(itemModels.createFlatItemModel(bladeOfVitality, "", ModelTemplates.FLAT_HANDHELD_ITEM));
 		ItemModel.Unbaked lashBlade = ItemModelUtils.plainModel(createFlatItemModel(itemModels, "lash_blade", ModelTemplates.FLAT_HANDHELD_ITEM));
 		ItemModel.Unbaked traverseBlade = ItemModelUtils.plainModel(createFlatItemModel(itemModels, "traverse_blade", ModelTemplates.FLAT_HANDHELD_ITEM));

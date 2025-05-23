@@ -1,5 +1,6 @@
 package com.traverse.bhc.client.easter;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.PrimitiveCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -19,6 +20,11 @@ public record CustomNameProperty() implements SelectItemModelProperty<String> {
 	@Override
 	public String get(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed, @NotNull ItemDisplayContext displayContext) {
 		return stack.has(DataComponents.CUSTOM_NAME) ? stack.get(DataComponents.CUSTOM_NAME).getString() : "";
+	}
+
+	@Override
+	public Codec<String> valueCodec() {
+		return PrimitiveCodec.STRING;
 	}
 
 	@Override

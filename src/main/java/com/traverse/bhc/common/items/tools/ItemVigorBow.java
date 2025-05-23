@@ -22,10 +22,12 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 public class ItemVigorBow extends BowItem implements SoulContainerProvider {
@@ -44,7 +46,7 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
 
     @Override
     public AbstractArrow customArrow(AbstractArrow arrow, ItemStack projectileStack, ItemStack weaponStack) {
-        arrow.setBaseDamage(arrow.getBaseDamage() + (HealthModifier.getHeartCount(weaponStack)/2));
+        arrow.setBaseDamage(arrow.baseDamage + (HealthModifier.getHeartCount(weaponStack)/2));
         return arrow;
     }
 
@@ -115,16 +117,16 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.VIGOR_BOW.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
+        tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.VIGOR_BOW.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
         if(HealthModifier.getHeartCount(stack) > 0) {
-            tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("bonus")), HealthModifier.getHeartCount(stack)).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+            tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("bonus")), HealthModifier.getHeartCount(stack)).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         }
         if(Screen.hasShiftDown()) {
             int[] heartCount = new int[]{HealthModifier.getHeartCount(stack)};
             int heartTotal = IntStream.of(heartCount).sum();
-            tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));
+            tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));
         }
 
     }
