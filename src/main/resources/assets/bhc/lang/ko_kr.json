@@ -26,11 +26,11 @@
   "item.bhc.soul_heart_amulet" : "영혼 목걸이",
   "container.bhc.heart_amulet" : "하트 목걸이",
   "container.bhc.soul_heart_amulet" : "영혼 목걸이",
-  "tooltip.bhc.heartamulet": "오른쪽 클릭하여 열기!",
-  "tooltip.bhc.vitality_blade": "Shift+오른쪽 클릭하여 열기!",
+  "tooltip.bhc.heart_amulet": "오른쪽 클릭하여 열기!",
+  "tooltip.bhc.blade_of_vitality": "Shift+오른쪽 클릭하여 열기!",
   "tooltip.bhc.patch_amount": "치유량: %s",
   "tooltip.bhc.patch_durability": "남은 사용량: %s",
   "container.bhc.blade_of_vitality": "활력의 검",
-  "soulheartused.bhc.message": "영혼 하트가 소모되었습니다!",
-  "curios.identifier.heartamulet": "하트 목걸이"
+  "message.bhc.soul_heart_used": "영혼 하트가 소모되었습니다!",
+  "curios.identifier.heart_amulet": "하트 목걸이"
 }
