@@ -26,11 +26,11 @@
     "item.bhc.soul_heart_amulet" : "Amulette d’âme",
     "container.bhc.heart_amulet" : "Amulette de coeur",
     "container.bhc.soul_heart_amulet" : "Amulette d’âme",
-    "tooltip.bhc.heartamulet": "Faites un clic droit pour ouvrir !",
-    "tooltip.bhc.vitality_blade": "Maj-clic droit pour ouvrir !",
+    "tooltip.bhc.heart_amulet": "Faites un clic droit pour ouvrir !",
+    "tooltip.bhc.blade_of_vitality": "Maj-clic droit pour ouvrir !",
     "tooltip.bhc.patch_amount": "Soins : %s",
     "tooltip.bhc.patch_durability": "Utilisations restantes : %s",
     "container.bhc.blade_of_vitality": "Epéée de vitalité",
-    "soulheartused.bhc.message": "Le coeur de l’âme a été consommé !",
-    "curios.identifier.heartamulet": "Amulette de coeur"
+    "message.bhc.soul_heart_used": "Le coeur de l’âme a été consommé !",
+    "curios.identifier.heart_amulet": "Amulette de coeur"
   }
