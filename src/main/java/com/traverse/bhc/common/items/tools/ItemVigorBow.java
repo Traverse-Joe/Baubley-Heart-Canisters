@@ -40,11 +40,6 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return true;
-    }
-
-    @Override
     public AbstractArrow customArrow(AbstractArrow arrow, ItemStack projectileStack, ItemStack weaponStack) {
         arrow.setBaseDamage(arrow.baseDamage + (HealthModifier.getHeartCount(weaponStack)/2));
         return arrow;
