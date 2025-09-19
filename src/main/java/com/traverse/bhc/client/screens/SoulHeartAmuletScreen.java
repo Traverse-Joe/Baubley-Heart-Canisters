@@ -1,7 +1,6 @@
 package com.traverse.bhc.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
 import net.minecraft.client.gui.GuiGraphics;

@@ -1,7 +1,6 @@
 package com.traverse.bhc.common.items;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
-import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HeartType;

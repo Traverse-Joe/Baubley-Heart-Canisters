@@ -1,6 +1,5 @@
 package com.traverse.bhc.common.items;
 
-import com.traverse.bhc.common.BaubleyHeartCanisters;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 
