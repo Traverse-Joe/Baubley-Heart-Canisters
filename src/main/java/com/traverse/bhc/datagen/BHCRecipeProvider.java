@@ -9,6 +9,8 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.SmithingRecipe;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -50,6 +52,12 @@ public class BHCRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, RegistryHandler.GREEN_HEART_PATCH.get()).define('W', ItemTags.WOOL).define('S', Tags.Items.STRINGS).define('H', RegistryHandler.GREEN_HEART.get()).pattern(" W ").pattern("SHS").pattern(" W ").unlockedBy("has_heart", has(RegistryHandler.GREEN_HEART.get())).group(RegistryHandler.GREEN_HEART_PATCH.getId().toString()).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, RegistryHandler.BLUE_HEART_PATCH.get()).define('W', ItemTags.WOOL).define('S', Tags.Items.STRINGS).define('H', RegistryHandler.BLUE_HEART.get()).pattern(" W ").pattern("SHS").pattern(" W ").unlockedBy("has_heart", has(RegistryHandler.BLUE_HEART.get())).group(RegistryHandler.BLUE_HEART_PATCH.getId().toString()).save(recipeOutput);
 
+        // heartpulse belts
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, RegistryHandler.RED_HEARTPULSE_BELT.get()).define('L', Tags.Items.LEATHERS).define('S', Tags.Items.STRINGS).define('R', RegistryHandler.RED_CANISTER.get()).pattern("LLL").pattern("SRS").pattern("LLL").unlockedBy("has_heart", has(RegistryHandler.RED_HEART.get())).group(RegistryHandler.RED_HEARTPULSE_BELT.getId().toString()).save(recipeOutput);
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(RegistryHandler.RED_HEARTPULSE_BELT.get()), Ingredient.of(RegistryHandler.RED_CANISTER.get()), Ingredient.of(RegistryHandler.YELLOW_CANISTER.get()),RecipeCategory.COMBAT, RegistryHandler.YELLOW_HEARTPULSE_BELT.get()).unlocks("has_heart", has(BHCItemTags.HEARTS)).save(recipeOutput, BaubleyHeartCanisters.id(getItemName(RegistryHandler.YELLOW_HEARTPULSE_BELT.get()) + "_smithing"));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(RegistryHandler.YELLOW_HEARTPULSE_BELT.get()), Ingredient.of(RegistryHandler.YELLOW_CANISTER.get()), Ingredient.of(RegistryHandler.GREEN_CANISTER.get()),RecipeCategory.COMBAT, RegistryHandler.GREEN_HEARTPULSE_BELT.get()).unlocks("has_heart", has(BHCItemTags.HEARTS)).save(recipeOutput, BaubleyHeartCanisters.id(getItemName(RegistryHandler.GREEN_HEARTPULSE_BELT.get()) + "_smithing"));
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(RegistryHandler.GREEN_HEARTPULSE_BELT.get()), Ingredient.of(RegistryHandler.GREEN_CANISTER.get()), Ingredient.of(RegistryHandler.BLUE_CANISTER.get()),RecipeCategory.COMBAT, RegistryHandler.BLUE_HEARTPULSE_BELT.get()).unlocks("has_heart", has(BHCItemTags.HEARTS)).save(recipeOutput, BaubleyHeartCanisters.id(getItemName(RegistryHandler.BLUE_HEARTPULSE_BELT.get()) + "_smithing"));
+
         // canister
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, RegistryHandler.CANISTER.get()).define('#', Tags.Items.BONES).define('I', Tags.Items.INGOTS_IRON).pattern(" I ").pattern("I#I").pattern(" I ").unlockedBy("has_bone", has(Tags.Items.BONES)).group(RegistryHandler.CANISTER.getId().toString()).save(recipeOutput);
 
@@ -74,6 +82,10 @@ public class BHCRecipeProvider extends RecipeProvider {
         // relic apple
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, RegistryHandler.RELIC_APPLE.get()).define('D', Tags.Items.GEMS_DIAMOND).define('E', Tags.Items.GEMS_EMERALD).define('#', Items.APPLE).pattern(" D ").pattern("E#E").pattern(" D ").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_emerald", has(Tags.Items.GEMS_EMERALD)).group(RegistryHandler.RELIC_APPLE.getId().toString()).save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, RegistryHandler.RELIC_APPLE.get()).define('D', Tags.Items.GEMS_DIAMOND).define('E', Tags.Items.GEMS_EMERALD).define('#', Items.APPLE).pattern(" E ").pattern("D#D").pattern(" E ").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_emerald", has(Tags.Items.GEMS_EMERALD)).group(RegistryHandler.RELIC_APPLE.getId().toString()).save(recipeOutput, RecipeBuilder.getDefaultRecipeId(RegistryHandler.RELIC_APPLE.get()).withSuffix("_rotated"));
+
+        //Wither Bones
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, RegistryHandler.WITHER_BONE.get(),6).requires(Tags.Items.BONES).requires(Tags.Items.BONES).requires(Tags.Items.BONES).requires(Items.WITHER_SKELETON_SKULL).unlockedBy("has_heart", has(RegistryHandler.RED_HEART.get())).group(BaubleyHeartCanisters.id("wither_bone").toString()).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BONE_MEAL, 6).requires(RegistryHandler.WITHER_BONE.get()).unlockedBy("has_wither_bone", has(RegistryHandler.WITHER_BONE.get())).group(BaubleyHeartCanisters.id("wither_bone_to_bonemeal").toString()).save(recipeOutput);;
 
         // vanilla enchanted golden apple
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Items.ENCHANTED_GOLDEN_APPLE).define('#', Tags.Items.STORAGE_BLOCKS_GOLD).define('A', Items.APPLE).pattern("###").pattern("#A#").pattern("###").unlockedBy("has_gold_block", has(Tags.Items.STORAGE_BLOCKS_GOLD)).group("enchanted_golden_apple").save(recipeOutput, BaubleyHeartCanisters.id("enchanted_golden_apple"));

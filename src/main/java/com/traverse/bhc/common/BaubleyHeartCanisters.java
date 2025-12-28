@@ -66,7 +66,7 @@ public class BaubleyHeartCanisters {
 
         config = new BHCConfig();
         try (var writer = Files.newBufferedWriter(configFile)) {
-            config.addEntrytoMap("red", "hostile", 0.05);
+            config.addEntrytoMap("red", "hostile", 0.15);
             config.addEntrytoMap("yellow", "boss", 1.0);
             config.addEntrytoMap("green", "dragon", 1.0);
             config.addEntrytoMap("blue", "minecraft:warden", 1.0);

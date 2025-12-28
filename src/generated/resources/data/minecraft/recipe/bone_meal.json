@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bhc:wither_bone_to_bonemeal",
+  "ingredients": [
+    {
+      "item": "bhc:wither_bone"
+    }
+  ],
+  "result": {
+    "count": 6,
+    "id": "minecraft:bone_meal"
+  }
+}

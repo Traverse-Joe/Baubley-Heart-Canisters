@@ -23,7 +23,7 @@ public class ItemHeartPatch extends BaseItem {
     protected final int color;
 
     public ItemHeartPatch(int healAmount, int cooldown, int durabilty, int color) {
-        super();
+        super(1);
         this.amount = healAmount;
         this.cooldown = cooldown;
         this.durabilty = durabilty;
