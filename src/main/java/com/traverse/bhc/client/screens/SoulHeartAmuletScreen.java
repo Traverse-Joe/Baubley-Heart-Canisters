@@ -8,11 +8,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-
-@OnlyIn(Dist.CLIENT)
 public class SoulHeartAmuletScreen extends AbstractContainerScreen<SoulHeartAmuletContainer> {
     private static final ResourceLocation BACKGROUND_TEXTURE = BaubleyHeartCanisters.id("textures/gui/soul_heart_amulet.png");
 

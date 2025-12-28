@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "bhc:red_heartpulse_belt",
+  "key": {
+    "L": {
+      "tag": "c:leathers"
+    },
+    "R": {
+      "item": "bhc:red_heart_canister"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "SRS",
+    "LLL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "bhc:red_heartpulse_belt"
+  }
+}

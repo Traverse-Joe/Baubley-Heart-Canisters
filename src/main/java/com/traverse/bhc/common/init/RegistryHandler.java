@@ -47,10 +47,15 @@ public class RegistryHandler {
     public static final DeferredItem<BaseItem> GREEN_HEART_MELTED = ITEMS.registerItem("green_heart_melted", BaseItem::new);
     public static final DeferredItem<BaseItem> BLUE_HEART_MELTED = ITEMS.registerItem("blue_heart_melted", BaseItem::new);
 
-    public static final DeferredItem<ItemHeartPatch> RED_HEART_PATCH = ITEMS.registerItem("red_heart_patch", (properties) -> new ItemHeartPatch(properties, 2, 5 * 20, 20, Color.red.getRGB()));
-    public static final DeferredItem<ItemHeartPatch> YELLOW_HEART_PATCH = ITEMS.registerItem("yellow_heart_patch", (properties) -> new ItemHeartPatch(properties, 6, 10 * 20, 25, Color.yellow.getRGB()));
-    public static final DeferredItem<ItemHeartPatch> GREEN_HEART_PATCH = ITEMS.registerItem("green_heart_patch", (properties) -> new ItemHeartPatch(properties, 10, 20 * 20, 30, Color.green.getRGB()));
-    public static final DeferredItem<ItemHeartPatch> BLUE_HEART_PATCH = ITEMS.registerItem("blue_heart_patch", (properties) -> new ItemHeartPatch(properties, 20, 30 * 20, 50, Color.blue.getRGB()));
+    public static final DeferredItem<ItemHeartPatch> RED_HEART_PATCH = ITEMS.registerItem("red_heart_patch", (properties) -> new ItemHeartPatch(properties, 2,  20, 20, Color.red.getRGB()));
+    public static final DeferredItem<ItemHeartPatch> YELLOW_HEART_PATCH = ITEMS.registerItem("yellow_heart_patch", (properties) -> new ItemHeartPatch(properties, 6, 3* 20, 25, Color.yellow.getRGB()));
+    public static final DeferredItem<ItemHeartPatch> GREEN_HEART_PATCH = ITEMS.registerItem("green_heart_patch", (properties) -> new ItemHeartPatch(properties, 10, 5 * 20, 30, Color.green.getRGB()));
+    public static final DeferredItem<ItemHeartPatch> BLUE_HEART_PATCH = ITEMS.registerItem("blue_heart_patch", (properties) -> new ItemHeartPatch(properties, 20, 8 * 20, 50, Color.blue.getRGB()));
+
+    public static final DeferredItem<ItemHeartPulseBelt> RED_HEARTPULSE_BELT = ITEMS.registerItem("red_heartpulse_belt", (properties) -> new ItemHeartPulseBelt(properties, HeartType.RED));
+    public static final DeferredItem<ItemHeartPulseBelt> YELLOW_HEARTPULSE_BELT = ITEMS.registerItem("yellow_heartpulse_belt", (properties) -> new ItemHeartPulseBelt(properties, HeartType.YELLOW));
+    public static final DeferredItem<ItemHeartPulseBelt> GREEN_HEARTPULSE_BELT = ITEMS.registerItem("green_heartpulse_belt", (properties) -> new ItemHeartPulseBelt(properties, HeartType.GREEN));
+    public static final DeferredItem<ItemHeartPulseBelt> BLUE_HEARTPULSE_BELT = ITEMS.registerItem("blue_heartpulse_belt", (properties) -> new ItemHeartPulseBelt(properties, HeartType.BLUE));
 
     public static final DeferredItem<ItemHeart> RED_HEART = ITEMS.registerItem("red_heart", (properties) -> new ItemHeart(properties, HeartType.RED));
     public static final DeferredItem<ItemHeart> YELLOW_HEART = ITEMS.registerItem("yellow_heart", (properties) -> new ItemHeart(properties, HeartType.YELLOW));

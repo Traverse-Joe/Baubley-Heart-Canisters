@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bhc:wither_bone",
+  "ingredients": [
+    {
+      "tag": "c:bones"
+    },
+    {
+      "tag": "c:bones"
+    },
+    {
+      "tag": "c:bones"
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  ],
+  "result": {
+    "count": 6,
+    "id": "bhc:wither_bone"
+  }
+}

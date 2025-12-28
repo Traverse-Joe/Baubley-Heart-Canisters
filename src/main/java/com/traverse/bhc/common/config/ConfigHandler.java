@@ -17,7 +17,7 @@ public class ConfigHandler {
                     .define("heartStackSize", 10);
             boneDropRate = builder
                     .comment("How often do wither bones Drop? (1.0 = 100 % and 0.0 means 0%)")
-                    .define("boneDropRate", 0.15);
+                    .define("boneDropRate", 0.18);
             echoShardDropRate = builder
                     .comment("How often do echo shards drop from Warden? (1.0 = 100 % and 0.0 means 0%)")
                     .define("echoShardDropRate", 0.5);

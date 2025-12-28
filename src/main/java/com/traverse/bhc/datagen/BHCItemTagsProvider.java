@@ -10,7 +10,9 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -28,6 +30,24 @@ public class BHCItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.SWORD_ENCHANTABLE).add(RegistryHandler.BLADE_OF_VITALITY.get());
         tag(ItemTags.BOW_ENCHANTABLE).add(RegistryHandler.VIGOR_BOW.get());
 
-        tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("curios", "heart_amulet"))).addTag(BHCItemTags.HEART_AMULETS);
+        // Create heart_belts tag and add belt items
+        tag(BHCItemTags.HEART_BELTS).add(
+                RegistryHandler.RED_HEARTPULSE_BELT.get(),
+                RegistryHandler.YELLOW_HEARTPULSE_BELT.get(),
+                RegistryHandler.GREEN_HEARTPULSE_BELT.get(),
+                RegistryHandler.BLUE_HEARTPULSE_BELT.get()
+        );
+
+        // Add items directly to Curios tags
+        TagKey<Item> curiosHeartAmuletTag = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CuriosApi.MODID, "heart_amulet"));
+        TagKey<Item> curiosBeltTag = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CuriosApi.MODID, "belt"));
+        
+        tag(curiosHeartAmuletTag).addTag(BHCItemTags.HEART_AMULETS);
+        tag(curiosBeltTag).add(
+                RegistryHandler.RED_HEARTPULSE_BELT.get(),
+                RegistryHandler.YELLOW_HEARTPULSE_BELT.get(),
+                RegistryHandler.GREEN_HEARTPULSE_BELT.get(),
+                RegistryHandler.BLUE_HEARTPULSE_BELT.get()
+        );
     }
 }

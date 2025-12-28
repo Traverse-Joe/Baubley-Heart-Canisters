@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "bhc:blue_heart_canister"
+  },
+  "base": {
+    "item": "bhc:green_heart_canister"
+  },
+  "result": {
+    "count": 1,
+    "id": "bhc:blue_heartpulse_belt"
+  },
+  "template": {
+    "item": "bhc:green_heartpulse_belt"
+  }
+}

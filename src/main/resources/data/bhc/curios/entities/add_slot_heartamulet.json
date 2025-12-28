@@ -1,4 +1,4 @@
 {
   "entities": ["player"],
-  "slots": ["heart_amulet"]
+  "slots": ["heart_amulet","belt"]
 }
