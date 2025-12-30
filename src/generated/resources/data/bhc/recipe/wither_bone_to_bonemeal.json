@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "bhc:wither_bone_to_bonemeal",
   "ingredients": [
-    {
-      "item": "bhc:wither_bone"
-    }
+    "bhc:wither_bone"
   ],
   "result": {
     "count": 6,

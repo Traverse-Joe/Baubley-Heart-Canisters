@@ -98,7 +98,7 @@ public class BHCRecipeProvider extends RecipeProvider {
 
         //Wither Bones
         shapeless(RecipeCategory.MISC, RegistryHandler.WITHER_BONE.get(),6).requires(Tags.Items.BONES).requires(Tags.Items.BONES).requires(Tags.Items.BONES).requires(Items.WITHER_SKELETON_SKULL).unlockedBy("has_heart", has(RegistryHandler.RED_HEART.get())).group(BaubleyHeartCanisters.id("wither_bone").toString()).save(output);
-        shapeless(RecipeCategory.MISC, Items.BONE_MEAL, 6).requires(RegistryHandler.WITHER_BONE.get()).unlockedBy("has_wither_bone", has(RegistryHandler.WITHER_BONE.get())).group(BaubleyHeartCanisters.id("wither_bone_to_bonemeal").toString()).save(output);;
+        shapeless(RecipeCategory.MISC, Items.BONE_MEAL, 6).requires(RegistryHandler.WITHER_BONE.get()).unlockedBy("has_wither_bone", has(RegistryHandler.WITHER_BONE.get())).group(BaubleyHeartCanisters.id("wither_bone_to_bonemeal").toString()).save(output, BaubleyHeartCanisters.id("wither_bone_to_bonemeal").toString());
 
         // vanilla enchanted golden apple
         shaped(RecipeCategory.FOOD, Items.ENCHANTED_GOLDEN_APPLE).define('#', Tags.Items.STORAGE_BLOCKS_GOLD).define('A', Items.APPLE).pattern("###").pattern("#A#").pattern("###").unlockedBy("has_gold_block", has(Tags.Items.STORAGE_BLOCKS_GOLD)).group("enchanted_golden_apple").save(output, BaubleyHeartCanisters.id("enchanted_golden_apple").toString());
