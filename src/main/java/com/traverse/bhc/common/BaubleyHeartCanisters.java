@@ -6,12 +6,15 @@ import com.traverse.bhc.common.config.BHCConfig;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import net.minecraft.resources.Identifier;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +30,7 @@ public class BaubleyHeartCanisters {
 
     public static BHCConfig config;
 
-    public BaubleyHeartCanisters(IEventBus modEventBus, ModContainer modContainer) {
+    public BaubleyHeartCanisters(IEventBus modEventBus, ModContainer modContainer, Dist dist) {
         RegistryHandler.ITEMS.register(modEventBus);
         RegistryHandler.TAB.register(modEventBus);
         RegistryHandler.CONTAINERS.register(modEventBus);
@@ -37,6 +40,10 @@ public class BaubleyHeartCanisters {
         modContainer.registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 
        modEventBus.addListener(this::setup);
+
+        if (dist.isClient()) {
+            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        }
     }
 
     private void setup(final FMLCommonSetupEvent event) {

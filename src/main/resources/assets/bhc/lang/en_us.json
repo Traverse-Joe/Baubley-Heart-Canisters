@@ -47,5 +47,13 @@
   "entity.bhc.hostile_mobs": "Hostile Mobs",
   "entity.bhc.boss_mobs": "Boss Mobs",
   "message.bhc.soul_heart_used": "Soul Heart Has Been Consumed!",
-  "curios.identifier.heart_amulet": "Heart Amulet"
+  "curios.identifier.heart_amulet": "Heart Amulet",
+  "bhc.configuration.General": "General",
+  "bhc.configuration.startingHealth": "Starting Health",
+  "bhc.configuration.soulHeartReturnChance": "Soul Heart Return Chance",
+  "bhc.configuration.Server": "Server",
+  "bhc.configuration.echoShardDropRate": "Echo Shard Drop Rate",
+  "bhc.configuration.heartStackSize": "Heart Stack Size",
+  "bhc.configuration.boneDropRate": "Bone Drop Rate",
+  "bhc.configuration.allowStartingHealthTweaks": "Allow Starting Health Tweaks"
 }
