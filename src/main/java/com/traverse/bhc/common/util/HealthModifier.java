@@ -2,7 +2,7 @@ package com.traverse.bhc.common.util;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 //@Mod.EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class HealthModifier {
 
-    public static final ResourceLocation HEALTH_MODIFIER_ID = BaubleyHeartCanisters.id("extra_health");
+    public static final Identifier HEALTH_MODIFIER_ID = BaubleyHeartCanisters.id("extra_health");
 
     /*
     public static void onEquipCurio(CurioEquipEvent event) {
@@ -178,7 +178,7 @@ public class HealthModifier {
         } else {
             player.closeContainer();
             if (player instanceof ServerPlayer serverPlayer) {
-                serverPlayer.kill(serverPlayer.serverLevel());
+                serverPlayer.kill(serverPlayer.level());
             }
         }
     }

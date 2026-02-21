@@ -9,14 +9,13 @@ import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.InventoryUtil;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Unit;
+import net.minecraft.util.Util;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -36,12 +35,12 @@ import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
-@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class ItemBladeOfVitality extends BaseItem implements SoulContainerProvider {
 
     private static final double EXTRA_DAMAGE_PER_HEART = 1.0F;
 
-    public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("blade_of_vitality");
+    public static final Identifier DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("blade_of_vitality");
 
     // TODO: make an actual Tier for Blade of Vitality Easier to Customize
     public ItemBladeOfVitality(Properties properties) {
@@ -106,7 +105,7 @@ public class ItemBladeOfVitality extends BaseItem implements SoulContainerProvid
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
         tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.BLADE_OF_VITALITY.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
-        if(Screen.hasShiftDown()) {
+        if(tooltipFlag.hasShiftDown()) {
             int[] heartCount = new int[]{HealthModifier.getHeartCount(stack)};
             int heartTotal = IntStream.of(heartCount).sum();
             tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));
@@ -127,8 +126,8 @@ public class ItemBladeOfVitality extends BaseItem implements SoulContainerProvid
         var inv = InventoryUtil.createVirtualInventory(BladeOfVitalityContainer.SLOT_COUNT, stack);
 
         int total = 0;
-        for (int i = 0; i < inv.getSlots(); i++) {
-            var invStack = inv.getStackInSlot(i);
+        for (int i = 0; i < inv.size(); i++) {
+            var invStack = inv.getResource(i);
             total += !invStack.isEmpty() ? invStack.getMaxStackSize() : ConfigHandler.general.heartStackSize.get();
         }
 

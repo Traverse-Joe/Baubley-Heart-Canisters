@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -79,7 +79,7 @@ public class ItemHeart extends BaseItem {
         Map<String, Double> entries = config.getHeartTypeEntries(heartTypeKey);
         if (entries == null || entries.isEmpty()) return;
 
-        if (Screen.hasShiftDown()) {
+        if (flag.hasShiftDown()) {
             // Show detailed drop information when Shift is held
             tooltipAdder.accept(Component.empty());
             tooltipAdder.accept(Component.translatable("tooltip.bhc.heart_drops").withStyle(ChatFormatting.GOLD));
@@ -117,7 +117,7 @@ public class ItemHeart extends BaseItem {
             default -> {
                 // Try to get entity type name from registry, fallback to formatted key
                 try {
-                    ResourceLocation entityId = ResourceLocation.parse(entityKey);
+                    Identifier entityId = Identifier.parse(entityKey);
                     var entityRegistry = context.registries().lookup(Registries.ENTITY_TYPE);
                     if (entityRegistry.isPresent()) {
                         ResourceKey<EntityType<?>> entityTypeKey = ResourceKey.create(Registries.ENTITY_TYPE, entityId);

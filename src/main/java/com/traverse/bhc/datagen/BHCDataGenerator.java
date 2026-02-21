@@ -10,7 +10,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class BHCDataGenerator {
 
     @SubscribeEvent
@@ -19,8 +19,8 @@ public class BHCDataGenerator {
         PackOutput packOutput = gen.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        var blockTags = gen.addProvider(true, new BHCBlockTagsProvider(packOutput, lookupProvider));
-        gen.addProvider(true, new BHCItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter()));
+        gen.addProvider(true, new BHCBlockTagsProvider(packOutput, lookupProvider));
+        gen.addProvider(true, new BHCItemTagsProvider(packOutput, lookupProvider));
         gen.addProvider(true, new BHCRecipeProvider.Runner(packOutput, lookupProvider));
         gen.addProvider(true, new BHCModelProvider(packOutput));
     }

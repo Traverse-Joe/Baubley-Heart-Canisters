@@ -3,7 +3,7 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.items.ItemHeartPulseBelt;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -19,9 +19,9 @@ import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class HeartPulseHandler {
-    public static final ResourceLocation MOVEMENT_SPEED_MODIFIER_ID = BaubleyHeartCanisters.id("heartpulse_movement_speed");
-    public static final ResourceLocation STEP_HEIGHT_MODIFIER_ID = BaubleyHeartCanisters.id("heartpulse_step_height");
-    public static final ResourceLocation JUMP_STRENGTH_MODIFIER_ID = BaubleyHeartCanisters.id("heartpulse_jump_strength");
+    public static final Identifier MOVEMENT_SPEED_MODIFIER_ID = BaubleyHeartCanisters.id("heartpulse_movement_speed");
+    public static final Identifier STEP_HEIGHT_MODIFIER_ID = BaubleyHeartCanisters.id("heartpulse_step_height");
+    public static final Identifier JUMP_STRENGTH_MODIFIER_ID = BaubleyHeartCanisters.id("heartpulse_jump_strength");
 
     private static final double BASE_MOVEMENT_SPEED_BONUS = 0.12; // 5% movement speed increase per multiplier
     private static final double STEP_HEIGHT_ADDITION = 0.4; // Adds 0.4 to base 0.6 = 1.0 block step height

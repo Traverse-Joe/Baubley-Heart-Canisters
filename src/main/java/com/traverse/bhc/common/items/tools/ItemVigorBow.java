@@ -6,19 +6,19 @@ import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Util;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -32,7 +32,7 @@ import java.util.stream.IntStream;
 
 public class ItemVigorBow extends BowItem implements SoulContainerProvider {
 
-    public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("vigor_bow");
+    public static final Identifier DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("vigor_bow");
     private static final double EXTRA_DAMAGE_PER_HEART = 1.0F;
 
     public ItemVigorBow(Properties properties) {
@@ -118,7 +118,7 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
         if(HealthModifier.getHeartCount(stack) > 0) {
             tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("bonus")), HealthModifier.getHeartCount(stack)).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         }
-        if(Screen.hasShiftDown()) {
+        if(tooltipFlag.hasShiftDown()) {
             int[] heartCount = new int[]{HealthModifier.getHeartCount(stack)};
             int heartTotal = IntStream.of(heartCount).sum();
             tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));

@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -31,22 +31,22 @@ public class DropHandler {
     @SubscribeEvent
     public static void onEntityDrop(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity.level().isClientSide || entity instanceof Player) return;
+        if (entity.level().isClientSide() || entity instanceof Player) return;
         if (entity.level() instanceof ServerLevel serverLevel) {
             if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
                 if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
-                    entity.spawnAtLocation(serverLevel, RegistryHandler.WITHER_BONE.get(), 1);
+                    entity.spawnAtLocation(serverLevel, RegistryHandler.WITHER_BONE.toStack(), 1);
                 }
             }
 
             if(event.getEntity() instanceof Warden warden) {
                 if(warden.level().random.nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
-                    entity.spawnAtLocation(serverLevel, Items.ECHO_SHARD, 1);
+                    entity.spawnAtLocation(serverLevel, Items.ECHO_SHARD.getDefaultInstance(), 1);
                 }
             }
 
             for (ItemStack stack : getEntityDrops(entity)) {
-                entity.spawnAtLocation(serverLevel, stack.getItem(), 0);
+                entity.spawnAtLocation(serverLevel, stack, 0);
             }
         }
     }

@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 import java.util.List;
 
@@ -47,12 +48,14 @@ public class HeartAmuletRecipe extends ShapelessRecipe {
         }
 
         // expand the virtual inventory
-        var oldInv = InventoryUtil.createVirtualInventory(4, oldCanister);
-        var newInv = InventoryUtil.createVirtualInventory(5, stack);
-        for (int i = 0; i < oldInv.getSlots(); i++) {
-            newInv.setStackInSlot(i, oldInv.getStackInSlot(i));
+        try (var tx = Transaction.openRoot()) {
+            var oldInv = InventoryUtil.createVirtualInventory(4, oldCanister);
+            var newInv = InventoryUtil.createVirtualInventory(5, stack);
+            for (int i = 0; i < oldInv.size(); i++) {
+                newInv.insert(i, oldInv.getResource(i), oldInv.getAmountAsInt(i), tx);
+            }
+            tx.commit();
         }
-
         return stack;
     }
 

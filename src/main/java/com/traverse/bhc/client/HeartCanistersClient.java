@@ -7,14 +7,14 @@ import com.traverse.bhc.client.screens.SoulHeartAmuletScreen;
 import com.traverse.bhc.client.screens.VigorBowScreen;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 
-@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, value = Dist.CLIENT)
 public class HeartCanistersClient {
 
     @SubscribeEvent
@@ -27,6 +27,6 @@ public class HeartCanistersClient {
 
     @SubscribeEvent
     public static void registerItemProperty(RegisterSelectItemModelPropertyEvent event) {
-        event.register(ResourceLocation.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "custom_name"), CustomNameProperty.TYPE);
+        event.register(Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "custom_name"), CustomNameProperty.TYPE);
     }
 }

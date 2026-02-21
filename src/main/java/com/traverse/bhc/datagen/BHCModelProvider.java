@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -61,10 +61,10 @@ public class BHCModelProvider extends ModelProvider {
 				);
 	}
 
-	public ResourceLocation createFlatItemModel(ItemModelGenerators itemModels, String name, ModelTemplate modelTemplate) {
+	public Identifier createFlatItemModel(ItemModelGenerators itemModels, String name, ModelTemplate modelTemplate) {
 		return modelTemplate.create(
-				ResourceLocation.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "item/" + name),
-				TextureMapping.layer0(ResourceLocation.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "item/" + name)),
+				Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "item/" + name),
+				TextureMapping.layer0(Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "item/" + name)),
 				itemModels.modelOutput
 		);
 	}

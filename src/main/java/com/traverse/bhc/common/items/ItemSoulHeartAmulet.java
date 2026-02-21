@@ -6,10 +6,10 @@ import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.util.Util;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -52,7 +52,7 @@ public class ItemSoulHeartAmulet extends BaseItem implements SoulContainerProvid
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag);
         tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", RegistryHandler.HEART_AMULET.getId())).setStyle(Style.EMPTY.applyFormat(ChatFormatting.GOLD)));
-        if(Screen.hasShiftDown()) {
+        if(tooltipFlag.hasShiftDown()) {
             int[] heartCount = new int[]{HealthModifier.getHeartCount(stack)};
             int heartTotal = IntStream.of(heartCount).sum();
             tooltipComponents.accept(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("heart_amount")), heartTotal).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_RED)));

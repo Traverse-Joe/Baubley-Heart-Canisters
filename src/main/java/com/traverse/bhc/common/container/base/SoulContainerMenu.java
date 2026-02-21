@@ -12,8 +12,10 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ComponentItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerCopySlot;
+import net.neoforged.neoforge.transfer.IndexModifier;
+import net.neoforged.neoforge.transfer.item.ItemAccessItemHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SoulContainerMenu.class);
     protected final int containerSlotId;
-    protected final ComponentItemHandler itemStackHandler;
+    protected final InventoryUtil.VirtualInventory itemStackHandler;
     protected final Inventory playerInventory;
     protected final int slotCount;
 
@@ -40,7 +42,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         this.slotCount = slotCount;
 
         if (!stack.is(getContainerItem())) {
-            LOGGER.error("Item in slot {} of player {} was not of expected type, closing menu!", containerSlotId, playerInventory.player.getGameProfile().getName());
+            LOGGER.error("Item in slot {} of player {} was not of expected type, closing menu!", containerSlotId, playerInventory.player.getGameProfile().name());
             playerInventory.player.closeContainer();
         }
     }
@@ -50,7 +52,7 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         if (hand == InteractionHand.MAIN_HAND) {
             slotId = player.getInventory().getSelectedSlot();
             if (!Inventory.isHotbarSlot(slotId)) {
-                LOGGER.error("Unable to find main hand slot for player {}", player.getGameProfile().getName());
+                LOGGER.error("Unable to find main hand slot for player {}", player.getGameProfile().name());
             }
         } else {
             slotId = Inventory.SLOT_OFFHAND;
@@ -97,11 +99,11 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         if (slot.hasItem()) {
             ItemStack slotStack = slot.getItem();
             stack = slotStack.copy();
-            if (index < this.itemStackHandler.getSlots()) {
-                if (!this.moveItemStackTo(slotStack, this.itemStackHandler.getSlots(), this.slots.size(), true)) {
+            if (index < this.itemStackHandler.size()) {
+                if (!this.moveItemStackTo(slotStack, this.itemStackHandler.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(slotStack, 0, this.itemStackHandler.getSlots(), false)) {
+            } else if (!this.moveItemStackTo(slotStack, 0, this.itemStackHandler.size(), false)) {
                 return ItemStack.EMPTY;
             }
             if (slotStack.isEmpty()) {
@@ -131,12 +133,12 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
         }
     }
 
-    public static class SlotPendant extends ItemHandlerCopySlot {
+    public static class SlotPendant extends ResourceHandlerSlot {
 
         private final int slotIndex;
 
-        public SlotPendant(ComponentItemHandler itemHandler, int slotIndex, int xPosition, int yPosition) {
-            super(itemHandler, slotIndex, xPosition, yPosition);
+        public SlotPendant(InventoryUtil.VirtualInventory itemHandler, int slotIndex, int xPosition, int yPosition) {
+            super(itemHandler, itemHandler.indexModifier(), slotIndex, xPosition, yPosition);
             this.slotIndex = slotIndex;
         }
 
