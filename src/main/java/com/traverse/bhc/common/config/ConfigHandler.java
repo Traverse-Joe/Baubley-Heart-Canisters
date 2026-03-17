@@ -10,6 +10,18 @@ public class ConfigHandler {
         public final ForgeConfigSpec.ConfigValue<Double> echoShardDropRate;
         public final ForgeConfigSpec.ConfigValue<Double> soulHeartReturnChance;
 
+        // Heart Patch - Heal Amounts
+        public final ForgeConfigSpec.ConfigValue<Integer> redPatchHealAmount;
+        public final ForgeConfigSpec.ConfigValue<Integer> yellowPatchHealAmount;
+        public final ForgeConfigSpec.ConfigValue<Integer> greenPatchHealAmount;
+        public final ForgeConfigSpec.ConfigValue<Integer> bluePatchHealAmount;
+
+        // Heart Patch - Cooldowns (in seconds)
+        public final ForgeConfigSpec.ConfigValue<Integer> redPatchCooldown;
+        public final ForgeConfigSpec.ConfigValue<Integer> yellowPatchCooldown;
+        public final ForgeConfigSpec.ConfigValue<Integer> greenPatchCooldown;
+        public final ForgeConfigSpec.ConfigValue<Integer> bluePatchCooldown;
+
         General(ForgeConfigSpec.Builder builder) {
             builder.push("General");
             heartStackSize = builder
@@ -24,6 +36,36 @@ public class ConfigHandler {
             soulHeartReturnChance = builder
                     .comment("Chance for the Soul Heart to return a Blue Heart Canister after being broken")
                     .define("soulHeartReturnChance", 1.0);
+            builder.pop();
+
+            builder.push("Heart Patches");
+            builder.comment("Heal amounts are in half-hearts (e.g. 2 = 1 full heart)");
+            redPatchHealAmount = builder
+                    .comment("Amount of health restored by the Red Heart Patch")
+                    .define("redPatchHealAmount", 2);
+            yellowPatchHealAmount = builder
+                    .comment("Amount of health restored by the Yellow Heart Patch")
+                    .define("yellowPatchHealAmount", 6);
+            greenPatchHealAmount = builder
+                    .comment("Amount of health restored by the Green Heart Patch")
+                    .define("greenPatchHealAmount", 10);
+            bluePatchHealAmount = builder
+                    .comment("Amount of health restored by the Blue Heart Patch")
+                    .define("bluePatchHealAmount", 20);
+
+            builder.comment("Cooldowns are in seconds");
+            redPatchCooldown = builder
+                    .comment("Cooldown in seconds for the Red Heart Patch")
+                    .define("redPatchCooldown", 5);
+            yellowPatchCooldown = builder
+                    .comment("Cooldown in seconds for the Yellow Heart Patch")
+                    .define("yellowPatchCooldown", 10);
+            greenPatchCooldown = builder
+                    .comment("Cooldown in seconds for the Green Heart Patch")
+                    .define("greenPatchCooldown", 20);
+            bluePatchCooldown = builder
+                    .comment("Cooldown in seconds for the Blue Heart Patch")
+                    .define("bluePatchCooldown", 30);
             builder.pop();
         }
     }
