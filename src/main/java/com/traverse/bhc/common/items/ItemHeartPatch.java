@@ -14,18 +14,19 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ItemHeartPatch extends BaseItem {
 
-    protected final int amount;
-    protected final int cooldown;
+    protected final Supplier<Integer> amountSupplier;
+    protected final Supplier<Integer> cooldownSupplier;
     protected final int durabilty;
     protected final int color;
 
-    public ItemHeartPatch(int healAmount, int cooldown, int durabilty, int color) {
+    public ItemHeartPatch(Supplier<Integer> healAmount, Supplier<Integer> cooldownSeconds, int durabilty, int color) {
         super(1);
-        this.amount = healAmount;
-        this.cooldown = cooldown;
+        this.amountSupplier = healAmount;
+        this.cooldownSupplier = cooldownSeconds;
         this.durabilty = durabilty;
         this.color = color;
     }
@@ -47,8 +48,8 @@ public class ItemHeartPatch extends BaseItem {
         playerIn.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), 0.5F, worldIn.getRandom().nextFloat() * 0.4F / 0.4F / +0.8F);
 
         if (!worldIn.isClientSide()) {
-            playerIn.getCooldowns().addCooldown(stack.getItem(), cooldown);
-            playerIn.heal(amount);
+            playerIn.getCooldowns().addCooldown(stack.getItem(), cooldownSupplier.get() * 20);
+            playerIn.heal(amountSupplier.get());
             stack.setDamageValue(stack.getDamageValue() + 1);
             if (!playerIn.isCreative() && stack.getDamageValue() >= stack.getMaxDamage()) {
                 stack.shrink(1);
@@ -69,12 +70,10 @@ public class ItemHeartPatch extends BaseItem {
         return color;
     }
 
-
-
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("patch_amount")), amount).setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
+        tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("patch_amount")), amountSupplier.get()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
         tooltipComponents.add(Component.translatable(Util.makeDescriptionId("tooltip", BaubleyHeartCanisters.id("patch_durability")), durabilty - stack.getDamageValue()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
     }
 }

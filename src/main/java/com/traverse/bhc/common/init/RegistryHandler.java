@@ -6,6 +6,7 @@ import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
 import com.traverse.bhc.common.container.VigorBowContainer;
 import com.traverse.bhc.common.container.base.SoulContainerMenu;
+import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.items.*;
 import com.traverse.bhc.common.items.tools.ItemBladeOfVitality;
 import com.traverse.bhc.common.items.tools.ItemVigorBow;
@@ -47,10 +48,10 @@ public class RegistryHandler {
     public static final DeferredHolder<Item, BaseItem> GREEN_HEART_MELTED = ITEMS.register("green_heart_melted", () -> new BaseItem());
     public static final DeferredHolder<Item, BaseItem> BLUE_HEART_MELTED = ITEMS.register("blue_heart_melted", () -> new BaseItem());
 
-    public static final DeferredHolder<Item, ItemHeartPatch> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(2,  20, 20, Color.red.getRGB()));
-    public static final DeferredHolder<Item, ItemHeartPatch> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(6, 3* 20, 25, Color.yellow.getRGB()));
-    public static final DeferredHolder<Item, ItemHeartPatch> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(10, 5 * 20, 30, Color.green.getRGB()));
-    public static final DeferredHolder<Item, ItemHeartPatch> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(20, 8 * 20, 50, Color.blue.getRGB()));
+    public static final DeferredHolder<Item, ItemHeartPatch> RED_HEART_PATCH = ITEMS.register("red_heart_patch", () -> new ItemHeartPatch(ConfigHandler.general.redPatchHealAmount::get, ConfigHandler.general.redPatchCooldown::get, 20, Color.red.getRGB()));
+    public static final DeferredHolder<Item, ItemHeartPatch> YELLOW_HEART_PATCH = ITEMS.register("yellow_heart_patch", () -> new ItemHeartPatch(ConfigHandler.general.yellowPatchHealAmount::get, ConfigHandler.general.yellowPatchCooldown::get, 25, Color.yellow.getRGB()));
+    public static final DeferredHolder<Item, ItemHeartPatch> GREEN_HEART_PATCH = ITEMS.register("green_heart_patch", () -> new ItemHeartPatch(ConfigHandler.general.greenPatchHealAmount::get, ConfigHandler.general.greenPatchCooldown::get, 30, Color.green.getRGB()));
+    public static final DeferredHolder<Item, ItemHeartPatch> BLUE_HEART_PATCH = ITEMS.register("blue_heart_patch", () -> new ItemHeartPatch(ConfigHandler.general.bluePatchHealAmount::get, ConfigHandler.general.bluePatchCooldown::get, 50, Color.blue.getRGB()));
 
     public static final DeferredHolder<Item, ItemHeartPulseBelt> RED_HEARTPULSE_BELT = ITEMS.register("red_heartpulse_belt", () -> new ItemHeartPulseBelt(HeartType.RED));
     public static final DeferredHolder<Item, ItemHeartPulseBelt> YELLOW_HEARTPULSE_BELT = ITEMS.register("yellow_heartpulse_belt", () -> new ItemHeartPulseBelt(HeartType.YELLOW));
