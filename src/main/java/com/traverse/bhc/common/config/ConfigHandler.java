@@ -5,67 +5,67 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class ConfigHandler {
 
     public static class General {
-        public final ModConfigSpec.ConfigValue<Integer> heartStackSize;
-        public final ModConfigSpec.ConfigValue<Double> boneDropRate;
-        public final ModConfigSpec.ConfigValue<Double> echoShardDropRate;
-        public final ModConfigSpec.ConfigValue<Double> soulHeartReturnChance;
+        public final ModConfigSpec.IntValue heartStackSize;
+        public final ModConfigSpec.DoubleValue boneDropRate;
+        public final ModConfigSpec.DoubleValue echoShardDropRate;
+        public final ModConfigSpec.DoubleValue soulHeartReturnChance;
 
         // Heart Patch - Heal Amounts
-        public final ModConfigSpec.ConfigValue<Integer> redPatchHealAmount;
-        public final ModConfigSpec.ConfigValue<Integer> yellowPatchHealAmount;
-        public final ModConfigSpec.ConfigValue<Integer> greenPatchHealAmount;
-        public final ModConfigSpec.ConfigValue<Integer> bluePatchHealAmount;
+        public final ModConfigSpec.IntValue redPatchHealAmount;
+        public final ModConfigSpec.IntValue yellowPatchHealAmount;
+        public final ModConfigSpec.IntValue greenPatchHealAmount;
+        public final ModConfigSpec.IntValue bluePatchHealAmount;
 
         // Heart Patch - Cooldowns (in seconds)
-        public final ModConfigSpec.ConfigValue<Integer> redPatchCooldown;
-        public final ModConfigSpec.ConfigValue<Integer> yellowPatchCooldown;
-        public final ModConfigSpec.ConfigValue<Integer> greenPatchCooldown;
-        public final ModConfigSpec.ConfigValue<Integer> bluePatchCooldown;
+        public final ModConfigSpec.IntValue redPatchCooldown;
+        public final ModConfigSpec.IntValue yellowPatchCooldown;
+        public final ModConfigSpec.IntValue greenPatchCooldown;
+        public final ModConfigSpec.IntValue bluePatchCooldown;
 
         General(ModConfigSpec.Builder builder) {
             builder.push("General");
             heartStackSize = builder
                     .comment("The maximum stacksize for heart canisters, also the maximum amount of full hearts you can get per heart container type")
-                    .define("heartStackSize", 10);
+                    .defineInRange("heartStackSize", 10, 0, Integer.MAX_VALUE);
             boneDropRate = builder
                     .comment("How often do wither bones Drop? (1.0 = 100 % and 0.0 means 0%)")
-                    .define("boneDropRate", 0.18);
+                    .defineInRange("boneDropRate", 0.18, 0, 1);
             echoShardDropRate = builder
                     .comment("How often do echo shards drop from Warden? (1.0 = 100 % and 0.0 means 0%)")
-                    .define("echoShardDropRate", 0.5);
+                    .defineInRange("echoShardDropRate", 0.5, 0, 1);
             soulHeartReturnChance = builder
                     .comment("Chance for the Soul Heart to return a Blue Heart Canister after being broken")
-                    .define("soulHeartReturnChance", 1.0);
+                    .defineInRange("soulHeartReturnChance", 1.0, 0, 1);
             builder.pop();
 
             builder.push("Heart Patches");
             builder.comment("Heal amounts are in half-hearts (e.g. 2 = 1 full heart)");
             redPatchHealAmount = builder
                     .comment("Amount of health restored by the Red Heart Patch")
-                    .define("redPatchHealAmount", 2);
+                    .defineInRange("redPatchHealAmount", 2, 0, Integer.MAX_VALUE);
             yellowPatchHealAmount = builder
                     .comment("Amount of health restored by the Yellow Heart Patch")
-                    .define("yellowPatchHealAmount", 6);
+                    .defineInRange("yellowPatchHealAmount", 6, 0, Integer.MAX_VALUE);
             greenPatchHealAmount = builder
                     .comment("Amount of health restored by the Green Heart Patch")
-                    .define("greenPatchHealAmount", 10);
+                    .defineInRange("greenPatchHealAmount", 10, 0, Integer.MAX_VALUE);
             bluePatchHealAmount = builder
                     .comment("Amount of health restored by the Blue Heart Patch")
-                    .define("bluePatchHealAmount", 20);
+                    .defineInRange("bluePatchHealAmount", 20, 0, Integer.MAX_VALUE);
 
             builder.comment("Cooldowns are in seconds");
             redPatchCooldown = builder
                     .comment("Cooldown in seconds for the Red Heart Patch")
-                    .define("redPatchCooldown", 5);
+                    .defineInRange("redPatchCooldown", 5, 0, Integer.MAX_VALUE);
             yellowPatchCooldown = builder
                     .comment("Cooldown in seconds for the Yellow Heart Patch")
-                    .define("yellowPatchCooldown", 10);
+                    .defineInRange("yellowPatchCooldown", 10, 0, Integer.MAX_VALUE);
             greenPatchCooldown = builder
                     .comment("Cooldown in seconds for the Green Heart Patch")
-                    .define("greenPatchCooldown", 20);
+                    .defineInRange("greenPatchCooldown", 20, 0, Integer.MAX_VALUE);
             bluePatchCooldown = builder
                     .comment("Cooldown in seconds for the Blue Heart Patch")
-                    .define("bluePatchCooldown", 30);
+                    .defineInRange("bluePatchCooldown", 30, 0, Integer.MAX_VALUE);
             builder.pop();
         }
     }
