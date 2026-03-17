@@ -26,7 +26,7 @@ public class ConfigHandler {
             builder.push("General");
             heartStackSize = builder
                     .comment("The maximum stacksize for heart canisters, also the maximum amount of full hearts you can get per heart container type")
-                    .defineInRange("heartStackSize", 10, 0, Integer.MAX_VALUE);
+                    .defineInRange("heartStackSize", 10, 0, 99);
             boneDropRate = builder
                     .comment("How often do wither bones Drop? (1.0 = 100 % and 0.0 means 0%)")
                     .defineInRange("boneDropRate", 0.18, 0, 1);
