@@ -40,10 +40,9 @@ public class BaubleyHeartCanisters {
         modContainer.registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 
        modEventBus.addListener(this::setup);
-
-        if (dist.isClient()) {
-            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-        }
+       if (dist.isClient()) {
+           modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+       }
     }
 
     private void setup(final FMLCommonSetupEvent event) {
