@@ -34,13 +34,13 @@ public class DropHandler {
         if (entity.level().isClientSide() || entity instanceof Player) return;
         if (entity.level() instanceof ServerLevel serverLevel) {
             if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
-                if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
+                if (entity.level().getRandom().nextDouble() < ConfigHandler.general.boneDropRate.get()) {
                     entity.spawnAtLocation(serverLevel, RegistryHandler.WITHER_BONE.toStack(), 1);
                 }
             }
 
             if(event.getEntity() instanceof Warden warden) {
-                if(warden.level().random.nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
+                if(warden.level().getRandom().nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
                     entity.spawnAtLocation(serverLevel, Items.ECHO_SHARD.getDefaultInstance(), 1);
                 }
             }
@@ -88,12 +88,12 @@ public class DropHandler {
                         }
                         break;
                     case "hostile":
-                        if (entity instanceof Monster && !(entity.getType().is(Tags.EntityTypes.BOSSES) && !(entity instanceof Warden))) {
+                        if (entity instanceof Monster && !(entity.is(Tags.EntityTypes.BOSSES) && !(entity instanceof Warden))) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;
                     case "boss":
-                        if (entity.getType().is(Tags.EntityTypes.BOSSES) && !(entity instanceof EnderDragon)) {
+                        if (entity.is(Tags.EntityTypes.BOSSES) && !(entity instanceof EnderDragon)) {
                             addWithPercent(items, stack, entry.getValue());
                         }
                         break;

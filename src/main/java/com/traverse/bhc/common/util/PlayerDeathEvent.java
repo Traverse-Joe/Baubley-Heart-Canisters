@@ -41,7 +41,7 @@ public class PlayerDeathEvent {
                         if (!resource.isEmpty()) {
                             if (soulInventory.extract(4, resource, 1, tx) != 1) return;
                             tx.commit();;
-                            player.displayClientMessage(Component.translatable(Util.makeDescriptionId("message", BaubleyHeartCanisters.id("soul_heart_used"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
+                            player.sendOverlayMessage(Component.translatable(Util.makeDescriptionId("message", BaubleyHeartCanisters.id("soul_heart_used"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)));
                             player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
                             //15% chance
                             if (player.getRandom().nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {

@@ -1,16 +1,23 @@
 package com.traverse.bhc.common.init;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
+import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.container.HeartAmuletContainer;
 import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
 import com.traverse.bhc.common.container.VigorBowContainer;
 import com.traverse.bhc.common.container.base.SoulContainerMenu;
-import com.traverse.bhc.common.config.ConfigHandler;
-import com.traverse.bhc.common.items.*;
+import com.traverse.bhc.common.items.BaseHeartCanister;
+import com.traverse.bhc.common.items.BaseItem;
+import com.traverse.bhc.common.items.ItemHeart;
+import com.traverse.bhc.common.items.ItemHeartAmulet;
+import com.traverse.bhc.common.items.ItemHeartPatch;
+import com.traverse.bhc.common.items.ItemHeartPulseBelt;
+import com.traverse.bhc.common.items.ItemRelicApple;
+import com.traverse.bhc.common.items.ItemSoulHeartAmulet;
 import com.traverse.bhc.common.items.tools.ItemBladeOfVitality;
 import com.traverse.bhc.common.items.tools.ItemVigorBow;
-import com.traverse.bhc.common.recipes.HeartAmuletRecipe.Serializer;
+import com.traverse.bhc.common.recipes.HeartAmuletRecipe;
 import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -79,7 +86,7 @@ public class RegistryHandler {
     public static final DeferredHolder<MenuType<?>, MenuType<VigorBowContainer>> VIGOR_BOW_CONTAINER = CONTAINERS.register("vigor_bow", () -> IMenuTypeExtension.create((windowId, inv, data) -> new VigorBowContainer(windowId, inv, SoulContainerMenu.readSlotId(data))));
 
     //Recipe Serializer
-    public static final DeferredHolder<RecipeSerializer<?>, Serializer> HEART_AMULET_RECIPE_SERIALIZER = RECIPESERIALIZER.register("amulet_shapeless", Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<HeartAmuletRecipe>> HEART_AMULET_RECIPE_SERIALIZER = RECIPESERIALIZER.register("amulet_shapeless", () -> HeartAmuletRecipe.SERIALIZER);
 
     //Creative Mod Tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> BHC_TAB = TAB.register("bhc_tab", () -> CreativeModeTab.builder().icon(() -> new ItemStack(RegistryHandler.HEART_AMULET.get())).displayItems((params, output) -> RegistryHandler.ITEMS.getEntries().forEach(item -> output.accept(item.get()))).title(Component.translatable("itemGroup.bhcTab")).build());

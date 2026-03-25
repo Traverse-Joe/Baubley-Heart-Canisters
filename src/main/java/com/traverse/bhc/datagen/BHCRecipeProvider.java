@@ -17,10 +17,10 @@ import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.SmithingRecipe;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -49,10 +49,10 @@ public class BHCRecipeProvider extends RecipeProvider {
         shapeless(RecipeCategory.MISC, RegistryHandler.BLUE_CANISTER.get()).requires(RegistryHandler.GREEN_CANISTER.get()).requires(RegistryHandler.BLUE_HEART.get()).requires(Tags.Items.STORAGE_BLOCKS_NETHERITE).requires(Tags.Items.GEMS_AMETHYST).unlockedBy("has_heart", has(RegistryHandler.BLUE_HEART.get())).group(BaubleyHeartCanisters.id("blue_heart_canister").toString()).save(output);
 
         // melted hearts from blast furnace
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.RED_HEART.get()), RecipeCategory.MISC, RegistryHandler.RED_HEART_MELTED.get(), 0.1F, 100).unlockedBy("has_heart", has(RegistryHandler.RED_HEART.get())).group(RegistryHandler.RED_HEART_MELTED.getId().toString()).save(output, RegistryHandler.RED_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.YELLOW_HEART.get()), RecipeCategory.MISC, RegistryHandler.YELLOW_HEART_MELTED.get(), 0.3F, 200).unlockedBy("has_heart", has(RegistryHandler.YELLOW_HEART.get())).group(RegistryHandler.YELLOW_HEART_MELTED.getId().toString()).save(output, RegistryHandler.YELLOW_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.GREEN_HEART.get()), RecipeCategory.MISC, RegistryHandler.GREEN_HEART_MELTED.get(), 0.7F, 300).unlockedBy("has_heart", has(RegistryHandler.GREEN_HEART.get())).group(RegistryHandler.GREEN_HEART_MELTED.getId().toString()).save(output, RegistryHandler.GREEN_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.BLUE_HEART.get()), RecipeCategory.MISC, RegistryHandler.BLUE_HEART_MELTED.get(), 1.0F, 400).unlockedBy("has_heart", has(RegistryHandler.BLUE_HEART.get())).group(RegistryHandler.BLUE_HEART_MELTED.getId().toString()).save(output, RegistryHandler.BLUE_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.RED_HEART.get()), RecipeCategory.MISC, CookingBookCategory.MISC, RegistryHandler.RED_HEART_MELTED.get(), 0.1F, 100).unlockedBy("has_heart", has(RegistryHandler.RED_HEART.get())).group(RegistryHandler.RED_HEART_MELTED.getId().toString()).save(output, RegistryHandler.RED_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.YELLOW_HEART.get()), RecipeCategory.MISC, CookingBookCategory.MISC, RegistryHandler.YELLOW_HEART_MELTED.get(), 0.3F, 200).unlockedBy("has_heart", has(RegistryHandler.YELLOW_HEART.get())).group(RegistryHandler.YELLOW_HEART_MELTED.getId().toString()).save(output, RegistryHandler.YELLOW_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.GREEN_HEART.get()), RecipeCategory.MISC, CookingBookCategory.MISC, RegistryHandler.GREEN_HEART_MELTED.get(), 0.7F, 300).unlockedBy("has_heart", has(RegistryHandler.GREEN_HEART.get())).group(RegistryHandler.GREEN_HEART_MELTED.getId().toString()).save(output, RegistryHandler.GREEN_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryHandler.BLUE_HEART.get()), RecipeCategory.MISC, CookingBookCategory.MISC, RegistryHandler.BLUE_HEART_MELTED.get(), 1.0F, 400).unlockedBy("has_heart", has(RegistryHandler.BLUE_HEART.get())).group(RegistryHandler.BLUE_HEART_MELTED.getId().toString()).save(output, RegistryHandler.BLUE_HEART_MELTED.getId().withSuffix("_from_smelting").toString());
 
         // melted hearts conversion
         nineBlockStorageRecipes(RecipeCategory.MISC, RegistryHandler.RED_HEART_MELTED.get(), RecipeCategory.MISC, RegistryHandler.YELLOW_HEART_MELTED.get(), BaubleyHeartCanisters.id(getConversionRecipeName(RegistryHandler.YELLOW_HEART_MELTED.get(), RegistryHandler.RED_HEART_MELTED.get())).toString(), RegistryHandler.YELLOW_HEART_MELTED.getId().toString(), BaubleyHeartCanisters.id(getConversionRecipeName(RegistryHandler.RED_HEART_MELTED.get(), RegistryHandler.YELLOW_HEART_MELTED.get())).toString(), RegistryHandler.RED_HEART_MELTED.getId().toString());
@@ -94,7 +94,7 @@ public class BHCRecipeProvider extends RecipeProvider {
 
         // relic apple
         shaped(RecipeCategory.FOOD, RegistryHandler.RELIC_APPLE.get()).define('D', Tags.Items.GEMS_DIAMOND).define('E', Tags.Items.GEMS_EMERALD).define('#', Items.APPLE).pattern(" D ").pattern("E#E").pattern(" D ").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_emerald", has(Tags.Items.GEMS_EMERALD)).group(RegistryHandler.RELIC_APPLE.getId().toString()).save(output);
-        shaped(RecipeCategory.FOOD, RegistryHandler.RELIC_APPLE.get()).define('D', Tags.Items.GEMS_DIAMOND).define('E', Tags.Items.GEMS_EMERALD).define('#', Items.APPLE).pattern(" E ").pattern("D#D").pattern(" E ").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_emerald", has(Tags.Items.GEMS_EMERALD)).group(RegistryHandler.RELIC_APPLE.getId().toString()).save(output, RecipeBuilder.getDefaultRecipeId(RegistryHandler.RELIC_APPLE.get()).withSuffix("_rotated").toString());
+        shaped(RecipeCategory.FOOD, RegistryHandler.RELIC_APPLE.get()).define('D', Tags.Items.GEMS_DIAMOND).define('E', Tags.Items.GEMS_EMERALD).define('#', Items.APPLE).pattern(" E ").pattern("D#D").pattern(" E ").unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND)).unlockedBy("has_emerald", has(Tags.Items.GEMS_EMERALD)).group(RegistryHandler.RELIC_APPLE.getId().toString()).save(output, RegistryHandler.RELIC_APPLE.getId().withSuffix("_rotated").toString());
 
         //Wither Bones
         shapeless(RecipeCategory.MISC, RegistryHandler.WITHER_BONE.get(),6).requires(Tags.Items.BONES).requires(Tags.Items.BONES).requires(Tags.Items.BONES).requires(Items.WITHER_SKELETON_SKULL).unlockedBy("has_heart", has(RegistryHandler.RED_HEART.get())).group(BaubleyHeartCanisters.id("wither_bone").toString()).save(output);

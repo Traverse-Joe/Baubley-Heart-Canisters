@@ -6,7 +6,6 @@
   "group": "bhc:red_heart_melted",
   "ingredient": "bhc:red_heart",
   "result": {
-    "count": 1,
     "id": "bhc:red_heart_melted"
   }
 }

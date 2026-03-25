@@ -5,11 +5,11 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.InventoryUtil;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,22 +21,40 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 import java.util.List;
 
 public class HeartAmuletRecipe extends ShapelessRecipe {
+    public static final MapCodec<HeartAmuletRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
+            i -> i.group(
+                            Codec.STRING.fieldOf("group").forGetter(o -> o.group),
+                            ItemStackTemplate.CODEC.fieldOf("result").forGetter(o -> o.result),
+                            com.mojang.serialization.Codec.lazyInitialized(() -> Ingredient.CODEC.listOf(1, ShapedRecipePattern.getMaxHeight() * ShapedRecipePattern.getMaxWidth())).fieldOf("ingredients").forGetter(o -> o.ingredients)
+                    )
+                    .apply(i, HeartAmuletRecipe::new)
+    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, HeartAmuletRecipe> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.STRING_UTF8,
+            o -> o.group,
+            ItemStackTemplate.STREAM_CODEC,
+            o -> o.result,
+            Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
+            o -> o.ingredients,
+            HeartAmuletRecipe::new
+    );
+    public static final RecipeSerializer<HeartAmuletRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
 
     final String group;
-    final ItemStack result;
+    final ItemStackTemplate result;
     final List<Ingredient> ingredients;
 
 
-    public HeartAmuletRecipe(String group, ItemStack stack, List<Ingredient> list) {
-        super(group, CraftingBookCategory.EQUIPMENT, stack, list);
+    public HeartAmuletRecipe(String group, ItemStackTemplate stack, List<Ingredient> list) {
+        super(new CommonInfo(true), new CraftingBookInfo(CraftingBookCategory.EQUIPMENT, group), stack, list);
         this.group = group;
         this.result = stack;
         this.ingredients = list;
     }
 
     @Override
-    public ItemStack assemble(CraftingInput craftingContainer, HolderLookup.Provider registries) {
-        ItemStack stack = super.assemble(craftingContainer, registries);
+    public ItemStack assemble(CraftingInput craftingContainer) {
+        ItemStack stack = super.assemble(craftingContainer);
 
         ItemStack oldCanister = ItemStack.EMPTY;
         for (int i = 0; i < craftingContainer.size(); i++) {
@@ -64,35 +82,5 @@ public class HeartAmuletRecipe extends ShapelessRecipe {
     @Override
     public RecipeSerializer<ShapelessRecipe> getSerializer() {
         return (RecipeSerializer)RegistryHandler.HEART_AMULET_RECIPE_SERIALIZER.get();
-    }
-
-    public static class Serializer implements RecipeSerializer<HeartAmuletRecipe> {
-        private static final MapCodec<HeartAmuletRecipe> CODEC = RecordCodecBuilder.mapCodec(
-                instance -> instance.group(
-                                Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
-                                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
-                                Codec.lazyInitialized(() -> Ingredient.CODEC.listOf(1, ShapedRecipePattern.getMaxHeight() * ShapedRecipePattern.getMaxWidth())).fieldOf("ingredients").forGetter(p_360071_ -> p_360071_.ingredients)
-                        )
-                        .apply(instance, HeartAmuletRecipe::new)
-        );
-        public static final StreamCodec<RegistryFriendlyByteBuf, HeartAmuletRecipe> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.STRING_UTF8,
-                recipe -> recipe.group,
-                ItemStack.STREAM_CODEC,
-                recipe -> recipe.result,
-                Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()),
-                recipe -> recipe.ingredients,
-                HeartAmuletRecipe::new
-        );
-
-        @Override
-        public MapCodec<HeartAmuletRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, HeartAmuletRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 }

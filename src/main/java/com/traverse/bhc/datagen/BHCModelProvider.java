@@ -14,6 +14,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
@@ -64,7 +65,7 @@ public class BHCModelProvider extends ModelProvider {
 	public Identifier createFlatItemModel(ItemModelGenerators itemModels, String name, ModelTemplate modelTemplate) {
 		return modelTemplate.create(
 				Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "item/" + name),
-				TextureMapping.layer0(Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "item/" + name)),
+				TextureMapping.layer0(new Material(Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "item/" + name))),
 				itemModels.modelOutput
 		);
 	}

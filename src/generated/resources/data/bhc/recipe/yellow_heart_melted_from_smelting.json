@@ -6,7 +6,6 @@
   "group": "bhc:yellow_heart_melted",
   "ingredient": "bhc:yellow_heart",
   "result": {
-    "count": 1,
     "id": "bhc:yellow_heart_melted"
   }
 }

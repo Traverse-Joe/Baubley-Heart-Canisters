@@ -190,7 +190,7 @@ public class HealthModifier {
         }
 
         //noinspection DataFlowIssue -- inventory cannot be null here
-        var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).stream().mapToInt(ItemStack::getCount).toArray();
+        var values = stack.get(RegistryHandler.STORED_HEARTS_COMPONENT).allItemsCopyStream().mapToInt(ItemStack::getCount).toArray();
         if (values.length != valuesLength) {
             return Arrays.copyOf(values, valuesLength);
         }
