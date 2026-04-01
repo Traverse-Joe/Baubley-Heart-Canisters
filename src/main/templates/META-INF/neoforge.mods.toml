@@ -18,6 +18,6 @@ ${mod_description}
 [dependencies]
 "${mod_id}" = [
     { modId = "neoforge", type = 'required', versionRange = "[${neo_version},)", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
-    { modId = "minecraft", type = 'required', versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
+    { modId = "minecraft", type = 'required', versionRange = "[${minecraft_version},)", ordering = "NONE", side = "BOTH" },
     { modId = "curios", type = 'required', versionRange = "[15.0.0-beta.1+26.1,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
 ]
