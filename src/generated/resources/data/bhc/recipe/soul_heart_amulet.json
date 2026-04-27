@@ -1,6 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
+  "type": "bhc:amulet_shapeless",
   "group": "bhc:soul_heart_amulet",
   "ingredients": [
     "bhc:heart_amulet",

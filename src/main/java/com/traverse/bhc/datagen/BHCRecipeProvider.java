@@ -3,6 +3,7 @@ package com.traverse.bhc.datagen;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.data.BHCItemTags;
 import com.traverse.bhc.common.init.RegistryHandler;
+import com.traverse.bhc.datagen.builder.HeartAmuletRecipeBuilder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
@@ -79,7 +80,7 @@ public class BHCRecipeProvider extends RecipeProvider {
         shaped(RecipeCategory.MISC, RegistryHandler.HEART_AMULET.get()).define('S', Tags.Items.STRINGS).define('H', BHCItemTags.HEARTS).define('#', Tags.Items.GLASS_BLOCKS_COLORLESS).pattern("S S").pattern("#H#").pattern(" # ").unlockedBy("has_heart", has(BHCItemTags.HEARTS)).group(RegistryHandler.SOUL_HEART_AMULET.getId().toString()).save(output);
 
         //soul heart amulet
-        shapeless(RecipeCategory.MISC, RegistryHandler.SOUL_HEART_AMULET.get()).requires(RegistryHandler.HEART_AMULET.get()).requires(RegistryHandler.SOUL_HEART_CRYSTAL.get()).unlockedBy("has_crystal", has(RegistryHandler.SOUL_HEART_CRYSTAL.get())).group(RegistryHandler.SOUL_HEART_AMULET.getId().toString()).save(output);
+        HeartAmuletRecipeBuilder.shapeless(items, RecipeCategory.MISC, RegistryHandler.SOUL_HEART_AMULET.get()).requires(RegistryHandler.HEART_AMULET.get()).requires(RegistryHandler.SOUL_HEART_CRYSTAL.get()).unlockedBy("has_crystal", has(RegistryHandler.SOUL_HEART_CRYSTAL.get())).group(RegistryHandler.SOUL_HEART_AMULET.getId().toString()).save(output);
 
         // blade of vitality
         shaped(RecipeCategory.COMBAT, RegistryHandler.BLADE_OF_VITALITY.get()).define('C', RegistryHandler.SOUL_HEART_CRYSTAL.get()).define('A', RegistryHandler.SOUL_HEART_AMULET.get()).define('S', Tags.Items.RODS_WOODEN).pattern("C").pattern("A").pattern("S").unlockedBy("has_crystal", has(RegistryHandler.SOUL_HEART_CRYSTAL.get())).save(output);
