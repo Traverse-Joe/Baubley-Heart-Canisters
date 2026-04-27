@@ -6,7 +6,6 @@ import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.Util;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.Level;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 

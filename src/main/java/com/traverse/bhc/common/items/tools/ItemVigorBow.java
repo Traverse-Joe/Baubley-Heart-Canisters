@@ -6,7 +6,6 @@ import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HealthModifier;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;

@@ -4,7 +4,6 @@ import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.BHCConfig;
 import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
