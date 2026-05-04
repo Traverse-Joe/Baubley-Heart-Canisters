@@ -4,8 +4,10 @@ import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 import net.minecraft.world.entity.monster.warden.Warden;
@@ -18,10 +20,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class DropHandler {
@@ -33,22 +32,28 @@ public class DropHandler {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide() || entity instanceof Player) return;
         if (entity.level() instanceof ServerLevel serverLevel) {
+            Collection<ItemEntity> drops = event.getDrops();
+
             if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
                 if (entity.level().getRandom().nextDouble() < ConfigHandler.general.boneDropRate.get()) {
-                    entity.spawnAtLocation(serverLevel, RegistryHandler.WITHER_BONE.toStack(), 1);
+                    drops.add(makeItemEntity(serverLevel, entity, 1, RegistryHandler.WITHER_BONE.toStack()));
                 }
             }
 
             if(event.getEntity() instanceof Warden warden) {
                 if(warden.level().getRandom().nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
-                    entity.spawnAtLocation(serverLevel, Items.ECHO_SHARD.getDefaultInstance(), 1);
+                    drops.add(makeItemEntity(serverLevel, entity, 1, Items.ECHO_SHARD.getDefaultInstance()));
                 }
             }
 
             for (ItemStack stack : getEntityDrops(entity)) {
-                entity.spawnAtLocation(serverLevel, stack, 0);
+                drops.add(makeItemEntity(serverLevel, entity, 0, stack));
             }
         }
+    }
+
+    private static ItemEntity makeItemEntity(ServerLevel level, LivingEntity sourceEntity, float yOffset, ItemStack stack) {
+        return new ItemEntity(level, sourceEntity.getX(), sourceEntity.getY() + yOffset, sourceEntity.getZ(), stack);
     }
 
     public static List<ItemStack> getEntityDrops(LivingEntity entity) {
