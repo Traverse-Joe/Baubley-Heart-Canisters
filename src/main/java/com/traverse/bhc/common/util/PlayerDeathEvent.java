@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -21,39 +22,47 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class PlayerDeathEvent {
 
-    @SubscribeEvent
+    private static final Set<UUID> FIRING = ConcurrentHashMap.newKeySet();
+
+    @SubscribeEvent (priority = EventPriority.LOWEST)
     public static void onPlayerDeathEvent(LivingDeathEvent evt) {
-        if (!evt.getEntity().level().isClientSide()) {
-            if (evt.getEntity() instanceof Player player) {
-                ICuriosItemHandler handler = CuriosApi.getCuriosInventory(evt.getEntity()).orElse(null);
-                if (handler == null) return;
-                SlotResult equipped = handler.findFirstCurio(itemStack -> itemStack.getItem() instanceof ItemSoulHeartAmulet).orElse(null);
-                if (equipped != null) {
-                    var soulInventory = InventoryUtil.createVirtualInventory(5, equipped.stack());
+        if (evt.getEntity().level().isClientSide()) return;
+        if (!(evt.getEntity() instanceof Player player)) return;
+        if (!FIRING.add(player.getUUID())) return;
+        try {
+            ICuriosItemHandler handler = CuriosApi.getCuriosInventory(evt.getEntity()).orElse(null);
+            if (handler == null) return;
+            SlotResult equipped = handler.findFirstCurio(itemStack -> itemStack.getItem() instanceof ItemSoulHeartAmulet).orElse(null);
+            if (equipped != null) {
+                var soulInventory = InventoryUtil.createVirtualInventory(5, equipped.stack());
 
-                    if (!soulInventory.getStackInSlot(4).isEmpty()) {
-                        var stack = soulInventory.getStackInSlot(4);
-                        stack.shrink(1);
-                        soulInventory.setStackInSlot(4, stack);
-                        player.displayClientMessage(Component.translatable(Util.makeDescriptionId("message", BaubleyHeartCanisters.id("soul_heart_used"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
-                        player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
-                        //15% chance
-                        if (player.getRandom().nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {
-                            ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(RegistryHandler.BLUE_CANISTER.get()));
-                        }
-                        evt.setCanceled(true);
-                        player.setHealth(player.getMaxHealth());
-                        player.removeAllEffects();
-                        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
-                        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
-                        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
+                if (!soulInventory.getStackInSlot(4).isEmpty()) {
+                    var stack = soulInventory.getStackInSlot(4);
+                    stack.shrink(1);
+                    soulInventory.setStackInSlot(4, stack);
+                    player.displayClientMessage(Component.translatable(Util.makeDescriptionId("message", BaubleyHeartCanisters.id("soul_heart_used"))).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)), true);
+                    player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), SoundEvents.TOTEM_USE, player.getSoundSource(), 1.0F, 1.0F, false);
+                    //15% chance
+                    if (player.getRandom().nextDouble() <= ConfigHandler.general.soulHeartReturnChance.get()) {
+                        ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(RegistryHandler.BLUE_CANISTER.get()));
                     }
-
+                    evt.setCanceled(true);
+                    player.setHealth(player.getMaxHealth());
+                    player.removeAllEffects();
+                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
                 }
             }
+        } finally {
+            FIRING.remove(player.getUUID());
         }
     }
 }
