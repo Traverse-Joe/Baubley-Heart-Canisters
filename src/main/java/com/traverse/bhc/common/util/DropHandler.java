@@ -21,6 +21,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
@@ -105,6 +106,29 @@ public class DropHandler {
                 }
             }
         }
+    }
+
+    public static Optional<VitalicSource> getMatchingSource(LivingEntity entity) {
+        VitalicSource[] priority = { VitalicSource.BLUE, VitalicSource.GREEN, VitalicSource.YELLOW, VitalicSource.RED };
+        for (VitalicSource source : priority) {
+            if (matches(source.getSerializedName(), entity)) return Optional.of(source);
+        }
+        return Optional.empty();
+    }
+
+    private static boolean matches(String category, LivingEntity entity) {
+        Map<String, Double> entries = BaubleyHeartCanisters.config.getHeartTypeEntries(category);
+        if (entries == null) return false;
+        for (Map.Entry<String, Double> entry : entries.entrySet()) {
+            if (entry.getKey().equals(entity.getEncodeId())) return true;
+            switch (entry.getKey()) {
+                case "passive" -> { if (!(entity instanceof Monster) && !(entity instanceof Player)) return true; }
+                case "hostile" -> { if (entity instanceof Monster && !(entity.is(Tags.EntityTypes.BOSSES) && !(entity instanceof Warden))) return true; }
+                case "boss" -> { if (entity.is(Tags.EntityTypes.BOSSES) && !(entity instanceof EnderDragon)) return true; }
+                case "dragon" -> { if (entity instanceof EnderDragon) return true; }
+            }
+        }
+        return false;
     }
 
     public static void addWithPercent(List<ItemStack> list, ItemStack stack, double percentage) {

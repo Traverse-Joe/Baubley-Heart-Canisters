@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bhc:block/red_large_vitalic_bud"
+  }
+}

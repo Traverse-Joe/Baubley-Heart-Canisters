@@ -1,6 +1,49 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "bhc:item/soul_heart_crystal"
+    "type": "minecraft:condition",
+    "component": "bhc:vitalic_charge",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "bhc:item/soul_heart_crystal"
+    },
+    "on_true": {
+      "type": "minecraft:select",
+      "cases": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "bhc:item/soul_heart_crystal_red"
+          },
+          "when": "red"
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "bhc:item/soul_heart_crystal_yellow"
+          },
+          "when": "yellow"
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "bhc:item/soul_heart_crystal_green"
+          },
+          "when": "green"
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "bhc:item/soul_heart_crystal_blue"
+          },
+          "when": "blue"
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "bhc:item/soul_heart_crystal"
+      },
+      "property": "bhc:vitalic_source"
+    },
+    "property": "minecraft:has_component"
   }
 }

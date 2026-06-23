@@ -1,6 +1,8 @@
 package com.traverse.bhc.client;
 
 import com.traverse.bhc.client.easter.CustomNameProperty;
+import com.traverse.bhc.client.properties.VitalicSourceProperty;
+import com.traverse.bhc.client.renderer.VitalicOrbRenderer;
 import com.traverse.bhc.client.screens.BladeOfVitalityScreen;
 import com.traverse.bhc.client.screens.HeartAmuletScreen;
 import com.traverse.bhc.client.screens.SoulHeartAmuletScreen;
@@ -11,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
 
@@ -28,5 +31,11 @@ public class HeartCanistersClient {
     @SubscribeEvent
     public static void registerItemProperty(RegisterSelectItemModelPropertyEvent event) {
         event.register(Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "custom_name"), CustomNameProperty.TYPE);
+        event.register(Identifier.fromNamespaceAndPath(BaubleyHeartCanisters.MODID, "vitalic_source"), VitalicSourceProperty.TYPE);
+    }
+
+    @SubscribeEvent
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(RegistryHandler.VITALIC_ORB.get(), VitalicOrbRenderer::new);
     }
 }

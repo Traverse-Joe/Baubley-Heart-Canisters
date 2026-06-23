@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  { "model": "bhc:block/blue_large_vitalic_bud", "x": 180 },
+    "facing=up":    { "model": "bhc:block/blue_large_vitalic_bud" },
+    "facing=north": { "model": "bhc:block/blue_large_vitalic_bud", "x": 90 },
+    "facing=south": { "model": "bhc:block/blue_large_vitalic_bud", "x": 90, "y": 180 },
+    "facing=east":  { "model": "bhc:block/blue_large_vitalic_bud", "x": 90, "y": 90 },
+    "facing=west":  { "model": "bhc:block/blue_large_vitalic_bud", "x": 90, "y": 270 }
+  }
+}

@@ -10,6 +10,12 @@ public class ConfigHandler {
         public final ModConfigSpec.DoubleValue echoShardDropRate;
         public final ModConfigSpec.DoubleValue soulHeartReturnChance;
 
+        // Soul Heart Crystal
+        public final ModConfigSpec.IntValue vitalicCrystalMaxCharge;
+        public final ModConfigSpec.IntValue vitalicChargePerKill;
+        public final ModConfigSpec.IntValue vitalicBuddingCrystalMaxCharge;
+        public final ModConfigSpec.IntValue vitalicOrbBuddingCrystalRadius;
+
         // Heart Patch - Heal Amounts
         public final ModConfigSpec.IntValue redPatchHealAmount;
         public final ModConfigSpec.IntValue yellowPatchHealAmount;
@@ -36,6 +42,18 @@ public class ConfigHandler {
             soulHeartReturnChance = builder
                     .comment("Chance for the Soul Heart to return a Blue Heart Canister after being broken")
                     .defineInRange("soulHeartReturnChance", 1.0, 0, 1);
+            vitalicCrystalMaxCharge = builder
+                    .comment("Maximum Vitalic Source charge a Soul Heart Crystal can hold")
+                    .defineInRange("vitalicCrystalMaxCharge", 100, 1, Integer.MAX_VALUE);
+            vitalicChargePerKill = builder
+                    .comment("Amount of Vitalic Source charge granted per matching mob kill")
+                    .defineInRange("vitalicChargePerKill", 1, 1, Integer.MAX_VALUE);
+            vitalicBuddingCrystalMaxCharge = builder
+                    .comment("Maximum Vitalic Source charge a Budding Crystal block can hold")
+                    .defineInRange("vitalicBuddingCrystalMaxCharge", 300, 1, Integer.MAX_VALUE);
+            vitalicOrbBuddingCrystalRadius = builder
+                    .comment("Block radius around a mob kill that a Vitalic Orb will look for a matching Budding Crystal before falling back to the killer player")
+                    .defineInRange("vitalicOrbBuddingCrystalRadius", 8, 0, 64);
             builder.pop();
 
             builder.push("Heart Patches");

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "bhc:block/yellow_budding_crystal_stage2"
+  }
+}

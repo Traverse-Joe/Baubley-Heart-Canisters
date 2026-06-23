@@ -32,10 +32,13 @@ public class BaubleyHeartCanisters {
 
     public BaubleyHeartCanisters(IEventBus modEventBus, ModContainer modContainer, Dist dist) {
         RegistryHandler.ITEMS.register(modEventBus);
+        RegistryHandler.BLOCKS.register(modEventBus);
         RegistryHandler.TAB.register(modEventBus);
         RegistryHandler.CONTAINERS.register(modEventBus);
         RegistryHandler.RECIPESERIALIZER.register(modEventBus);
         RegistryHandler.DATA_COMPONENT_TYPES.register(modEventBus);
+        RegistryHandler.ENTITY_TYPES.register(modEventBus);
+        RegistryHandler.BLOCK_ENTITY_TYPES.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.STARTUP, ConfigHandler.configSpec);
         modContainer.registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 
