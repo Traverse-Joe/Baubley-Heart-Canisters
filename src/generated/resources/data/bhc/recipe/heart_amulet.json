@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "bhc:soul_heart_amulet",
   "key": {
     "#": "#c:glass_blocks/colorless",

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "bhc:yellow_heart_melted",
   "ingredients": [
     "bhc:green_heart_melted"

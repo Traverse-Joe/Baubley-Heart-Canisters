@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "bhc:green_heart_canister",
   "ingredients": [
     "bhc:yellow_heart_canister",

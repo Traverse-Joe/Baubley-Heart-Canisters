@@ -23,18 +23,18 @@ public class BHCItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(BHCItemTags.HEARTS).add(RegistryHandler.RED_HEART.get(), RegistryHandler.YELLOW_HEART.get(), RegistryHandler.GREEN_HEART.get(), RegistryHandler.BLUE_HEART.get());
-        tag(BHCItemTags.HEART_AMULETS).add(RegistryHandler.HEART_AMULET.get(), RegistryHandler.SOUL_HEART_AMULET.get());
-        tag(BHCItemTags.WITHER_BONES).add(RegistryHandler.WITHER_BONE.get());
-        tag(ItemTags.SWORDS).add(RegistryHandler.BLADE_OF_VITALITY.get());
-        tag(ItemTags.BOW_ENCHANTABLE).add(RegistryHandler.VIGOR_BOW.get());
+        tag(BHCItemTags.HEARTS).add(RegistryHandler.RED_HEART.getKey(), RegistryHandler.YELLOW_HEART.getKey(), RegistryHandler.GREEN_HEART.getKey(), RegistryHandler.BLUE_HEART.getKey());
+        tag(BHCItemTags.HEART_AMULETS).add(RegistryHandler.HEART_AMULET.getKey(), RegistryHandler.SOUL_HEART_AMULET.getKey());
+        tag(BHCItemTags.WITHER_BONES).add(RegistryHandler.WITHER_BONE.getKey());
+        tag(ItemTags.SWORDS).add(RegistryHandler.BLADE_OF_VITALITY.getKey());
+        tag(ItemTags.BOW_ENCHANTABLE).add(RegistryHandler.VIGOR_BOW.getKey());
 
         // Create heart_belts tag and add belt items
         tag(BHCItemTags.HEART_BELTS).add(
-                RegistryHandler.RED_HEARTPULSE_BELT.get(),
-                RegistryHandler.YELLOW_HEARTPULSE_BELT.get(),
-                RegistryHandler.GREEN_HEARTPULSE_BELT.get(),
-                RegistryHandler.BLUE_HEARTPULSE_BELT.get()
+                RegistryHandler.RED_HEARTPULSE_BELT.getKey(),
+                RegistryHandler.YELLOW_HEARTPULSE_BELT.getKey(),
+                RegistryHandler.GREEN_HEARTPULSE_BELT.getKey(),
+                RegistryHandler.BLUE_HEARTPULSE_BELT.getKey()
         );
 
         // Add items directly to Curios tags
@@ -43,10 +43,10 @@ public class BHCItemTagsProvider extends ItemTagsProvider {
         
         tag(curiosHeartAmuletTag).addTag(BHCItemTags.HEART_AMULETS);
         tag(curiosBeltTag).add(
-                RegistryHandler.RED_HEARTPULSE_BELT.get(),
-                RegistryHandler.YELLOW_HEARTPULSE_BELT.get(),
-                RegistryHandler.GREEN_HEARTPULSE_BELT.get(),
-                RegistryHandler.BLUE_HEARTPULSE_BELT.get()
+                RegistryHandler.RED_HEARTPULSE_BELT.getKey(),
+                RegistryHandler.YELLOW_HEARTPULSE_BELT.getKey(),
+                RegistryHandler.GREEN_HEARTPULSE_BELT.getKey(),
+                RegistryHandler.BLUE_HEARTPULSE_BELT.getKey()
         );
     }
 }

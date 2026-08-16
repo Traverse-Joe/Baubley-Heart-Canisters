@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "bhc:soul_heart_crystal",
   "key": {
     "#": "minecraft:echo_shard",

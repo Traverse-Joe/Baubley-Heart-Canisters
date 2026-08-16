@@ -8,7 +8,7 @@ modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
 displayURL = "https://www.curseforge.com/projects/282947" #optional (displayed in the mod UI)
-logoFile = "icon.png" #optional
+#iconFile = "icon.png" #optional
 credits = "Thanks goes to Up who helped with original build. Also Abused_Master for helping when i bugged him."
 authors = "${mod_authors}"
 description = '''
@@ -19,5 +19,5 @@ ${mod_description}
 "${mod_id}" = [
     { modId = "neoforge", type = 'required', versionRange = "[${neo_version},)", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
     { modId = "minecraft", type = 'required', versionRange = "[${minecraft_version},)", ordering = "NONE", side = "BOTH" },
-    { modId = "curios", type = 'required', versionRange = "[15.0.0-beta.1+26.1,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
+    { modId = "curios", type = 'required', versionRange = "[16.0.0+26.2,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
 ]

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "bhc:yellow_heart_melted",
   "key": {
     "#": "bhc:red_heart_melted"

@@ -6,12 +6,13 @@ import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -112,7 +113,7 @@ public class ItemHeart extends BaseItem {
             case "passive" -> Component.translatable("entity.bhc.passive_mobs");
             case "hostile" -> Component.translatable("entity.bhc.hostile_mobs");
             case "boss" -> Component.translatable("entity.bhc.boss_mobs");
-            case "dragon" -> EntityType.ENDER_DRAGON.getDescription();
+            case "dragon" -> EntityTypes.ENDER_DRAGON.getDescription();
             default -> {
                 // Try to get entity type name from registry, fallback to formatted key
                 try {
