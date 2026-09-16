@@ -39,6 +39,7 @@ public class BaubleyHeartCanisters {
         RegistryHandler.DATA_COMPONENT_TYPES.register(modEventBus);
         RegistryHandler.ENTITY_TYPES.register(modEventBus);
         RegistryHandler.BLOCK_ENTITY_TYPES.register(modEventBus);
+        RegistryHandler.PARTICLE_TYPES.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.STARTUP, ConfigHandler.configSpec);
         modContainer.registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 

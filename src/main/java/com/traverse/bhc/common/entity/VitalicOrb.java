@@ -3,6 +3,7 @@ package com.traverse.bhc.common.entity;
 import com.traverse.bhc.common.blocks.entity.BuddingCrystalBlockEntity;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.items.ItemSoulHeartCrystal;
+import com.traverse.bhc.common.particle.VitalicSparkOptions;
 import com.traverse.bhc.common.util.VitalicSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
@@ -11,6 +12,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -32,9 +34,20 @@ public class VitalicOrb extends Entity {
     private static final EntityDataAccessor<Integer> DATA_SOURCE = SynchedEntityData.defineId(VitalicOrb.class, EntityDataSerializers.INT);
 
     private static final double HOMING_SPEED = 0.10;
-    private static final double PICKUP_DISTANCE_SQ = 1.2 * 1.2;
+    private static final double PICKUP_DISTANCE_SQ = 0.6 * 0.6;
     private static final int MAX_LIFETIME = 600;
     public static final int TRAIL_LENGTH = 12;
+
+    private static final int TRAIL_SPARKS_PER_TICK = 3;
+    private static final int SPARK_LIFETIME = 12;
+    private static final int SPARK_LIFETIME_JITTER = 6;
+    private static final float SPARK_BASE_SCALE = 0.14F;
+    private static final double SPARK_OFFSET_RADIUS = 0.18;
+    private static final double SPARK_MOTION_JITTER = 0.008;
+    private static final double SPARK_VELOCITY_INHERIT = 0.05;
+    private static final int BURST_SPARK_COUNT = 16;
+    private static final float BURST_SPARK_SCALE = 0.22F;
+    private static final double SPARK_Y_BIAS = 0.20;
 
     @Nullable private UUID targetPlayerUUID;
     @Nullable private BlockPos targetBlock;
@@ -101,6 +114,7 @@ public class VitalicOrb extends Entity {
         }
         Vec3 delta = targetPos.subtract(position());
         if (delta.lengthSqr() < PICKUP_DISTANCE_SQ) {
+            emitDepositBurst();
             if (targetBlock != null) tryDepositIntoBlock();
             else tryDepositIntoPlayer();
             return;
@@ -108,6 +122,47 @@ public class VitalicOrb extends Entity {
         Vec3 velocity = delta.normalize().scale(HOMING_SPEED);
         setDeltaMovement(velocity);
         move(MoverType.SELF, getDeltaMovement());
+        emitTrailSpark();
+    }
+
+    private void emitTrailSpark() {
+        if (!(level() instanceof ServerLevel serverLevel)) return;
+        RandomSource rng = serverLevel.getRandom();
+        Vec3 inheritedMotion = getDeltaMovement().scale(SPARK_VELOCITY_INHERIT);
+        for (int i = 0; i < TRAIL_SPARKS_PER_TICK; i++) {
+            VitalicSparkOptions options = new VitalicSparkOptions(
+                    colorFor(getSource()),
+                    SPARK_BASE_SCALE + rng.nextFloat() * 0.04F,
+                    SPARK_LIFETIME + rng.nextInt(SPARK_LIFETIME_JITTER)
+            );
+            double ox = (rng.nextDouble() - 0.5) * SPARK_OFFSET_RADIUS * 2;
+            double oy = SPARK_Y_BIAS + (rng.nextDouble() - 0.5) * SPARK_OFFSET_RADIUS * 2;
+            double oz = (rng.nextDouble() - 0.5) * SPARK_OFFSET_RADIUS * 2;
+            double dx = inheritedMotion.x + (rng.nextDouble() - 0.5) * SPARK_MOTION_JITTER;
+            double dy = inheritedMotion.y + (rng.nextDouble() - 0.5) * SPARK_MOTION_JITTER;
+            double dz = inheritedMotion.z + (rng.nextDouble() - 0.5) * SPARK_MOTION_JITTER;
+            serverLevel.sendParticles(options, getX() + ox, getY() + oy, getZ() + oz, 0, dx, dy, dz, 1.0);
+        }
+    }
+
+    private void emitDepositBurst() {
+        if (!(level() instanceof ServerLevel serverLevel)) return;
+        RandomSource rng = serverLevel.getRandom();
+        VitalicSparkOptions options = new VitalicSparkOptions(
+                colorFor(getSource()),
+                BURST_SPARK_SCALE,
+                SPARK_LIFETIME + SPARK_LIFETIME_JITTER
+        );
+        for (int i = 0; i < BURST_SPARK_COUNT; i++) {
+            double angle = rng.nextDouble() * Math.PI * 2;
+            double cosPitch = rng.nextDouble() * 2 - 1;
+            double sinPitch = Math.sqrt(1 - cosPitch * cosPitch);
+            double speed = 0.04 + rng.nextDouble() * 0.05;
+            double dx = Math.cos(angle) * sinPitch * speed;
+            double dy = cosPitch * speed;
+            double dz = Math.sin(angle) * sinPitch * speed;
+            serverLevel.sendParticles(options, getX(), getY() + SPARK_Y_BIAS, getZ(), 0, dx, dy, dz, 1.0);
+        }
     }
 
     @Nullable
@@ -118,7 +173,7 @@ public class VitalicOrb extends Entity {
             return Vec3.atCenterOf(targetBlock);
         }
         Player player = resolvePlayer();
-        return player == null ? null : player.position().add(0.0, player.getBbHeight() * 0.5, 0.0);
+        return player == null ? null : player.position().add(0.0, player.getBbHeight() * 0.75, 0.0);
     }
 
     @Nullable

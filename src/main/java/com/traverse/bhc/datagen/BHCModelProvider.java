@@ -7,6 +7,7 @@ import com.traverse.bhc.common.blocks.BuddingCrystalBlock;
 import com.traverse.bhc.common.blocks.VitalicBudBlock;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.ItemSoulHeartCrystal;
+import com.traverse.bhc.common.items.GoldenPaladinArmorItem;
 import com.traverse.bhc.common.items.tools.ItemBladeOfVitality;
 import com.traverse.bhc.common.items.tools.ItemVigorBow;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -63,10 +64,17 @@ public class BHCModelProvider extends ModelProvider {
 				generateVigorBow(itemModels);
 			} else if (item instanceof ItemSoulHeartCrystal) {
 				generateSoulHeartCrystal(itemModels);
+			} else if (item instanceof GoldenPaladinArmorItem armorItem) {
+				generateGoldenPaladinArmorItem(itemModels, armorItem);
 			} else {
 				itemModels.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
 			}
 		}
+	}
+
+	private void generateGoldenPaladinArmorItem(ItemModelGenerators itemModels, GoldenPaladinArmorItem armorItem) {
+		Identifier model = itemModels.createFlatItemModel(armorItem, "", ModelTemplates.FLAT_ITEM);
+		itemModels.itemModelOutput.accept(armorItem, ItemModelUtils.plainModel(model));
 	}
 
 	private void generateBladeOfVitality(ItemModelGenerators itemModels) {

@@ -12,6 +12,7 @@ import com.traverse.bhc.common.container.SoulHeartAmuletContainer;
 import com.traverse.bhc.common.container.VigorBowContainer;
 import com.traverse.bhc.common.container.base.SoulContainerMenu;
 import com.traverse.bhc.common.entity.VitalicOrb;
+import com.traverse.bhc.common.particle.VitalicSparkOptions;
 import com.traverse.bhc.common.items.BaseHeartCanister;
 import com.traverse.bhc.common.items.BaseItem;
 import com.traverse.bhc.common.items.ItemHeart;
@@ -21,6 +22,7 @@ import com.traverse.bhc.common.items.ItemHeartPulseBelt;
 import com.traverse.bhc.common.items.ItemRelicApple;
 import com.traverse.bhc.common.items.ItemSoulHeartAmulet;
 import com.traverse.bhc.common.items.ItemSoulHeartCrystal;
+import com.traverse.bhc.common.items.GoldenPaladinArmorItem;
 import com.traverse.bhc.common.items.tools.ItemBladeOfVitality;
 import com.traverse.bhc.common.items.tools.ItemVigorBow;
 import com.traverse.bhc.common.recipes.HeartAmuletRecipe;
@@ -37,8 +39,10 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -63,6 +67,7 @@ public class RegistryHandler {
     public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, BaubleyHeartCanisters.MODID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, BaubleyHeartCanisters.MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, BaubleyHeartCanisters.MODID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, BaubleyHeartCanisters.MODID);
 
     //Items
     public static final DeferredItem<BaseHeartCanister> RED_CANISTER = ITEMS.registerItem("red_heart_canister", (properties) -> new BaseHeartCanister(properties, HeartType.RED));
@@ -99,6 +104,10 @@ public class RegistryHandler {
     public static final DeferredItem<ItemHeartAmulet> HEART_AMULET = ITEMS.registerItem("heart_amulet", ItemHeartAmulet::new);
     public static final DeferredItem<ItemSoulHeartAmulet> SOUL_HEART_AMULET = ITEMS.registerItem("soul_heart_amulet", ItemSoulHeartAmulet::new);
     public static final DeferredItem<ItemSoulHeartCrystal> SOUL_HEART_CRYSTAL = ITEMS.registerItem("soul_heart_crystal", ItemSoulHeartCrystal::new);
+    public static final DeferredItem<GoldenPaladinArmorItem> GOLDEN_PALADIN_HELMET = ITEMS.registerItem("golden_paladin_helmet", properties -> new GoldenPaladinArmorItem(properties, ArmorType.HELMET));
+    public static final DeferredItem<GoldenPaladinArmorItem> GOLDEN_PALADIN_CHESTPLATE = ITEMS.registerItem("golden_paladin_chestplate", properties -> new GoldenPaladinArmorItem(properties, ArmorType.CHESTPLATE));
+    public static final DeferredItem<GoldenPaladinArmorItem> GOLDEN_PALADIN_LEGGINGS = ITEMS.registerItem("golden_paladin_leggings", properties -> new GoldenPaladinArmorItem(properties, ArmorType.LEGGINGS));
+    public static final DeferredItem<GoldenPaladinArmorItem> GOLDEN_PALADIN_BOOTS = ITEMS.registerItem("golden_paladin_boots", properties -> new GoldenPaladinArmorItem(properties, ArmorType.BOOTS));
 
     //Budding Crystals
     public static final DeferredBlock<BuddingCrystalBlock> RED_BUDDING_CRYSTAL = registerBuddingCrystal("red_budding_crystal", VitalicSource.RED, MapColor.COLOR_RED);
@@ -168,10 +177,24 @@ public class RegistryHandler {
     //Entities
     public static final DeferredHolder<EntityType<?>, EntityType<VitalicOrb>> VITALIC_ORB = ENTITY_TYPES.register("vitalic_orb",
             () -> EntityType.Builder.<VitalicOrb>of(VitalicOrb::new, MobCategory.MISC)
-                    .sized(0.4F, 0.4F)
+                    .sized(0.2F, 0.2F)
                     .clientTrackingRange(8)
                     .updateInterval(2)
                     .build(ResourceKey.create(Registries.ENTITY_TYPE, BaubleyHeartCanisters.id("vitalic_orb"))));
+
+    //Particles
+    public static final DeferredHolder<ParticleType<?>, ParticleType<VitalicSparkOptions>> VITALIC_SPARK = PARTICLE_TYPES.register("vitalic_spark",
+            () -> new ParticleType<VitalicSparkOptions>(false) {
+                @Override
+                public com.mojang.serialization.MapCodec<VitalicSparkOptions> codec() {
+                    return VitalicSparkOptions.MAP_CODEC;
+                }
+
+                @Override
+                public net.minecraft.network.codec.StreamCodec<? super net.minecraft.network.RegistryFriendlyByteBuf, VitalicSparkOptions> streamCodec() {
+                    return VitalicSparkOptions.STREAM_CODEC;
+                }
+            });
 
     //Block Entities
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BuddingCrystalBlockEntity>> BUDDING_CRYSTAL_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register("budding_crystal",

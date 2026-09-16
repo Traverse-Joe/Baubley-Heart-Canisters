@@ -1,6 +1,7 @@
 package com.traverse.bhc.client;
 
 import com.traverse.bhc.client.easter.CustomNameProperty;
+import com.traverse.bhc.client.particle.VitalicSparkParticle;
 import com.traverse.bhc.client.properties.VitalicSourceProperty;
 import com.traverse.bhc.client.renderer.VitalicOrbRenderer;
 import com.traverse.bhc.client.screens.BladeOfVitalityScreen;
@@ -9,13 +10,17 @@ import com.traverse.bhc.client.screens.SoulHeartAmuletScreen;
 import com.traverse.bhc.client.screens.VigorBowScreen;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.init.RegistryHandler;
+import com.traverse.bhc.common.items.GoldenPaladinArmorItem;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterSelectItemModelPropertyEvent;
+import net.neoforged.neoforge.client.event.RenderPlayerEvent;
 
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, value = Dist.CLIENT)
 public class HeartCanistersClient {
@@ -37,5 +42,18 @@ public class HeartCanistersClient {
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(RegistryHandler.VITALIC_ORB.get(), VitalicOrbRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(RegistryHandler.VITALIC_SPARK.get(), VitalicSparkParticle.Provider::new);
+    }
+
+    @SubscribeEvent
+    public static void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
+        AvatarRenderState state = (AvatarRenderState) event.getRenderState();
+        if (state.chestEquipment.getItem() instanceof GoldenPaladinArmorItem) {
+            state.showCape = false;
+        }
     }
 }

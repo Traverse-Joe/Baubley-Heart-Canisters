@@ -33,7 +33,8 @@ public class VitalicOrbHandler {
         if (match.isEmpty()) return;
         VitalicSource source = match.get();
 
-        Vec3 spawnPos = killed.position().add(0.0, killed.getBbHeight() * 0.5, 0.0);
+        double spawnLift = Math.max(killed.getBbHeight() * 0.5, 1.0);
+        Vec3 spawnPos = killed.position().add(0.0, spawnLift, 0.0);
 
         BlockPos buddingTarget = findBuddingCrystal(serverLevel, killed.blockPosition(), source);
         if (buddingTarget != null) {
