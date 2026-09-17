@@ -39,6 +39,10 @@ public class HeartAmuletRecipe extends ShapelessRecipe {
                 break;
             }
         }
+        if (oldCanister.isEmpty()) {
+            // this should never happen, but if it does, just return the result without the inventory data
+            return stack;
+        }
 
         // expand the virtual inventory
         var oldInv = InventoryUtil.createVirtualInventory(4, oldCanister);
