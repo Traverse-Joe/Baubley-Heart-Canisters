@@ -3,9 +3,9 @@ package com.traverse.bhc.common.util;
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 import net.minecraft.world.entity.monster.warden.Warden;
@@ -32,23 +32,26 @@ public class DropHandler {
     public static void onEntityDrop(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide() || entity instanceof Player) return;
-        if (entity.level() instanceof ServerLevel serverLevel) {
-            if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
-                if (entity.level().getRandom().nextDouble() < ConfigHandler.general.boneDropRate.get()) {
-                    entity.spawnAtLocation(serverLevel, RegistryHandler.WITHER_BONE.toStack(), 1);
-                }
-            }
 
-            if(event.getEntity() instanceof Warden warden) {
-                if(warden.level().getRandom().nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
-                    entity.spawnAtLocation(serverLevel, Items.ECHO_SHARD.getDefaultInstance(), 1);
-                }
-            }
-
-            for (ItemStack stack : getEntityDrops(entity)) {
-                entity.spawnAtLocation(serverLevel, stack, 0);
+        if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
+            if (entity.level().getRandom().nextDouble() < ConfigHandler.general.boneDropRate.get()) {
+                event.getDrops().add(constructDrop(entity, RegistryHandler.WITHER_BONE.toStack()));
             }
         }
+
+        if(event.getEntity() instanceof Warden warden) {
+            if(warden.level().getRandom().nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
+                event.getDrops().add(constructDrop(entity, Items.ECHO_SHARD.getDefaultInstance()));
+            }
+        }
+
+        for (ItemStack stack : getEntityDrops(entity)) {
+            event.getDrops().add(constructDrop(entity, stack));
+        }
+    }
+
+    private static ItemEntity constructDrop(LivingEntity livingEntity, ItemStack stack) {
+        return new ItemEntity(livingEntity.level(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), stack);
     }
 
     public static List<ItemStack> getEntityDrops(LivingEntity entity) {
