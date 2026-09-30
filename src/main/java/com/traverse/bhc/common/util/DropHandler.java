@@ -5,10 +5,12 @@ import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -34,19 +36,23 @@ public class DropHandler {
 
         if (!TCONSTRUCT_LOADED && entity instanceof WitherSkeleton) {
             if (entity.level().random.nextDouble() < ConfigHandler.general.boneDropRate.get()) {
-                entity.spawnAtLocation(RegistryHandler.WITHER_BONE.get(), 1);
+                event.getDrops().add(constructDrop(entity, RegistryHandler.WITHER_BONE.get()));
             }
         }
 
         if(event.getEntity() instanceof Warden warden) {
             if(warden.level().random.nextDouble() < ConfigHandler.general.echoShardDropRate.get()) {
-                entity.spawnAtLocation(Items.ECHO_SHARD, 1);
+                event.getDrops().add(constructDrop(entity, Items.ECHO_SHARD));
             }
         }
 
         for (ItemStack stack : getEntityDrops(entity)) {
-            entity.spawnAtLocation(stack.getItem(), 0);
+            event.getDrops().add(constructDrop(entity, stack.getItem()));
         }
+    }
+
+    private static ItemEntity constructDrop(LivingEntity livingEntity, Item item) {
+        return new ItemEntity(livingEntity.level(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), new ItemStack(item));
     }
 
     public static List<ItemStack> getEntityDrops(LivingEntity entity) {
