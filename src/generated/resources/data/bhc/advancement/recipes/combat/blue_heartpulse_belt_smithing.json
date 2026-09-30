@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:blue_heartpulse_belt_smithing"
+        "recipes": "bhc:blue_heartpulse_belt_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

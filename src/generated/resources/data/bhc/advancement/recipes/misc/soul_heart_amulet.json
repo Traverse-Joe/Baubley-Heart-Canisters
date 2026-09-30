@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:soul_heart_amulet"
+        "recipes": "bhc:soul_heart_amulet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:soul_heart_canister_smithing"
+        "recipes": "bhc:soul_heart_canister_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -1,27 +1,23 @@
 package com.traverse.bhc.datagen;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.concurrent.CompletableFuture;
-
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID)
 public class BHCDataGenerator {
 
+    public static final RegistrySetBuilder RELOADABLE_BUILDER = new RegistrySetBuilder()
+            .add(RecipeProvider.asBootstrap(BHCRecipeProvider::new));
+
     @SubscribeEvent
     public static void onDataGeneration(GatherDataEvent.Client event) {
-        DataGenerator gen = event.getGenerator();
-        PackOutput packOutput = gen.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-
-        gen.addProvider(true, new BHCBlockTagsProvider(packOutput, lookupProvider));
-        gen.addProvider(true, new BHCItemTagsProvider(packOutput, lookupProvider));
-        gen.addProvider(true, new BHCRecipeProvider.Runner(packOutput, lookupProvider));
-        gen.addProvider(true, new BHCModelProvider(packOutput));
+        event.createReloadableRegistryObjects(RELOADABLE_BUILDER);
+        event.createProvider(BHCBlockTagsProvider::new);
+        event.createProvider(BHCItemTagsProvider::new);
+        event.createProvider(BHCModelProvider::new);
     }
 }

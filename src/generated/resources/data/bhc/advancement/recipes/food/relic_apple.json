@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:relic_apple"
+        "recipes": "bhc:relic_apple"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

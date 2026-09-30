@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:vigor_bow"
+        "recipes": "bhc:vigor_bow"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

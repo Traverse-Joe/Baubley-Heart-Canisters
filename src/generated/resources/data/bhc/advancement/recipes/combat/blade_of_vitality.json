@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:blade_of_vitality"
+        "recipes": "bhc:blade_of_vitality"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

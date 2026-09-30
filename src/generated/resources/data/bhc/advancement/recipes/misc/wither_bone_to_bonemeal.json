@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:wither_bone_to_bonemeal"
+        "recipes": "bhc:wither_bone_to_bonemeal"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

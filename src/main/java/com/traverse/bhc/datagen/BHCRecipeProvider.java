@@ -4,33 +4,30 @@ import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.data.BHCItemTags;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.datagen.builder.HeartAmuletRecipeBuilder;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.Tags;
-
-import java.util.concurrent.CompletableFuture;
 
 public class BHCRecipeProvider extends RecipeProvider {
 
     private final HolderGetter<Item> items;
 
-    public BHCRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
-        super(provider, output);
-        this.items = provider.lookupOrThrow(Registries.ITEM);
+    public BHCRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+        super(recipeOutput, advancementOutput);
+        this.items = advancementOutput.lookup(Registries.ITEM);
     }
 
     @Override
@@ -105,21 +102,5 @@ public class BHCRecipeProvider extends RecipeProvider {
 
     private Ingredient tagIngredient(TagKey<Item> tagKey) {
         return Ingredient.of(items.getOrThrow(tagKey));
-    }
-
-    public static class Runner extends RecipeProvider.Runner {
-        public Runner(PackOutput output, CompletableFuture<Provider> completableFuture) {
-            super(output, completableFuture);
-        }
-
-        @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
-            return new BHCRecipeProvider(provider, output);
-        }
-
-        @Override
-        public String getName() {
-            return "BHC Recipes";
-        }
     }
 }

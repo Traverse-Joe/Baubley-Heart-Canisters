@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:green_heart_melted_from_blue_heart_melted"
+        "recipes": "bhc:green_heart_melted_from_blue_heart_melted"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

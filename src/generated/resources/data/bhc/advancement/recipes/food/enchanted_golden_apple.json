@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:enchanted_golden_apple"
+        "recipes": "bhc:enchanted_golden_apple"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

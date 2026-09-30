@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:wither_bone"
+        "recipes": "bhc:wither_bone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

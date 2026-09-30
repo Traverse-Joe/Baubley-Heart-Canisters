@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:red_heart_melted_from_yellow_heart_melted"
+        "recipes": "bhc:red_heart_melted_from_yellow_heart_melted"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

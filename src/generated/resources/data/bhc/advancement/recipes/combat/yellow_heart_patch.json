@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:yellow_heart_patch"
+        "recipes": "bhc:yellow_heart_patch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

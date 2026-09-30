@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:red_heartpulse_belt"
+        "recipes": "bhc:red_heartpulse_belt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

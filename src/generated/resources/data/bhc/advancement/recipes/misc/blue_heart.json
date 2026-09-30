@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "bhc:blue_heart"
+        "recipes": "bhc:blue_heart"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
