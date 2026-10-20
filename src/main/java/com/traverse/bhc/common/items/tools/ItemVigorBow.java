@@ -35,7 +35,7 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
     private static final double EXTRA_DAMAGE_PER_HEART = 1.0F;
 
     public ItemVigorBow(Properties properties) {
-        super(properties.stacksTo(1));
+        super(properties.stacksTo(1).enchantable(1));
     }
 
     @Override
