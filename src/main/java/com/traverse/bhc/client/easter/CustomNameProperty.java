@@ -12,14 +12,28 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+import java.util.Locale;
+
 public record CustomNameProperty() implements SelectItemModelProperty<String> {
 	public static final SelectItemModelProperty.Type<CustomNameProperty, String> TYPE = SelectItemModelProperty.Type.create(
 			MapCodec.unit(new CustomNameProperty()), PrimitiveCodec.STRING
 	);
 
+	private static final List<String> KEYWORDS = List.of("beautiful eyes", "traverse", "jamiscus");
+
 	@Override
 	public String get(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed, @NotNull ItemDisplayContext displayContext) {
-		return stack.has(DataComponents.CUSTOM_NAME) ? stack.get(DataComponents.CUSTOM_NAME).getString() : "";
+		if (!stack.has(DataComponents.CUSTOM_NAME)) {
+			return "";
+		}
+		String name = stack.get(DataComponents.CUSTOM_NAME).getString().toLowerCase(Locale.ROOT);
+		for (String keyword : KEYWORDS) {
+			if (name.contains(keyword)) {
+				return keyword;
+			}
+		}
+		return name;
 	}
 
 	@Override
