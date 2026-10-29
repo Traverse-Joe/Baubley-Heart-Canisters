@@ -25,6 +25,10 @@ public class ConfigHandler {
         public final ModConfigSpec.DoubleValue vigorBowDamagePerContainer;
         public final ModConfigSpec.DoubleValue bladeOfVitalityDamagePerContainer;
 
+        public final ModConfigSpec.IntValue heartAmuletSlotCapacity;
+        public final ModConfigSpec.IntValue vigorBowSlotCapacity;
+        public final ModConfigSpec.IntValue bladeOfVitalitySlotCapacity;
+
         General(ModConfigSpec.Builder builder) {
             builder.push("General");
             heartStackSize = builder
@@ -39,6 +43,9 @@ public class ConfigHandler {
             soulHeartReturnChance = builder
                     .comment("Chance for the Soul Heart to return a Blue Heart Canister after being broken")
                     .defineInRange("soulHeartReturnChance", 1.0, 0, 1);
+            heartAmuletSlotCapacity = builder
+                    .comment("The maximum amount of heart canisters each slot of the Heart Amulet can hold")
+                    .defineInRange("heartAmuletSlotCapacity", 10, 1, 99);
             builder.pop();
 
             builder.push("Heart Patches");
@@ -78,6 +85,12 @@ public class ConfigHandler {
             bladeOfVitalityDamagePerContainer = builder
                     .comment("Extra attack damage added by the Blade of Vitality per heart container stored in it")
                     .defineInRange("bladeOfVitalityDamagePerContainer", 1.0, 0, Double.MAX_VALUE);
+            vigorBowSlotCapacity = builder
+                    .comment("The maximum amount of heart canisters each slot of the Vigor Bow can hold")
+                    .defineInRange("vigorBowSlotCapacity", 10, 1, 99);
+            bladeOfVitalitySlotCapacity = builder
+                    .comment("The maximum amount of heart canisters each slot of the Blade of Vitality can hold")
+                    .defineInRange("bladeOfVitalitySlotCapacity", 10, 1, 99);
             builder.pop();
         }
     }

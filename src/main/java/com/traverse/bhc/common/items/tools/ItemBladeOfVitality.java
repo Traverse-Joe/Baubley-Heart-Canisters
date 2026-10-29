@@ -6,7 +6,6 @@ import com.traverse.bhc.common.container.BladeOfVitalityContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.items.BaseItem;
 import com.traverse.bhc.common.util.HealthModifier;
-import com.traverse.bhc.common.util.InventoryUtil;
 import com.traverse.bhc.common.util.SoulContainerProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
@@ -114,15 +113,7 @@ public class ItemBladeOfVitality extends BaseItem implements SoulContainerProvid
     }
 
     private static int getMaxHearts(ItemStack stack) {
-        var inv = InventoryUtil.createVirtualInventory(BladeOfVitalityContainer.SLOT_COUNT, stack);
-
-        int total = 0;
-        for (int i = 0; i < inv.size(); i++) {
-            var invStack = inv.getResource(i);
-            total += !invStack.isEmpty() ? invStack.getMaxStackSize() : ConfigHandler.general.heartStackSize.get();
-        }
-
-        return total;
+        return BladeOfVitalityContainer.SLOT_COUNT * ConfigHandler.general.bladeOfVitalitySlotCapacity.get();
     }
 
 }
