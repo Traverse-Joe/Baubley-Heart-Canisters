@@ -8,8 +8,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 
 import java.util.Arrays;
 
@@ -154,11 +157,11 @@ public class HealthModifier {
 
         float diff = player.getMaxHealth() - player.getHealth();
 
-        int extraHearts = 0;
+        double extraHearts = 0;
 
         if(addHealth) {
             // no need to check item type, either the stack has our component or it doesnt
-            extraHearts = HealthModifier.getHeartCount(stack) * 2;
+            extraHearts = HealthModifier.getHeartCount(stack) * 2 * player.getAttributeValue(RegistryHandler.HEART_EFFECTIVENESS);
         }
 
         AttributeModifier modifier = health.getModifier(HEALTH_MODIFIER_ID);
@@ -180,6 +183,16 @@ public class HealthModifier {
             if (player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.kill(serverPlayer.level());
             }
+        }
+    }
+
+    public static void addPlayerAttributes(EntityAttributeModificationEvent event) {
+        event.add(EntityType.PLAYER, RegistryHandler.HEART_EFFECTIVENESS);
+    }
+
+    public static void tickAmulet(LivingEntity entity, ItemStack stack) {
+        if (entity instanceof Player player && !player.level().isClientSide() && player.tickCount % 20 == 0) {
+            updatePlayerHealth(player, stack, true);
         }
     }
 
