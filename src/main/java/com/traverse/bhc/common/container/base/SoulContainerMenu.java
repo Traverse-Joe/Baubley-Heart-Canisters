@@ -1,5 +1,6 @@
 package com.traverse.bhc.common.container.base;
 
+import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.items.BaseHeartCanister;
 import com.traverse.bhc.common.util.InventoryUtil;
 import net.minecraft.core.Holder;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import java.util.function.IntSupplier;
 
 public abstract class SoulContainerMenu extends AbstractContainerMenu {
 
@@ -134,15 +136,31 @@ public abstract class SoulContainerMenu extends AbstractContainerMenu {
     public static class SlotPendant extends ItemHandlerCopySlot {
 
         private final int slotIndex;
+        private final IntSupplier capacity;
 
         public SlotPendant(ComponentItemHandler itemHandler, int slotIndex, int xPosition, int yPosition) {
+            this(itemHandler, slotIndex, xPosition, yPosition, ConfigHandler.general.heartStackSize::get);
+        }
+
+        public SlotPendant(ComponentItemHandler itemHandler, int slotIndex, int xPosition, int yPosition, IntSupplier capacity) {
             super(itemHandler, slotIndex, xPosition, yPosition);
             this.slotIndex = slotIndex;
+            this.capacity = capacity;
         }
 
         @Override
         public boolean mayPlace(@Nonnull ItemStack stack) {
             return super.mayPlace(stack) && stack.getItem() instanceof BaseHeartCanister && ((BaseHeartCanister) stack.getItem()).getType().ordinal() == slotIndex;
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return capacity.getAsInt();
+        }
+
+        @Override
+        public int getMaxStackSize(@Nonnull ItemStack stack) {
+            return capacity.getAsInt();
         }
     }
 
