@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.traverse.bhc.common.config.BHCConfig;
 import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.init.RegistryHandler;
+import com.traverse.bhc.common.util.HealthModifier;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -36,6 +37,8 @@ public class BaubleyHeartCanisters {
         RegistryHandler.CONTAINERS.register(modEventBus);
         RegistryHandler.RECIPESERIALIZER.register(modEventBus);
         RegistryHandler.DATA_COMPONENT_TYPES.register(modEventBus);
+        RegistryHandler.ATTRIBUTES.register(modEventBus);
+        modEventBus.addListener(HealthModifier::addPlayerAttributes);
         modContainer.registerConfig(ModConfig.Type.STARTUP, ConfigHandler.configSpec);
         modContainer.registerConfig(ModConfig.Type.SERVER, ConfigHandler.serverConfigSpec);
 

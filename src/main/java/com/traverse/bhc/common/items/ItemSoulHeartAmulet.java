@@ -66,6 +66,11 @@ public class ItemSoulHeartAmulet extends BaseItem implements SoulContainerProvid
     }
 
     @Override
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        HealthModifier.tickAmulet(slotContext.entity(), stack);
+    }
+
+    @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         if (slotContext.entity() instanceof Player player) {
             updatePlayerHealth(player, ItemStack.EMPTY, false);

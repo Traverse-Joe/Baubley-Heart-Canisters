@@ -1,4 +1,5 @@
 {
+  "attribute.bhc.heart_effectiveness" : "Heart Effectiveness",
   "itemGroup.bhcTab" : "Baubley Heart Canisters",
   "item.bhc.red_heart" : "Miniature Red Heart",
   "item.bhc.yellow_heart" : "Miniature Yellow Heart",

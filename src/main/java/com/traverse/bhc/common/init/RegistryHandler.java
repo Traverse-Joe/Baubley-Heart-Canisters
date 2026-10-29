@@ -15,6 +15,8 @@ import com.traverse.bhc.common.util.HeartType;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -35,6 +37,9 @@ public class RegistryHandler {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPESERIALIZER = DeferredRegister.create(Registries.RECIPE_SERIALIZER, BaubleyHeartCanisters.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BaubleyHeartCanisters.MODID);
     public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, BaubleyHeartCanisters.MODID);
+    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, BaubleyHeartCanisters.MODID);
+
+    public static final DeferredHolder<Attribute, Attribute> HEART_EFFECTIVENESS = ATTRIBUTES.register("heart_effectiveness", () -> new RangedAttribute("attribute.bhc.heart_effectiveness", ConfigHandler.general.heartEffectivenessDefault.get(), 0.0D, 1024.0D).setSyncable(true));
 
     //Items
     public static final DeferredHolder<Item, BaseHeartCanister> RED_CANISTER = ITEMS.register("red_heart_canister", () -> new BaseHeartCanister(HeartType.RED));

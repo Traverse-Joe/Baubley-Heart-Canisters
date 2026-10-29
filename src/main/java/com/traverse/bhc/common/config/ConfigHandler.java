@@ -26,6 +26,7 @@ public class ConfigHandler {
         public final ModConfigSpec.DoubleValue bladeOfVitalityDamagePerContainer;
 
         public final ModConfigSpec.IntValue heartAmuletSlotCapacity;
+        public final ModConfigSpec.DoubleValue heartEffectivenessDefault;
         public final ModConfigSpec.IntValue vigorBowSlotCapacity;
         public final ModConfigSpec.IntValue bladeOfVitalitySlotCapacity;
 
@@ -46,6 +47,9 @@ public class ConfigHandler {
             heartAmuletSlotCapacity = builder
                     .comment("The maximum amount of heart canisters each slot of the Heart Amulet can hold")
                     .defineInRange("heartAmuletSlotCapacity", 10, 1, 99);
+            heartEffectivenessDefault = builder
+                    .comment("Base value of the bhc:heart_effectiveness player attribute, which multiplies the extra health granted by heart amulets. 0.0 = no extra health unless the attribute is raised by a modifier, 1.0 = normal, 2.0 = double")
+                    .defineInRange("heartEffectivenessDefault", 1.0, 0, 1024);
             builder.pop();
 
             builder.push("Heart Patches");
