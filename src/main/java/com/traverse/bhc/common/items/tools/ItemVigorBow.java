@@ -1,6 +1,7 @@
 package com.traverse.bhc.common.items.tools;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
+import com.traverse.bhc.common.config.ConfigHandler;
 import com.traverse.bhc.common.container.VigorBowContainer;
 import com.traverse.bhc.common.init.RegistryHandler;
 import com.traverse.bhc.common.util.HealthModifier;
@@ -32,7 +33,6 @@ import java.util.stream.IntStream;
 public class ItemVigorBow extends BowItem implements SoulContainerProvider {
 
     public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("vigor_bow");
-    private static final double EXTRA_DAMAGE_PER_HEART = 1.0F;
 
     public ItemVigorBow() {
         super(new Item.Properties().stacksTo(1));
@@ -50,7 +50,7 @@ public class ItemVigorBow extends BowItem implements SoulContainerProvider {
 
     @Override
     public AbstractArrow customArrow(AbstractArrow arrow, ItemStack projectileStack, ItemStack weaponStack) {
-        arrow.setBaseDamage(arrow.getBaseDamage() + (HealthModifier.getHeartCount(weaponStack)/2));
+        arrow.setBaseDamage(arrow.getBaseDamage() + HealthModifier.getHeartCount(weaponStack) * ConfigHandler.general.vigorBowDamagePerContainer.get());
         return arrow;
     }
 

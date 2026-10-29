@@ -35,8 +35,6 @@ import java.util.stream.IntStream;
 @EventBusSubscriber(modid = BaubleyHeartCanisters.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvider {
 
-    private static final double EXTRA_DAMAGE_PER_HEART = 1.0F;
-
     public static final ResourceLocation DAMAGE_MODIFIER_ID = BaubleyHeartCanisters.id("blade_of_vitality");
 
     // TODO: make an actual Tier for Blade of Vitality Easier to Customize
@@ -92,7 +90,7 @@ public class ItemBladeOfVitality extends SwordItem implements SoulContainerProvi
 
             int heartCount = HealthModifier.getHeartCount(event.getItemStack());
             if (heartCount > 0) {
-                event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, heartCount * EXTRA_DAMAGE_PER_HEART, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+                event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, heartCount * ConfigHandler.general.bladeOfVitalityDamagePerContainer.get(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
             }
         }
     }

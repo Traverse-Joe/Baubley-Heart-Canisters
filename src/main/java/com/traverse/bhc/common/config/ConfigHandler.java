@@ -22,6 +22,9 @@ public class ConfigHandler {
         public final ModConfigSpec.IntValue greenPatchCooldown;
         public final ModConfigSpec.IntValue bluePatchCooldown;
 
+        public final ModConfigSpec.DoubleValue vigorBowDamagePerContainer;
+        public final ModConfigSpec.DoubleValue bladeOfVitalityDamagePerContainer;
+
         General(ModConfigSpec.Builder builder) {
             builder.push("General");
             heartStackSize = builder
@@ -66,6 +69,15 @@ public class ConfigHandler {
             bluePatchCooldown = builder
                     .comment("Cooldown in seconds for the Blue Heart Patch")
                     .defineInRange("bluePatchCooldown", 30, 0, Integer.MAX_VALUE);
+            builder.pop();
+
+            builder.push("Tools");
+            vigorBowDamagePerContainer = builder
+                    .comment("Extra arrow damage added by the Vigor Bow per heart container stored in it")
+                    .defineInRange("vigorBowDamagePerContainer", 0.5, 0, Double.MAX_VALUE);
+            bladeOfVitalityDamagePerContainer = builder
+                    .comment("Extra attack damage added by the Blade of Vitality per heart container stored in it")
+                    .defineInRange("bladeOfVitalityDamagePerContainer", 1.0, 0, Double.MAX_VALUE);
             builder.pop();
         }
     }
