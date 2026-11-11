@@ -21,6 +21,7 @@ public class BHCDataGenerator {
 
         gen.addProvider(true, new BHCBlockTagsProvider(packOutput, lookupProvider));
         gen.addProvider(true, new BHCItemTagsProvider(packOutput, lookupProvider));
+        gen.addProvider(true, new BHCEntityTypeTagsProvider(packOutput, lookupProvider));
         gen.addProvider(true, new BHCRecipeProvider.Runner(packOutput, lookupProvider));
         gen.addProvider(true, new BHCModelProvider(packOutput));
     }

@@ -2,6 +2,7 @@ package com.traverse.bhc.common.util;
 
 import com.traverse.bhc.common.BaubleyHeartCanisters;
 import com.traverse.bhc.common.config.ConfigHandler;
+import com.traverse.bhc.common.data.BHCEntityTags;
 import com.traverse.bhc.common.init.RegistryHandler;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
@@ -56,6 +57,7 @@ public class DropHandler {
 
     public static List<ItemStack> getEntityDrops(LivingEntity entity) {
         List<ItemStack> list = new ArrayList<>();
+        if (entity.is(BHCEntityTags.NO_HEARTS)) return list;
         handleEntry("red",entity,list);
         handleEntry("yellow",entity,list);
         handleEntry("green",entity,list);
