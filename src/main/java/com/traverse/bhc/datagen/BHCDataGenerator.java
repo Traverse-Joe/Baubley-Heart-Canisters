@@ -23,6 +23,7 @@ public class BHCDataGenerator {
 
         var blockTags = gen.addProvider(event.includeServer(), new BHCBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
         gen.addProvider(event.includeServer(), new BHCItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
+        gen.addProvider(event.includeServer(), new BHCEntityTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
         gen.addProvider(event.includeServer(), new BHCRecipeProvider(packOutput, lookupProvider));
     }
 }
